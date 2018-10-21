@@ -119,6 +119,9 @@ int isSatisfyHeap(BTree * tree) {
     // 队列 also ok
 	return satisfy;
 }
+//十二题
+// 指定顶点之间的最短路径
+// Dij算法即可解答
 int main()
 {
 
