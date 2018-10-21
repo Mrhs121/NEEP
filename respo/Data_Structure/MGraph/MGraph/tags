@@ -1,0 +1,18 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+BFSTraverse	Graph.h	/^inline void Graph<DataType>::BFSTraverse(int v)$/;"	f	class:Graph
+DFSTraverse	Graph.h	/^inline void Graph<DataType>::DFSTraverse(int v)$/;"	f	class:Graph
+Graph	Graph.h	/^Graph<DataType>::Graph(DataType v[], int _vertexNum, int _arcNum)$/;"	f	class:Graph
+Graph	Graph.h	/^class Graph$/;"	c
+MaxSize	Graph.h	/^const int MaxSize = 10; \/\/最多有多少个顶点$/;"	v
+arc	Graph.h	/^	int arc[MaxSize][MaxSize]; \/\/ 邻接矩阵 即边$/;"	m	class:Graph
+arcNum	Graph.h	/^	int arcNum; \/\/ 边的个数$/;"	m	class:Graph
+printArc	Graph.h	/^inline void Graph<DataType>::printArc()$/;"	f	class:Graph
+reSetVisitedTable	Graph.h	/^inline void Graph<DataType>::reSetVisitedTable()$/;"	f	class:Graph
+vertex	Graph.h	/^	DataType vertex[MaxSize]; \/\/ 存储顶点$/;"	m	class:Graph
+vertexNum	Graph.h	/^	int vertexNum;  \/\/ 顶点个数$/;"	m	class:Graph
+visited	Graph.h	/^	int visited[MaxSize]; \/\/顶点是否被访问$/;"	m	class:Graph

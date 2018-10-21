@@ -1,0 +1,2 @@
+just test
+svnserve -d -r yanjiu

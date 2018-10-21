@@ -1,0 +1,88 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ALGraph	graph.c	/^}ALGraph;$/;"	t	typeref:struct:__anon2	file:
+AdjList	graph.c	/^}VNode,AdjList[MAXNUM];$/;"	t	typeref:struct:VNode	file:
+ArcNode	graph.c	/^typedef struct ArcNode{$/;"	s	file:
+ArcNode	graph.c	/^}ArcNode;$/;"	t	typeref:struct:ArcNode	file:
+BFSTraverse	graph.c	/^void BFSTraverse(ALGraph * algraph,int v)$/;"	f
+BFS_MIN_Distance	graph.c	/^void BFS_MIN_Distance(ALGraph * algraph,int u){$/;"	f
+DFS_Stack	graph.c	/^}DFS_Stack;$/;"	t	typeref:struct:Stack	file:
+DFS_non_node	graph.c	/^}DFS_non_node;$/;"	t	typeref:struct:Stack_Node	file:
+DeQueue	graph.c	/^    int DeQueue(Q **queue){$/;"	f
+Dijkstra	graph.c	/^void Dijkstra(){$/;"	f
+Edge	graph.c	/^    int Edge[MAXNUM][MAXNUM];$/;"	m	struct:__anon1	file:
+EnQueue	graph.c	/^    void EnQueue(Q **queue,int _data){$/;"	f
+FindPath	graph.c	/^void FindPath(ALGraph * algraph,int u,int v,int path[],int d){$/;"	f
+I_ten	graph.c	/^typedef int I_ten[10];$/;"	t	file:
+Kruskal	graph.c	/^void Kruskal(){$/;"	f
+MAXNUM	graph.c	3;"	d	file:
+MAXX	graph.c	9;"	d	file:
+MGraph	graph.c	/^}MGraph;$/;"	t	typeref:struct:__anon1	file:
+NOT_VISITED	graph.c	8;"	d	file:
+Q	graph.c	/^}Q;$/;"	t	typeref:struct:Queue	file:
+Queue	graph.c	/^typedef struct Queue{$/;"	s	file:
+Queue1	graph.c	/^}Queue1;$/;"	t	typeref:struct:__anon3	file:
+Stack	graph.c	/^typedef struct Stack{$/;"	s	file:
+Stack_Node	graph.c	/^typedef struct Stack_Node{$/;"	s	file:
+ToplogicalSort	graph.c	/^int ToplogicalSort(ALGraph * algraph){$/;"	f
+VISITED	graph.c	7;"	d	file:
+VNode	graph.c	/^typedef struct VNode{$/;"	s	file:
+VNode	graph.c	/^}VNode,AdjList[MAXNUM];$/;"	t	typeref:struct:VNode	file:
+V_Type	graph.c	6;"	d	file:
+VertexType	graph.c	/^typedef int VertexType;$/;"	t	file:
+Vex	graph.c	/^    int Vex[MAXNUM];$/;"	m	struct:__anon1	file:
+a	graph.c	/^void a(int b[]){$/;"	f
+adjnum	graph.c	/^    int adjnum;$/;"	m	struct:Stack_Node	file:
+adjvex	graph.c	/^    int adjvex; \/\/vertices index$/;"	m	struct:ArcNode	file:
+adjvex	graph.c	/^    int adjvex;$/;"	m	struct:__anon3	file:
+arcnum	graph.c	/^    int vexnum,arcnum;$/;"	m	struct:__anon2	file:
+bfs	graph.c	/^void bfs(ALGraph * algraph,int v){$/;"	f
+bfstraverse	graph.c	/^void bfstraverse(ALGraph * algraph){$/;"	f
+create	graph.c	/^MGraph * create(){$/;"	f
+createAlgByArc	graph.c	/^ALGraph * createAlgByArc(){$/;"	f
+createDAG	graph.c	/^ALGraph * createDAG(){$/;"	f
+create_graph	graph.c	/^ALGraph * create_graph(){$/;"	f
+data	graph.c	/^    VertexType data;$/;"	m	struct:VNode	file:
+data	graph.c	/^    int data[MAXNUM];$/;"	m	struct:Queue	file:
+data	graph.c	/^    int data[MAXNUM];$/;"	m	struct:Stack	file:
+dfs	graph.c	/^void dfs(ALGraph * algraph,int v){$/;"	f
+dfs_non	graph.c	/^void dfs_non(ALGraph * algraph,int v){$/;"	f
+dfs_traverse	graph.c	/^void dfs_traverse(ALGraph * algraph){$/;"	f
+edgenum	graph.c	/^    int vexnum,edgenum;$/;"	m	struct:__anon1	file:
+fin	graph.c	/^FILE * fin;$/;"	v
+first	graph.c	/^    ArcNode * first;$/;"	m	struct:VNode	file:
+floyd	graph.c	/^void floyd(MGraph * mg,int n){$/;"	f
+front	graph.c	/^    int front;$/;"	m	struct:Queue	file:
+getDegree	graph.c	/^void  getDegree(ALGraph * algraph,int degree[]){$/;"	f
+info	graph.c	/^    int info; \/\/  权值$/;"	m	struct:ArcNode	file:
+init	graph.c	/^    void init(Q **queue){$/;"	f
+initVisited	graph.c	/^void initVisited(int n){$/;"	f
+isEmpty	graph.c	/^    int isEmpty(Q *queue){$/;"	f
+main	graph.c	/^int main()$/;"	f
+next	graph.c	/^    struct ArcNode * next;$/;"	m	struct:ArcNode	typeref:struct:ArcNode::ArcNode	file:
+next_arc	graph.c	/^    ArcNode * next_arc;$/;"	m	struct:Stack_Node	file:
+pop	graph.c	/^int pop(DFS_Stack * s){$/;"	f
+prim	graph.c	/^void prim(MGraph * mgraph,int start){$/;"	f
+print	graph.c	/^void print(ALGraph * g){$/;"	f
+printAlg	graph.c	/^void printAlg(ALGraph * algraph){$/;"	f
+printM	graph.c	/^void printM(MGraph * mgraph){$/;"	f
+printPath	graph.c	/^void printPath(int path[],int size){$/;"	f
+push	graph.c	/^void push(DFS_Stack * s,int data){$/;"	f
+q	graph.c	/^Q * q;$/;"	v
+rear	graph.c	/^    int rear;$/;"	m	struct:Queue	file:
+testAlgraph	graph.c	/^void testAlgraph(){$/;"	f
+testCreateByArc	graph.c	/^ALGraph * testCreateByArc(){$/;"	f
+testFindPath	graph.c	/^void testFindPath(){$/;"	f
+testMgraph	graph.c	/^void testMgraph(){$/;"	f
+testQ	graph.c	/^void testQ(){$/;"	f
+top	graph.c	/^    int top;$/;"	m	struct:Stack	file:
+v	graph.c	/^    VNode  v;$/;"	m	struct:__anon3	file:
+vertices	graph.c	/^    AdjList vertices;$/;"	m	struct:__anon2	file:
+vexnum	graph.c	/^    int vexnum,arcnum;$/;"	m	struct:__anon2	file:
+vexnum	graph.c	/^    int vexnum,edgenum;$/;"	m	struct:__anon1	file:
+visit	graph.c	/^void visit(ALGraph * algraph,int v){$/;"	f
+visited	graph.c	/^int visited[MAXNUM];$/;"	v

@@ -1,0 +1,35 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: Stacklist - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\Users\ADMINI~1\AppData\Local\Temp\RSP3E7B.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /Fp"Debug/Stacklist.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"G:\Code\数据结构与算法\顺序栈\Stacklist.cpp"
+]
+Creating command line "cl.exe @C:\Users\ADMINI~1\AppData\Local\Temp\RSP3E7B.tmp" 
+<h3>Output Window</h3>
+Compiling...
+Stacklist.cpp
+G:\Code\数据结构与算法\顺序栈\Stacklist.cpp(67) : error C2039: 'Insert' : is not a member of 'StackList<int>'
+G:\Code\数据结构与算法\顺序栈\Stacklist.cpp(74) : error C2039: 'Delete' : is not a member of 'StackList<int>'
+G:\Code\数据结构与算法\顺序栈\Stacklist.cpp(80) : error C2039: 'Display' : is not a member of 'StackList<int>'
+G:\Code\数据结构与算法\顺序栈\Stacklist.cpp(84) : error C2039: 'DataFind' : is not a member of 'StackList<int>'
+G:\Code\数据结构与算法\顺序栈\Stacklist.cpp(91) : error C2039: 'LocaFind' : is not a member of 'StackList<int>'
+G:\Code\数据结构与算法\顺序栈\Stacklist.cpp(98) : error C2039: 'Front' : is not a member of 'StackList<int>'
+G:\Code\数据结构与算法\顺序栈\Stacklist.cpp(105) : error C2039: 'Behind' : is not a member of 'StackList<int>'
+G:\Code\数据结构与算法\顺序栈\Stacklist.cpp(109) : error C2039: 'Empty' : is not a member of 'StackList<int>'
+G:\Code\数据结构与算法\顺序栈\Stacklist.cpp(111) : error C2039: 'Clear' : is not a member of 'StackList<int>'
+执行 cl.exe 时出错.
+
+
+
+<h3>Results</h3>
+Stacklist.obj - 1 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

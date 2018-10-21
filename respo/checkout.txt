@@ -1,0 +1,1 @@
+svn checkout svn://116.85.54.212 ./ --username=huangsheng --password=123456789 

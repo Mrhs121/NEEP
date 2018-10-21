@@ -1,0 +1,26 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+BitwiseOperation	kr_1.c	/^void BitwiseOperation(){$/;"	f
+Five_18	kr_1.c	/^void Five_18(){$/;"	f
+MAXLINE	kr_1.c	4;"	d	file:
+MAXNUM	kr_1.c	5;"	d	file:
+QuickSort	kr_1.c	/^void QuickSort(struct Score s[],int left,int right){$/;"	f
+Score	kr_1.c	/^typedef struct  Score{$/;"	s	file:
+ScoreSort	kr_1.c	/^void ScoreSort(struct Score s[],int count){$/;"	f
+Stu	kr_1.c	/^}Stu[200];$/;"	t	typeref:struct:Score	file:
+getBits	kr_1.c	/^int getBits(int x,int start,int len){$/;"	f
+getLine	kr_1.c	/^void getLine(char s[],int lim)$/;"	f
+itoa	kr_1.c	/^void   itoa   (   unsigned   long   val,   char   *buf,   unsigned   radix    )   $/;"	f
+main	kr_1.c	/^int main()$/;"	f
+name	kr_1.c	/^    char name[20];$/;"	m	struct:Score	file:
+num	kr_1.c	/^    int num;$/;"	m	struct:Score	file:
+printString	kr_1.c	/^void printString(char str[]){$/;"	f
+printStu	kr_1.c	/^void printStu(struct Score s[],int count){$/;"	f
+reverse	kr_1.c	/^void reverse(char s[],int size)$/;"	f
+score	kr_1.c	/^    int score;$/;"	m	struct:Score	file:
+setbits	kr_1.c	/^int setbits(int x,int p,int n,int y){$/;"	f
+write	kr_1.c	/^void write(FILE * out,struct Score s[],int count){$/;"	f
