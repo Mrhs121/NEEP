@@ -27,25 +27,60 @@ int isSudo(int sudo[MAX][MAX],int n){
         cl[i] = -1;
     }
 
+    // 先验证大的矩阵是否满足要求
     for(i=0;i<n*n;i++){
         for(j=0;j<n*n;j++){
+        	// 同时检查第i行第i列
             if(row[sudo[i][j]]==-1){
                 row[sudo[i][j]] = 1;
             } else {
-                printf("行：(%d,%d)->%d\n",i,j,sudo[i][j]);
+                printf("行重复元素：(%d,%d)->%d\n",i,j,sudo[i][j]);
                 return NO;
             }
             if(cl[sudo[j][i]]==-1){
                 cl[sudo[j][i]] = 1;
             } else {
-                printf("列：(%d,%d)->%d\n",j,i,sudo[j][i]);
+                printf("列重复元素：(%d,%d)->%d\n",j,i,sudo[j][i]);
                 return NO;
             }
         }
+        // 恢复检测表
         for(j=0;j<=n*n;j++){
             row[j]= -1;
             cl[j] = -1;
-        }   
+        } 
+
+    }
+
+    for(j=0;j<=n*n;j++){
+        row[j]= -1;
+        cl[j] = -1;
+    } 
+
+    // 再验证n*n的小矩阵是否符合要求
+    for(i=0;i<n*n;i++){
+    	for(j=0;j<n*n;j++){
+    		int statr_clo=(i%3)*3;
+    		int start_row=(i/3)*3;
+    		int x = start_row+j/3;
+    		int y = statr_clo+j%3;
+    		if(j%3==0&&j!=0){
+    			printf("\n");
+    		}
+    		printf("(%d,%d) ",x,y);
+
+    		if(row[sudo[x][y]]!=-1){
+    			printf("x:%d y:%d value:%d\n",x,y,sudo[x][y]);
+    			return NO;
+    		}
+    		row[sudo[x][y]] = 1;
+    	}
+    	printf("\n--------------\n");
+    	// 恢复检测表
+    	for(j=0;j<=n*n;j++){
+        	row[j]= -1;
+        	cl[j] = -1;
+   		} 
     }
     return YES;
 }
@@ -113,6 +148,9 @@ void TEN(){
 
 int main()
 {
-    TEN();
+ //   TEN();
+   	int sudo[MAX][MAX];
+   	int n = readSudo(sudo);
+   	printf("issudo:%d\n",isSudo(sudo,n));
     return 1;
 }

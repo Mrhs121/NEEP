@@ -21,19 +21,31 @@ void printStu(struct Score s[],int count){
 
 
 
+// 相同成绩学号大的排在前面
 void QuickSort(struct Score s[],int left,int right){
-    if(left>=right){
+     if(left>=right){
         return;
     }
     int l = left;
     int r = right;
     int base = l;
-    struct Score tmp = s[left];
+    struct Score tmp = s[base];
     while(left<right){
-        while(s[right].score <= s[base].score && left<right)
+        while(s[right].score <= s[base].score && left<right ){
+            // 如果成绩相等，那么就按照学号从大到小排
+            if(s[right].score == s[base].score && s[right].num > s[base].num){
+                printf("r :%d,%d ",s[right].score,s[base].score);
+                break;
+            }
             right--;
-        while(s[left].score >= s[base].score && left<right)
+        }
+        while(s[left].score >= s[base].score && left<right ){
+            if(s[left].score == s[base].score && s[left].num < s[base].num){
+                printf("l :%d,%d ",s[left].score,s[left].score);
+                break;
+            }
             left++;
+        }
 
         if(left < right ){
             struct Score ll = s[left];
@@ -42,8 +54,10 @@ void QuickSort(struct Score s[],int left,int right){
 
         }
     }
-    s[l] = s[left];
+    s[base] = s[left];
     s[left] = tmp;
+    
+   // printStu(s, 10);
     QuickSort(s,l,left-1);
     QuickSort(s,left+1,r);
 }
@@ -119,8 +133,8 @@ void Five_18(){
         count++;
     }
     printStu(stu,count);
-    QuickSortByIdcard(stu,0,count-1);
-    printStu(stu,count);
+   // QuickSortByIdcard(stu,0,count-1);
+   // printStu(stu,count);
     QuickSort(stu,0,count-1);
     printStu(stu,count);
     write(out,stu,count);
