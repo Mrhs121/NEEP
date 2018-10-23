@@ -74,8 +74,7 @@ void DtoH(int x){
     int mod = x%16;
     DtoH(Divisor);
     
-    if(mod>=10)
-
+    if(mod>=10)// 如果余数大于10则转换为A-F输出
         printf("%c",'A'+(mod-10));
     else 
         printf("%d",mod);
@@ -109,7 +108,7 @@ int isSatisfyHeap(BTree * tree) {
 
 			if (p->data < p->rchild->data)
 			{
-                printf("notsatisfy rchild:%d > root:%d\n",p->rchild->data,p->data);
+                printf("not satisfy rchild:%d > root:%d\n",p->rchild->data,p->data);
 				return notsatisfy;
 			}
 

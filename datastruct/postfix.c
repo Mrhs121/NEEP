@@ -10,6 +10,7 @@
 
 int value[24] = {1,2,3,4,2,2}; 
 
+// 后缀表达式
 int calulate(char postfix[])
 {
     int stack[100];
@@ -18,40 +19,40 @@ int calulate(char postfix[])
     int x,y;
     char c = postfix[0];
     while(c!='\0'){
-    if(islower(c))
-    {
-        printf("%c\n",c);
-        stack[++top] = value[c-'a']; 
-    }
-    else
-    {
-        printf("%c\n",c);
-        switch(c)
+        if(islower(c))
         {
-            case '+':
-                //从栈顶取出两个元素
-                x = stack[top--];
-                y = stack[top];
-                stack[top] = x + y;
-                printf("%d\n",stack[top]);
-                break;
-            case '-':
-                x = stack[top--];
-                y = stack[top];
-                stack[top] = y - x;
-                printf("%d\n",stack[top]);break;
-            case '*': 
-                x = stack[top--];
-                y = stack[top];
-                stack[top] = x * y;
-                printf("%d\n",stack[top])             ;  break;
-            case '/':
-                x = stack[top--];
-                y = stack[top];
-                stack[top] = y/x;
-                 printf("%d\n",stack[top]);break;
-            default : return 1;
+            printf("%c\n",c);
+            stack[++top] = value[c-'a']; 
         }
+        else
+        {
+            printf("%c\n",c);
+            switch(c)
+            {
+                case '+':
+                    //从栈顶取出两个元素
+                    x = stack[top--];
+                    y = stack[top];
+                    stack[top] = x + y;
+                    printf("%d\n",stack[top]);
+                    break;
+                case '-':
+                    x = stack[top--];
+                    y = stack[top];
+                    stack[top] = y - x;
+                    printf("%d\n",stack[top]);break;
+                case '*': 
+                    x = stack[top--];
+                    y = stack[top];
+                    stack[top] = x * y;
+                    printf("%d\n",stack[top])             ;  break;
+                case '/':
+                    x = stack[top--];
+                    y = stack[top];
+                    stack[top] = y/x;
+                     printf("%d\n",stack[top]);break;
+                default : return 1;
+            }
        // c = postfix[++i];
     }
      c = postfix[++i];

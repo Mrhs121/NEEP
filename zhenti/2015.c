@@ -97,7 +97,6 @@ int readSudo(int sudo[MAX][MAX]){
 }
 
 
-
 // 2015 第十大题，生成二叉树的扩充标准形式的存储结构
 //  完美解决方案
 ExtendBTree * TEN_extendTree2(BTree * tree,ExtendBTree * pre){
