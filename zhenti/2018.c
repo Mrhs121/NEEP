@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #define YES 1
 #define NO 0
 #define MAX 100
@@ -19,6 +20,14 @@ void printStu(struct Score s[],int count){
     }
 }
 
+void print(int b[],int n){
+    int i;
+    printf("\n");
+    for(i=0;i<n;i++){
+        printf("%d ",b[i]);
+    }
+    printf("\n");
+}
 
 
 // 相同成绩学号大的排在前面
@@ -140,21 +149,82 @@ void Five_18(){
     write(out,stu,count);
 } // 完美解决方案
 
-float SqrtByNewton(float x)
+
+// 四 利用牛顿迭代法求立方根
+float CubeSqrtByNewton(float x)
 {
     float val = x;//最终
     float last;//保存上一个计算的值
     do
     {
         last = val;
-        val =(val + x/val) / 2;
+        val =(2*val + x/(val*val)) / 3;
                                         
-    }while(abs(val-last) > eps);
+    }while(fabs(val-last) > eps);
     return val;
 
 }
-int main()
+
+// 升序
+int Asc(int a,int b){
+    // 升序，如果a 》 b 则返回真
+    return a>=b;
+}
+
+// 降序
+int Des(int a,int b){
+    return a<=b;
+}
+// c 第三大题  根据不同的参数，排序规则不同，升或者降
+// 快速排序
+// compare 排序标准
+void SAN_QuickSort(int (*compare)(int ,int ),int arr[],int left,int right){
+    if(left>=right)
+        return;
+    int l = left;
+    int r = right;
+    int base = arr[l];
+    while(left<right){
+        while(compare(arr[right],base) && left < right)
+            right--;
+        while(compare(base,arr[left]) && left < right)
+            left++;
+        if(left<right){
+            int temp = arr[right];
+            arr[right] = arr[left];
+            arr[left] = temp;
+        }
+    }
+    arr[l] = arr[left];
+    arr[left] = base;
+    //print(arr,10);
+    SAN_QuickSort(compare,arr,l,left-1);
+    SAN_QuickSort(compare,arr,left+1,r);
+}
+
+// 二 从x的第start位开始，取len位数，假定第一位从0开始
+int getBits(int x,int start,int len){
+    int a = x>>(start-len+1);// 先将期望得到的字段移动到最右端
+    int res = a & ~(~0 << len); // ~0所有位全为1，向左移动n位，右边n位用0填补，再取反，右边n位变为1的屏蔽码
+    return res;
+}
+int main(int argc,char *argv[])
 {
-    Five_18();
+    printf("%f\n",CubeSqrtByNewton(10));
+ //   Five_18();
+    // int select = 0;
+    // if (argc>1 && strcmp(argv[1],"-a")==0)
+    // {
+    //     select = 1;
+    //     // 0 默认升序，1 降序
+
+    // }
+    // //int b[10] = {1,2,3,4,5,6,7,8,9,10};
+    // int b[10] = {111111,1234,124,6,1234,1,412,4231,4 ,3};
+    // printf("----原始数据------\n");
+    // print(b,10); 
+    // printf("---------------\n");
+    // SAN_QuickSort( (int (*)(int , int))select==0?Asc:Des,b,0,9);
+    // print(b,10);
     return 1;
 }

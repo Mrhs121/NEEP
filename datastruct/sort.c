@@ -74,10 +74,29 @@ void HalfInsertSort(int arr[],int n){
 void dobule_pop(int arr[],int n){
     
 }
-// 拍排
+// 快速排序
 void QuickSort(int arr[],int left,int right){
-    
-
+    if(left>=right)
+        return;
+    int l = left;
+    int r = right;
+    int base = arr[l];
+    while(left<right){
+        while(arr[right]<=base && left < right)
+            right--;
+        while(arr[left]>=base && left < right)
+            left++;
+        if(left<right){
+            int temp = arr[right];
+            arr[right] = arr[left];
+            arr[left] = temp;
+        }
+    }
+    arr[l] = arr[left];
+    arr[left] = base;
+    print(arr,10);
+    QuickSort(arr,l,left-1);
+    QuickSort(arr,left+1,r);
 }
 
 // 选择排序
@@ -282,12 +301,15 @@ void ss(){
 }
 int main()
 {   
-ss();
+    //ss();
     //testListSelectSort();
 //    testHeadFile();
    // testHeap();
     //printf("\n-----------------\n");
-    //int b[10] = {412,1234,124,6,1234,1,412,4231,4 ,3,};
+  //  int b[10] = {1,2,3,4,5,6,7,8,9,10};
+    int b[10] = {412,1234,124,6,1234,1,412,4231,4 ,3};
+    QuickSort(b,0,9);
+    print(b,10);
 //    int k_min = find_k_min(b,0,9,3);
     //printf("k_min = %d\n",k_min);
     //print(b,10);
