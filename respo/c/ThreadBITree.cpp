@@ -36,27 +36,31 @@ ThrNode * create(ThrNode * root)
                 T->rchild = create(T->rchild);
         }
 
-        eturn T;	
+       return T;	
 }
 
-//中序线索化链表，左孩子 根节点 右孩子
-void createThread(ThrNode * node,ThrNode * pre)
+//中序线索化链表，左孩子 根节点 右孩子 ,传递的是二级指针，直接对实体进行修改，从最左边的节点往回的走的时候保证pre的可见性
+void createThread(ThrNode * node,ThrNode **pre)
 {
 	if(node == NULL){
 		return ;
 	}
-	printf("线索化\n");
+	//printf("线索化\n");
 	createThread(node->lchild,pre);
 	if(node->lchild==NULL) {
-		printf("1 zhi qian");
+		//printf("1 zhi qian");
 		node->ltag = 1;
-		printf("she zhi qian qu");
-		node->lchild = pre; //设置前驱	
+		printf("设置%c的前驱\n",node->data);
+		node->lchild = *pre; //设置前驱	
 	}
 
-	if(node->rchild == NULL) node->rtag = 1; // 如果孩子为空，则设置为后继
-	if(pre!= NULL && pre->rtag==1 ) pre->rchild=node; // 设置后记
-	pre=node;
+	//if(node->rchild == NULL) node->rtag = 1; // 如果孩子为空，则设置为后继
+	if((*pre)!= NULL && (*pre)->rchild==NULL ) {
+		 printf("设置%c的后继%c\n",(*pre)->data,node->data);
+		(*pre)->rchild=node; // 设置后记
+		(*pre)->rtag = 1;
+	}
+	(*pre)=node;
 	createThread(node->rchild,pre);
 }
 
@@ -68,6 +72,6 @@ int main()
 	ThrNode * pre = (ThrNode*)malloc(sizeof(ThrNode));
 	pre = NULL;
 	cout<<root->lchild->data<<endl;
-	createThread(root,pre);
+	createThread(root,&pre);
 	return 0;
 }

@@ -85,6 +85,43 @@ void printAlg(ALGraph * algraph){
     printf("----------------------------------------------\n");
 }
 
+void printArrary(int arr[],int n){
+    int i=0;
+    for(i=0;i<n;i++){
+        printf("%d ",arr[i] );
+    }
+    printf("\n");
+}
+
+void print(ALGraph * g){
+    int i =0;
+    for(i=0;i<g->vexnum;i++){
+        printf("%4d",g->vertices[i].data);
+    }
+}
+
+void printM(MGraph * mgraph){
+    int i,j;
+
+    printf(" V |");
+    for(i=0;i<mgraph->vexnum;i++){
+        printf(" v%d  |",i);
+    }
+    printf("\n");
+    for(i=0;i<mgraph->vexnum;i++){
+        printf("v%d |",i);
+        for(j=0;j<mgraph->vexnum;j++){
+            printf("%5d|",mgraph->Edge[i][j]);
+        }
+        printf("\n----");
+        for(j=0;j<mgraph->vexnum;j++){
+            printf("------");
+        }
+        printf("\n");
+    }
+}
+
+
 ALGraph * create_graph(){
     //int vexnum;
     ALGraph * algraph = (ALGraph*)malloc(sizeof(ALGraph));
@@ -147,7 +184,7 @@ ALGraph * createDAG(){
     }
     int v1,v2,info;
     for(i=0;i<algraph->arcnum;i++){
-        fscanf(fin,"%d %d\n",&v1,&v2);
+        fscanf(fin,"%d %d %d\n",&v1,&v2,&info);
         ArcNode * p = (ArcNode*)malloc(sizeof(ArcNode));
         ArcNode * t = (ArcNode*)malloc(sizeof(ArcNode));
         p->next = NULL;
@@ -155,14 +192,14 @@ ALGraph * createDAG(){
         if(algraph->vertices[v1].first == NULL){
             //ArcNode * p = (ArcNode*)malloc(sizeof(ArcNode));
             p->adjvex = v2;
-            //p->info = info;
+            p->info = info;
             algraph->vertices[v1].first = p; 
         } else {
             p = algraph->vertices[v1].first;
             while(p->next!=NULL)
                 p = p->next;
             t->adjvex = v2;
-            //t->info = info;
+            t->info = info;
             p->next = t;
         }    
         p = (ArcNode*)malloc(sizeof(ArcNode));
@@ -234,7 +271,7 @@ ALGraph * createAlgByArc(){
 }
 
 
-// 创建邻接举矩阵 
+// 创建邻接举矩阵 带权 有向图
 MGraph * create(){
     FILE * fin = fopen("mgraph.txt","r");
     MGraph * mgraph = (MGraph*)malloc(sizeof(mgraph));
@@ -261,7 +298,7 @@ MGraph * create(){
         //printf("%d,%d\n",l,r);
         // 编号从0开始
         mgraph->Edge[l][r] = info;
-        mgraph->Edge[r][l] = info;
+        //mgraph->Edge[r][l] = info;
     }
     return mgraph;
 }
@@ -269,34 +306,6 @@ MGraph * create(){
 
 
 
-
-void print(ALGraph * g){
-    int i =0;
-    for(i=0;i<g->vexnum;i++){
-        printf("%4d",g->vertices[i].data);
-    }
-}
-
-void printM(MGraph * mgraph){
-    int i,j;
-
-    printf(" V |");
-    for(i=0;i<mgraph->vexnum;i++){
-        printf(" v%d  |",i);
-    }
-    printf("\n");
-    for(i=0;i<mgraph->vexnum;i++){
-        printf("v%d |",i);
-        for(j=0;j<mgraph->vexnum;j++){
-            printf("%5d|",mgraph->Edge[i][j]);
-        }
-        printf("\n----");
-        for(j=0;j<mgraph->vexnum;j++){
-            printf("------");
-        }
-        printf("\n");
-    }
-}
 
 void testAlgraph(){
     fin = fopen("g_input.txt","r");
@@ -679,8 +688,55 @@ void prim(MGraph * mgraph,int start){
     }
 }
 
-void Dijkstra(){
 
+// 某个定点到其他顶点的最短距离
+// n个顶点，v出发顶点
+void Dijkstra(int n,int v,int dist[],int pre[],MGraph * m){
+    int s[MAXNUM],i,j,k,min;
+    for(i=0;i<n;i++){
+        dist[i] = m->Edge[v][i];
+        s[i] = 0;
+        if(dist[i]<MAXNUM) 
+            pre[i] = v;
+        else
+            pre[i] = 0;
+    }
+    printArrary(dist,n);
+    s[v] = 1;
+    pre[v] = 0;
+    for(i=0;i<n;i++){
+        min = MAXNUM;
+        k = 0;
+        for(j=0;j<n;j++){
+            if(s[j]==0){
+                if(dist[j]!=0&&dist[j]<min){
+                    min = dist[j];
+                    k = j;//记录权最小的边依附的顶点
+                }
+            }
+        }
+        printArrary(dist,n);
+        if (k==0)
+        {
+            continue;
+        }
+        printf("选择顶点 :%d\n",k+1);
+        s[k] = 1; // 标记这个点已经并入了集合
+        for(j=0;j<n;j++){
+            // A通过vj到底其他点的距离，如果小于原始的距离则修改
+            if(s[j]==0 && m->Edge[k][j]<MAXNUM){
+                if(dist[k]+m->Edge[k][j] < dist[j]){
+                    printf("修改 %d \n",j+1);
+                    dist[j] = dist[k]+m->Edge[k][j];
+                    pre[j] = k;
+                }
+            }
+        }
+        printArrary(pre,n);
+        printf("--------------------\n");
+
+
+    }
 }
 
 void Kruskal(){
@@ -734,14 +790,45 @@ void a(int b[]){
     b[1] = 2;
 }
 
+void testDijkstra(){
+    MGraph * m = (MGraph*)malloc(sizeof(MGraph));
+    m = create();
+    printM(m);
+    int dist[MAXNUM];
+    int pre[MAXNUM];
+    Dijkstra(m->vexnum,0,dist,pre,m);
+    int i=0;
+    printf("-------------------\n");
+    for(i=0;i<m->vexnum;i++){
+        printf("%d ",pre[i]);
+    }
+    // 例如 1号顶点到3号顶点之间的最短路径(编号对应下标减一)
+    int start_index = 3;
+    int next = start_index;
+    printf("1号顶点到4号顶点之间的最短路径为\n");
+    printf("4 ");
+    while(next != 0){
+        printf("%d ",pre[next]+1);
+        next = pre[next];
+    }
+    printf("\n");
+}
+
 int main()
 {
-    
+    testDijkstra();
+ //    fin = fopen("arc_input.txt","r");
+ // //   int path[MAXNUM] = {-1};
+ //    ALGraph * algraph = (ALGraph *)malloc(sizeof(ALGraph));
+ //    //algraph = createAlgByArc();
+ //    algraph = createDAG();
+ //    printAlg(algraph);
+
    // ALGraph * algraph = testCreateByArc();
   //  printf("--->toplfo sort :%d\n",ToplogicalSort(algraph));
 // testFindPath();
 //bin    testQ();
-    testMgraph();
+    //testMgraph();
 //   testAlgraph();
     return 0;
 }
