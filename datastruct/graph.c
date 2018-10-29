@@ -691,6 +691,7 @@ void prim(MGraph * mgraph,int start){
 
 // 某个定点到其他顶点的最短距离
 // n个顶点，v出发顶点
+// pre 记录前驱节点的编号，既可找到完整的最短路径
 void Dijkstra(int n,int v,int dist[],int pre[],MGraph * m){
     int s[MAXNUM],i,j,k,min;
     for(i=0;i<n;i++){

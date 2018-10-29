@@ -2,7 +2,6 @@
     839-17年真题答案
 */
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
@@ -72,16 +71,17 @@ void DtoH(int x){
         return;
     int Divisor = x/16;
     int mod = x%16;
-    DtoH(Divisor);
-    
+    DtoH(Divisor);    
     if(mod>=10)// 如果余数大于10则转换为A-F输出
         printf("%c",'A'+(mod-10));
     else 
         printf("%d",mod);
 } // 完美解决方案
 
-// 判断一颗二叉树是否满足堆的条件
+// 9 判断一颗二叉树是否满足大顶堆的条件
 int isSatisfyHeap(BTree * tree) {
+    if(tree==NULL)
+        return notsatisfy;
 	BTree * stack[100];
 	int top = -1;
 	stack[++top] = tree;
@@ -89,33 +89,26 @@ int isSatisfyHeap(BTree * tree) {
 	while (top != -1)
 	{
 		p = stack[top--];
-
 		// 左右孩子均不能大于根结点
 		if (p->lchild != NULL)
 		{
-
 			if (p->data < p->lchild->data)
 			{
                 printf("notsatisfy :lchild:%d > root:%d\n",p->lchild->data,p->data);
 				return notsatisfy;
 			}
-
 			stack[++top] = p->lchild;
 		}
-
 		if (p->rchild != NULL)
 		{
-
 			if (p->data < p->rchild->data)
 			{
                 printf("not satisfy rchild:%d > root:%d\n",p->rchild->data,p->data);
 				return notsatisfy;
 			}
-
 			stack[++top] = p->lchild;
 		}
 	}
-    // 队列 also ok
 	return satisfy;
 }
 //十二题

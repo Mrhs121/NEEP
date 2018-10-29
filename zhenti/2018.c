@@ -14,7 +14,7 @@ typedef struct  Score{
 
 void printStu(struct Score s[],int count){
     int i=0;
-    printf("----- 原始数据 ------\n");
+    //printf("----- 原始数据 ------\n");
     for(i=0;i<count;i++){
         printf("%d %s %d\n",s[i].num,s[i].name,s[i].score);
     }
@@ -48,7 +48,7 @@ void QuickSort(struct Score s[],int left,int right){
             }
             right--;
         }
-        while(s[left].score >= s[base].score && left<right ){
+        while( s[left].score >= s[base].score  && left<right ){
             if(s[left].score == s[base].score && s[left].num < s[base].num){
                 printf("l :%d,%d ",s[left].score,s[left].score);
                 break;
@@ -70,35 +70,7 @@ void QuickSort(struct Score s[],int left,int right){
     QuickSort(s,l,left-1);
     QuickSort(s,left+1,r);
 }
-
- 
-void QuickSortByIdcard(struct Score s[],int left,int right){
-    if(left>=right){
-        return;
-    }
-    int l = left;
-    int r = right;
-    int base = l;
-    struct Score tmp = s[left];
-    while(left<right){
-        while(s[right].num >= s[base].num && left<right)
-            right--;
-        while(s[left].num <= s[base].num && left<right)
-            left++;
-        if(left < right ){    
-            struct Score ll = s[left];
-            s[left] = s[right];
-            s[right] = ll;
-
-        }
-    }
-    s[l] = s[left];
-    s[left] = tmp;
-    QuickSortByIdcard(s,l,left-1);
-    QuickSortByIdcard(s,left+1,r);
-}
    
-
 void write(FILE * out,struct Score s[],int count){
     int i=0;
     for(i=0;i<count;i++){
@@ -142,9 +114,8 @@ void Five_18(){
         count++;
     }
     printStu(stu,count);
-   // QuickSortByIdcard(stu,0,count-1);
-   // printStu(stu,count);
     QuickSort(stu,0,count-1);
+    printf("\n-----after------\n");
     printStu(stu,count);
     write(out,stu,count);
 } // 完美解决方案
@@ -208,23 +179,34 @@ int getBits(int x,int start,int len){
     int res = a & ~(~0 << len); // ~0所有位全为1，向左移动n位，右边n位用0填补，再取反，右边n位变为1的屏蔽码
     return res;
 }
+
+
+int _test(void *arr[],int type,int n,int compare){
+
+}
+
 int main(int argc,char *argv[])
 {
-    printf("%f\n",CubeSqrtByNewton(10));
- //   Five_18();
+    // 
+    // char data = {'a','b','c'};
+    // int data2 = {1,2,3};
+    // test(data,1);
+
+    //printf("%f\n",CubeSqrtByNewton(10));
+    Five_18();
     // int select = 0;
     // if (argc>1 && strcmp(argv[1],"-a")==0)
     // {
     //     select = 1;
     //     // 0 默认升序，1 降序
-
     // }
     // //int b[10] = {1,2,3,4,5,6,7,8,9,10};
     // int b[10] = {111111,1234,124,6,1234,1,412,4231,4 ,3};
     // printf("----原始数据------\n");
     // print(b,10); 
     // printf("---------------\n");
-    // SAN_QuickSort( (int (*)(int , int))select==0?Asc:Des,b,0,9);
+    //SAN_QuickSort( (int (*)(int , int))select==0?Asc:Des,b,0,9);
+    //printf("%d\n","abc"-"abd");
     // print(b,10);
     return 1;
 }
