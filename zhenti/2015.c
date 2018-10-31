@@ -211,6 +211,10 @@ void mergeWithoutBuffer2(int *a,int n,int *b,int m){
             a[i] = b[i];
     }
 }
+
+//十二题
+// 指定顶点之间的最短路径
+// Dij算法即可解答
 int main()
 {
     int a[100] = {4,5,99};

@@ -7,7 +7,21 @@
 #include <stdarg.h>
 #include "../datastruct/myStrcut.h"
 #define satisfy 1
-#define notsatisfy 0;
+#define notsatisfy 0
+#define NOT_VISITED 0
+#define VISITED 1
+
+
+
+
+int myScanf(const char * format, ...){
+    va_list ap;
+    va_start(ap,format);
+    char c = '';
+    int i=0;
+    char f;
+
+}
 
 
 // 第四大题，自定义myprintf
@@ -17,7 +31,9 @@ void myprintf(const char * format , ...)
     va_start(argList, format); // 初始化 argList，让它指向第一个变参,即为format字符串
     char c=' ';
     int i=0;
+    int next_data;
     char f;
+
     while(c!='\0') {
         while ((c = format[i]) != '%' && (c = format[i]) != '\0'){
             printf("%c", c);
@@ -25,6 +41,10 @@ void myprintf(const char * format , ...)
         }
         f = format[++i];
         switch(f){
+            case 's':
+                i++;
+                printf("%s",va_arg(argList, char*));
+                break;
 
             case 'd':
                 i++;
@@ -111,9 +131,46 @@ int isSatisfyHeap(BTree * tree) {
 	}
 	return satisfy;
 }
-//十二题
-// 指定顶点之间的最短路径
-// Dij算法即可解答
+
+void printPath(int path[],int size){
+    int i=0;
+    for(i=0;i<=size;i++){
+        printf("--->%d",path[i]);
+    }
+    printf("\n");
+}
+
+int visited[1000];
+
+// 可用于解2017最后一题即为找简单路径，没有回路
+// uv:指定的两点 path用于存放路径的数组 d迭代的路径深度 k指定的长度
+void FindPath(ALGraph * algraph,int u,int v,int path[],int d,int k){
+    int w;
+    ArcNode * p;
+    d++;
+    path[d] = u;
+    visited[u] = VISITED;
+    if(u==v){
+        if(d==k){
+            printPath(path,d);
+        }
+        visited[v] = NOT_VISITED;
+        return;
+    }
+    p = algraph->vertices[u].first;
+    while(p!=NULL){
+        w = p->adjvex;
+        if(visited[w] == NOT_VISITED){
+            FindPath(algraph,w,v,path,d,k);
+        }
+        p = p->next;
+    }
+    visited[u] = NOT_VISITED;
+}
+
+
+
+
 int main()
 {
 
@@ -123,7 +180,7 @@ int main()
     //printf("%d\n",invert(a,4,3));
     DtoH(a);
     printf("\n");
-    myprintf("int :%d char:%c float:%f %d->八进制:%o %d->十六进制:%x finish\n",1,'c',2.0f,b,b,c,c);
+    myprintf("str = %s int :%d char:%c float:%f %d->八进制:%o %d->十六进制:%x finish\n","huangsheng",1,'c',2.0f,b,b,c,c);
     //printf("%c\n",'a'+1+'0');
     BTree * T = (BTree*)malloc(sizeof(BTree));
     int data[] = {5,2,4,-1,-1,3,-1,-1,-1,3,-1,-1};

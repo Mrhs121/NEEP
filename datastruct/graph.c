@@ -76,7 +76,7 @@ void printAlg(ALGraph * algraph){
         printf("%d: %d ",i,algraph->vertices[i].data);
         ArcNode * p = algraph->vertices[i].first;
         while(p!=NULL){
-            printf("---(%d)--->%d(%d)",p->info,p->adjvex,algraph->vertices[p->adjvex].data
+            printf("---(权：%d)--->%d(%d)",p->info,p->adjvex,algraph->vertices[p->adjvex].data
                    );
             p = p->next;
         }
@@ -218,19 +218,24 @@ ALGraph * createAlgByArc(){
     ALGraph * algraph = (ALGraph*)malloc(sizeof(ALGraph));
     int i=0;
     printf("input vexnum and arcnum:");
-    fscanf(fin,"%d%d",&algraph->vexnum,&algraph->arcnum);
+    fscanf(fin,"%d %d",&algraph->vexnum,&algraph->arcnum);
     printf("---->%d %d\n",algraph->vexnum,algraph->arcnum);
     // printf("---->input all vex's data\n");
     //初始化定点表
     for(i=0;i<algraph->vexnum;i++){
         //printf("input vex%d\'s data:",i);
-        fscanf(fin,"%d",&algraph->vertices[i].data);
+        int data;
+        fscanf(fin,"%d",&data);
+        //printf("%d ",data);
+        algraph->vertices[i].data = data;
         algraph->vertices[i].first = (ArcNode*)malloc(sizeof(ArcNode));
         algraph->vertices[i].first = NULL;
     }
+    printf("\n");
     int v1,v2,info;
     for(i=0;i<algraph->arcnum;i++){
         fscanf(fin,"%d %d %d\n",&v1,&v2,&info);
+       // printf("%d %d %d\n",v1,v2,info);
         ArcNode * p = (ArcNode*)malloc(sizeof(ArcNode));
         ArcNode * t = (ArcNode*)malloc(sizeof(ArcNode));
         p->next = NULL;
@@ -238,14 +243,14 @@ ALGraph * createAlgByArc(){
         if(algraph->vertices[v1].first == NULL){
             //ArcNode * p = (ArcNode*)malloc(sizeof(ArcNode));
             p->adjvex = v2;
-           p->info = info;
+            p->info = info;
             algraph->vertices[v1].first = p; 
         } else {
             p = algraph->vertices[v1].first;
             while(p->next!=NULL)
                 p = p->next;
             t->adjvex = v2;
-           // t->info = info;
+            t->info = info;
             p->next = t;
         }    
         p = (ArcNode*)malloc(sizeof(ArcNode));
@@ -264,7 +269,8 @@ ALGraph * createAlgByArc(){
             t->adjvex = v1;
             t->info = info;
             p->next = t;
-        }    
+        }
+        //printAlg(algraph);    
           
     }
     return algraph;
@@ -564,22 +570,24 @@ void BFS_MIN_Distance(ALGraph * algraph,int u){
 
 void printPath(int path[],int size){
     int i=0;
+    printf("k=:%d  path:",size);
     for(i=0;i<=size;i++){
-        printf("--->%d",path[i]);
+        printf(i==size?"%d":"%d--->",path[i]);
     }
     printf("\n");
 }
-// 可用于解2017最后一题 简单路径，没有回路
-void FindPath(ALGraph * algraph,int u,int v,int path[],int d){
+// 可用于解2017最后一题即为找简单路径，没有回路
+// uv:指定的两点 path用于存放路径的数组 d迭代的路径深度 k指定的长度
+void FindPath(ALGraph * algraph,int u,int v,int path[],int d,int k){
     int w;
     ArcNode * p;
     d++;
     path[d] = u;
     visited[u] = VISITED;
     if(u==v){
-        // 在这里可以做判断，i是否符合给出的k长度的限制
-        printf("finded :%d,%d ",u,v);
-        printPath(path,d);
+        if(d==k){
+            printPath(path,d);
+        }
         visited[v] = NOT_VISITED;
         return;
     }
@@ -587,11 +595,11 @@ void FindPath(ALGraph * algraph,int u,int v,int path[],int d){
     while(p!=NULL){
         w = p->adjvex;
         if(visited[w] == NOT_VISITED){
-            FindPath(algraph,w,v,path,d);
+            FindPath(algraph,w,v,path,d,k);
         }
         p = p->next;
     }
-    visited[u] = 0;
+    visited[u] = NOT_VISITED;
 }
 
 void testFindPath(){
@@ -599,13 +607,14 @@ void testFindPath(){
     fin = fopen("g_input.txt","r");
     int path[MAXNUM] = {-1};
     ALGraph * algraph = (ALGraph *)malloc(sizeof(ALGraph));
-    algraph = create_graph();
+    //algraph = create_graph();
+    algraph = createAlgByArc();
     printAlg(algraph);
-    initVisited(algraph->vexnum); 
-    BFSTraverse(algraph,0);
-    printf("---------------find simple path -----------\n");
+    //initVisited(algraph->vexnum); 
+    //BFSTraverse(algraph,0);
+    printf("---------------find simple path -----------\nfind 0<->3 \n");
     initVisited(algraph->vexnum);
-    FindPath(algraph,0,3,path,-1);
+    FindPath(algraph,0,3,path,-1,2);
 }
 // 创建   代 权 的 图
 ALGraph * testCreateByArc(){
@@ -815,9 +824,10 @@ void testDijkstra(){
     printf("\n");
 }
 
-int main()
+int main( )
 {
-    testDijkstra();
+    testFindPath();
+    //testDijkstra();
  //    fin = fopen("arc_input.txt","r");
  // //   int path[MAXNUM] = {-1};
  //    ALGraph * algraph = (ALGraph *)malloc(sizeof(ALGraph));
