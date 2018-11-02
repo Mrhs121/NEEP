@@ -21,6 +21,7 @@ void swap(const void* a, const void* b, int size)
 enum TYPE{INT,FLOAT,CHAR,STR};
 typedef enum TYPE Datatype;
 
+// 适用于任何类型
 void Qsort(void* base, int left, int right, int size, int (*cmp)(const void* a, const void* b))
 {
     assert(base != NULL && size >= 1 && cmp != NULL);    /* left may be < 0 because of the last - 1 */

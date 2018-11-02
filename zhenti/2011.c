@@ -177,6 +177,39 @@ double equation(char express[]){
         para[n++] = rightOrleft*next*(atoi(temp));
     return -print(para, n)/print(var, m);
 }
+
+int cmp_int(const void* a, const void* b)
+{
+    //Applicationssert(a != NULL && b != NULL);
+    const int* lhs = (const int*)a;
+    const int* rhs = (const int*)b;
+    if (*lhs < *rhs) {
+        return -1;
+    } else if (*lhs == *rhs) {
+        return 0;
+    } else {
+        return 1;
+    }
+}
+void *search(void* key,void* base,size_t num,size_t width,
+            int(*compare)(const void* elem1, const void* elem2))
+{
+    size_t start = 0, end = num;
+    int result;
+
+    while(start < end)
+    {
+        size_t mid = start + (end - start) / 2;
+        result = compare(key, base + mid * width);
+        if(result < 0)
+            end = mid;
+        else if(result > 0)
+            start = mid + 1;
+        else
+            return (void *)base + mid * width;
+    }
+    return NULL;
+}
 int main()
 {
 
