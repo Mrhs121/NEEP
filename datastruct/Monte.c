@@ -9,7 +9,7 @@
 #include<stdlib.h>
 #include<time.h>
 
-#define TIMES 6000000
+#define TIMES 1000000
 
 struct T{
     int key, value;
@@ -30,9 +30,9 @@ int main(int argc,char ** args)
         a[i].value = 0;
     }
     srand((unsigned)time(0));
+    // Monte模拟算法
     for(i=0;i<TIMES;i++){
         int v = (rand()%6+1) + (rand()%6+1);
-
         a[v-1].value++;
     }
     for(i=0;i<12;i++){

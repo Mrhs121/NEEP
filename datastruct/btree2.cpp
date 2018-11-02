@@ -50,7 +50,7 @@ int _data1[] = {1,2,3,-1,-1,4,-1,-1,5,6,-1,-1,7,-1,-1};
 int _data[] = {1,2,3,4,-1,-1,5,-1,-1,6,-1,-1,7,-1,-1};
 int _data2[] = { 1,2,3,-1,-1,-1,5,-1,-1 };
 int _data_sortTree[] = {6,2,1,-1,-1,4,3,-1,-1,-1,8,-1,-1};
-//用于
+//用于计算后缀表达式，存储在二叉树中
 char _data_char[] = { '*','+','a','#','#','b','#','#','*','c','#','#','-','#','d','#','#' };
 char _data_char2[] = { '+','+','a','#','#','b','#','#','+','c','#','#','+','d','#','#','e','#','#' };
 
@@ -421,7 +421,6 @@ BTree * ancestor(BTree* root, int node1, int node2)
             return right_lca;
         else
             return left_lca;
-    
 }
 
 // 王道解法
@@ -429,6 +428,7 @@ BTree * ancestor_wd(BTree * root,BTree * p,BTree * q)
 {
     return  NULL;
 }
+
 //非递归后序遍历
 void postOrder(BTree * tree)
 {
@@ -445,13 +445,9 @@ void postOrder(BTree * tree)
 		if (p != NULL) {
 			push(&s, p);
 			p = p->lchild;
-			//            if(p==NULL){
-			//              cout<<"left finish"<<endl;
-			//        }
 		}
 		else
 		{
-			//      cout<<"tetst111111"<<endl;
 			p = getTop(s);
 			if (p->rchild&&p->rchild != r)
 			{
@@ -634,17 +630,7 @@ void testBST(){
     cout<<"----------------------\n";
     OutPut(T,4);
 }
-// 测试最近公共祖先
-void testAncestor(){
-    BTree * T = NULL;
-    T = createTree(T,_data);
-    PreOrderBiTree(T);
-    cout<<"-------------------\n";
-    BTree * res =  ancestor(T,5,6);
-    if(res!=NULL){
-        cout<<"the ancestor is :"<<res->data<<endl;
-    }
-}
+
 
 int main()
 {
