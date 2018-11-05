@@ -452,6 +452,8 @@ void dfs(ALGraph * algraph,int v){
     visited[v] = VISITED;
     ArcNode * f = algraph->vertices[v].first;
     while(f!=NULL){
+        // 此处加上 arc++ 用于判断是否是棵树
+        // void dfs(ALGraph * alg,int v ,int * arc)
         if(visited[f->adjvex]!=VISITED){
             dfs(algraph,f->adjvex);
           //  f = f->next;
@@ -602,6 +604,35 @@ void FindPath(ALGraph * algraph,int u,int v,int path[],int d,int k){
     visited[u] = NOT_VISITED;
 }
 
+int count=0;
+void FindPath2(ALGraph * algraph,int u,int v,int path[],int d,int k){
+    count++;
+    //sprintf("current :%d ",u);
+    int w;
+    ArcNode * p;
+    d++;
+    path[d] = u;
+    visited[u] = VISITED;
+    if(u==v){
+            printPath(path,d);
+            //其实再往下找就没有意义了
+    }
+    p = algraph->vertices[u].first;
+    while(p!=NULL){
+        w = p->adjvex;
+        if(visited[w] == NOT_VISITED){
+            FindPath2(algraph,w,v,path,d,k);
+        }
+        p = p->next;
+    }
+    visited[u] = NOT_VISITED;
+}
+void clean(int data[],int n){
+    int i = 0;
+    for(i=0;i<n;i++){
+        data[i] = 0;
+    }
+}
 void testFindPath(){
 
     fin = fopen("g_input.txt","r");
@@ -614,7 +645,11 @@ void testFindPath(){
     //BFSTraverse(algraph,0);
     printf("---------------find simple path -----------\nfind 0<->3 \n");
     initVisited(algraph->vexnum);
-    FindPath(algraph,0,3,path,-1,2);
+    FindPath(algraph,0,4,path,-1,2);
+    clean(path,10);
+    printf("\n------\n");
+    FindPath2(algraph,0,4,path,-1,2);
+    printf("count : %d \n",count);
 }
 // 创建   代 权 的 图
 ALGraph * testCreateByArc(){

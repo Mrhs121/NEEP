@@ -6,7 +6,7 @@ unsigned char* i2ba(int n, unsigned char *s)
     
 
     // 相当于取下多少位出来 0xff 为屏蔽码，表示八位二进制的 1111 1111
-    s[0] = n % 0xFF;
+    s[0] = n & 0xFF;
     s[1] = (n >> 8) & 0xFF;
 
     s[2] = (n >> 16) & 0xFF;
@@ -217,8 +217,16 @@ int main()
 	//char express[] = "-5a+10=4a-2+123-22a+22";
 	char express[] = "a+2a+3a-12=a+13";
     printf("%s\na = %.5f\n",express,equation(express));
-	// unsigned char s[4];
-	// i2ba(200,s);
-	// printf("%d %d %d %d\n",s[0],s[1],s[2],s[3]);
+	unsigned char s[4];
+    int aa;
+    scanf("%d",&aa);
+	i2ba(aa,s);
+	printf("%d %d %d %d\n",s[0],s[1],s[2],s[3]);
+    unsigned char s2[4];
+    *((int *)s2) = aa;
+  
+    printf("%s %c %d %d %d\n",s2,s2[0],s2[1],s2[2],s2[3]);
+    unsigned char b = 123;
+    printf("b = %c\n",b);
 	return 1;
 }

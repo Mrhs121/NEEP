@@ -14,14 +14,14 @@
 
 
 
-int myScanf(const char * format, ...){
-    va_list ap;
-    va_start(ap,format);
-    char c = '';
-    int i=0;
-    char f;
+// int myScanf(const char * format, ...){
+//     va_list ap;
+//     va_start(ap,format);
+//     char c = '';
+//     int i=0;
+//     char f;
 
-}
+// }
 
 
 // 第四大题，自定义myprintf
@@ -71,6 +71,7 @@ void myprintf(const char * format , ...)
         }
        // printf("%c",format[i++]);
     }
+    va_end(argList);
 }
 
 // 从x的第p位开始的n位数求反，其他位不变
@@ -98,17 +99,36 @@ void DtoH(int x){
         printf("%d",mod);
 } // 完美解决方案
 
+
+// 十进制转为二进制输出 
+void B2I(int x){
+    if(x==0)
+        return;
+    int Divisor = x/2;
+    int mod = x%2;
+    B2I(Divisor);    
+    printf("%d",mod);
+}
+
+
 // 9 判断一颗二叉树是否满足大顶堆的条件
+// 层序遍历队列或者用堆也行
 int isSatisfyHeap(BTree * tree) {
     if(tree==NULL)
         return notsatisfy;
 	BTree * stack[100];
+    BTree * queue[100];
+    int front=0,rear=0;
 	int top = -1;
 	stack[++top] = tree;
+    queue[rear] = tree;
+    rear++;
 	BTree * p;
-	while (top != -1)
+	while (front != rear)
 	{
-		p = stack[top--];
+		//p = stack[top--];
+        p = queue[front++];
+        printf("%d ",p->data);
 		// 左右孩子均不能大于根结点
 		if (p->lchild != NULL)
 		{
@@ -117,8 +137,9 @@ int isSatisfyHeap(BTree * tree) {
                 printf("notsatisfy :lchild:%d > root:%d\n",p->lchild->data,p->data);
 				return notsatisfy;
 			}
-			stack[++top] = p->lchild;
-		}
+			//stack[++top] = p->lchild;
+		      queue[rear++] = p->lchild;
+        }
 		if (p->rchild != NULL)
 		{
 			if (p->data < p->rchild->data)
@@ -126,7 +147,8 @@ int isSatisfyHeap(BTree * tree) {
                 printf("not satisfy rchild:%d > root:%d\n",p->rchild->data,p->data);
 				return notsatisfy;
 			}
-			stack[++top] = p->lchild;
+			//stack[++top] = p->lchild;
+            queue[rear++] = p->lchild;
 		}
 	}
 	return satisfy;
@@ -175,18 +197,22 @@ int main()
 {
 
     
-    int a = 175;
-    int b=8,c=16;
-    //printf("%d\n",invert(a,4,3));
-    DtoH(a);
-    printf("\n");
-    myprintf("str = %s int :%d char:%c float:%f %d->八进制:%o %d->十六进制:%x finish\n","huangsheng",1,'c',2.0f,b,b,c,c);
-    //printf("%c\n",'a'+1+'0');
+    // int a = 175;
+    // int b=8,c=16;
+    // //printf("%d\n",invert(a,4,3));
+    // scanf("%d",&a);
+    // DtoH(a);
+    // printf("\n");
+    // B2I(a);
+    // printf("\n");
+    // myprintf("str = %s int :%d char:%c float:%f %d->八进制:%o %d->十六进制:%x finish\n","huangsheng",1,'c',2.0f,b,b,c,c);
+    // //printf("%c\n",'a'+1+'0');
     BTree * T = (BTree*)malloc(sizeof(BTree));
-    int data[] = {5,2,4,-1,-1,3,-1,-1,-1,3,-1,-1};
+    int data[] = {10,7,6,-1,-1,8,-1,-1,8,-1,-1};
     T = createTree(T, data);
     PreOrderBiTree(T);
     printf("\n");
     printf("isSatisfyHeap = %s\n",isSatisfyHeap(T)==satisfy?"satisfy":"notsatisfy");
+    printf("%d\n",123<<33  );
     return 1;
 }

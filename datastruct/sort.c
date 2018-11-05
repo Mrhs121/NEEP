@@ -273,7 +273,7 @@ void ss(){
     list = NULL;
     while(h!=NULL){
         p=s=h;
-        q=q=r=NULL;
+        q=r=NULL;
         while(p!=NULL){
             if(p->data>s->data){
                 s = p;
