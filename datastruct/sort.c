@@ -310,6 +310,7 @@ int main()
     int b[10] = {412,1234,124,6,1234,1,412,4231,4 ,3};
     QuickSort(b,0,9);
     print(b,10);
+    
 //    int k_min = find_k_min(b,0,9,3);
     //printf("k_min = %d\n",k_min);
     //print(b,10);

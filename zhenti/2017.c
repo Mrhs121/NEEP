@@ -92,21 +92,21 @@ void DtoH(int x){
         return;
     int Divisor = x/16;
     int mod = x%16;
-    DtoH(Divisor);    
+    DtoH(Divisor);
     if(mod>=10)// 如果余数大于10则转换为A-F输出
         printf("%c",'A'+(mod-10));
-    else 
+    else
         printf("%d",mod);
 } // 完美解决方案
 
 
-// 十进制转为二进制输出 
+// 十进制转为二进制输出
 void B2I(int x){
     if(x==0)
         return;
     int Divisor = x/2;
     int mod = x%2;
-    B2I(Divisor);    
+    B2I(Divisor);
     printf("%d",mod);
 }
 
@@ -196,7 +196,7 @@ void FindPath(ALGraph * algraph,int u,int v,int path[],int d,int k){
 int main()
 {
 
-    
+
     // int a = 175;
     // int b=8,c=16;
     // //printf("%d\n",invert(a,4,3));

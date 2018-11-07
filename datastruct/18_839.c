@@ -9,7 +9,8 @@
 #include<stdlib.h>
 #define FALSE 0
 #define TRUE 1
-
+#define YES 1
+#define NO 0
 typedef struct LNode{
     int data;
     struct LNode * next;
@@ -32,13 +33,14 @@ LNode * create(int data[],int n)
         m = node;
     }
     return head;
-
+}
 
 // 2018 839 判断表b是否包含在a中 时间O(n)
 int  isAIncludeB(LNode *a,LNode*b)
 {
     LNode * _a = a->next;
     LNode * _b = b->next;
+    LNode * save = _a;
     // 如果匹配链 首元素的值比目标链的首元素都小
     // 那么肯定不包含
     if(_b->data < _a->data){
@@ -52,7 +54,8 @@ int  isAIncludeB(LNode *a,LNode*b)
         } else {
             // 不匹配的情况下 子表复原到表头
             _b = b->next;
-            _a = _a->next;
+            _a = save->next;
+            save  = _a;
         }
         // 如果走完了，那么说明吧全部匹配好了
         if(_b==NULL){
@@ -66,13 +69,32 @@ int  isAIncludeB(LNode *a,LNode*b)
     }
     //return FALSE;
 }
+
+// a 是否 在 b中 （不要求连续）
+int isAIncludeB2(LNode * a,LNode * b){
+    if(a == NULL){
+        return YES;
+    }
+    LNode * pa = a->next;
+    LNode * pb = b->next;
+    while(pb!=NULL && pa->data>=pb->data){
+        if(pb->data == pa->data){
+             return isAIncludeB2(pa->next,pb->next);
+        } else {
+            pb = pb->next;
+        }
+    }
+    printf("---->");
+    return NO;
+}
+
 int main()
 {
-    int a[] = {1,2,3,4,5,6,7,8};
-    int b[] = {1,2,3};
+    int a[] = {2,2,3,3,5,6,7,8};
+    int b[] = {2,3,5};
     LNode * A = create(a,8);
     LNode * B = create(b,3);
-    if(isAIncludeB(A,B)){
+    if(isAIncludeB2(B,A)){
         printf("A include B\n");
     } else {
         printf("not included B\n");
