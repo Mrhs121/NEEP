@@ -102,6 +102,8 @@ LNode * createWithoutHead(int data[],int n)
     return head;
 }
 int _count;
+
+
 BTree* createTree(BTree* T,int _data[]) {
 
     //printf("输入数据(-1表示空节点):");
@@ -156,5 +158,35 @@ void PreOrderExBiTree(ExtendBTree *T)
         PreOrderExBiTree(T->lchild);
 		PreOrderExBiTree(T->rchild);
 	}
+}
+
+
+// 二叉树的层序遍历 使用队列若该节点的左右孩子不为空，则入队
+void LeverOrder(BTree * root)
+{
+    int front = -1;
+    int rear = -1;
+    BTree * Q[1000];
+    int last = 0;
+    Q[++rear] = root;
+    last = rear;
+    int l=1;
+    BTree * q = (BTree*)malloc(sizeof(BTree));
+    while (front != rear)
+    {
+        q = Q[++front];
+        printf("%d:%d\t",l,q->data);
+        // 左右孩子入队
+        if (q->lchild != NULL)
+            Q[++rear] = q->lchild;
+        if (q->rchild != NULL)
+            Q[++rear] = q->rchild;
+        if(front == last){
+            last = rear;
+            l++;
+            printf("\n");
+        }
+    }
+
 }
 

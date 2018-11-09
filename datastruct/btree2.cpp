@@ -31,6 +31,12 @@ typedef struct BTree_char {
 	struct BTree_char * rchild;
 }BTree_char;
 
+struct ThrNode
+{
+    char data;
+    ThrNode * lchild,*rchild;
+    int ltag,rtag;
+};
 
 typedef struct TStack {
 	BTree * data[50];
@@ -46,7 +52,7 @@ typedef struct Qu {
 
 
 //先序自动创建二叉树
-int _data1[] = {1,2,3,-1,-1,4,-1,-1,5,6,-1,-1,7,-1,-1};
+int _data1[] = {1,2,3,-1,-1,4,8,-1,-1,9,10,-1,-1,-1,5,6,-1,-1,7,-1,-1};
 int _data[] = {1,2,3,4,-1,-1,5,-1,-1,6,-1,-1,7,-1,-1};
 int _data2[] = { 1,2,3,-1,-1,-1,5,-1,-1 };
 int _data_sortTree[] = {6,2,1,-1,-1,4,3,-1,-1,-1,8,-1,-1};
@@ -60,6 +66,7 @@ int _Lever = 0;
 
 // 计算最大宽度
 // 以及计算层数
+// 采用层序遍历的思想
 int BTWidth(BTree * t) {
 	int LeverCount[100];
 	int max = -1;
@@ -78,7 +85,7 @@ int BTWidth(BTree * t) {
 			_queue.data[++_queue.rear] = p->lchild;
 		if (p->rchild != NULL)
 			_queue.data[++_queue.rear] = p->rchild;
-		// key
+		// 关键	当每一层扫描完了之后，那么下一层的所有节点也就入队了
 		if (_queue.front == last) {
 			Lever++;
 			cout << "count:" << count << endl;
@@ -150,16 +157,12 @@ BTree_char* createTree_char(BTree_char* T) {
 }
 
 
-
-
-
-
 BTree* createTree(BTree* T,int _data[]) {
 
-	cout << "输入数据(-1表示空节点):";
+	//cout << "输入数据(-1表示空节点):";
 	int data;
 	//scanf("%d",&data);
-	cout << _data[_count] << endl;;
+	//cout << _data[_count] << endl;;
 	data = _data[_count];
 	_count++;
 	if (data == -1)
@@ -168,14 +171,39 @@ BTree* createTree(BTree* T,int _data[]) {
 	{
 		T = (BTree*)malloc(sizeof(BTree));
 		T->data = data;
-		cout << "input " << data << " 的左子树:" << endl;
+		//cout << "input " << data << " 的左子树:" << endl;
 		T->lchild = createTree(T->lchild,_data);
-		cout << "input " << data << " 的右子树:" << endl;
+		//cout << "input " << data << " 的右子树:" << endl;
 		T->rchild = createTree(T->rchild,_data);
 	}
 	return T;
 }
 
+
+//中序线索化链表，左孩子 根节点 右孩子
+void createThread(ThrNode * node,ThrNode ** pre)
+{
+    if(node == NULL){
+        return ;
+    }
+    //printf("线索化\n");
+    createThread(node->lchild,pre);
+    if(node->lchild==NULL) {
+        //printf("1 zhi qian");
+        node->ltag = 1;
+        printf("设置%c的前驱\n",node->data);
+        node->lchild = *pre; //设置前驱
+    }
+    
+    //if(node->rchild == NULL) node->rtag = 1; // 如果孩子为空，则设置为后继
+    if((*pre)!= NULL && (*pre)->rchild==NULL ) {
+        printf("设置%c的后继%c\n",(*pre)->data,node->data);
+        (*pre)->rchild=node; // 设置后记
+        (*pre)->rtag = 1;
+    }
+    (*pre)=node;
+    createThread(node->rchild,pre);
+}
 // 839真题 答案 一颗二叉树采用标准存储
 // 判断这棵树是否为堆的条件
 int isSatisfyHeap(BTree * tree) {
@@ -266,8 +294,8 @@ void postOrderBiTree(BTree *T)
 	else
 	{
 	//	printf("%d ", T->data);
-		PreOrderBiTree(T->lchild);
-		PreOrderBiTree(T->rchild);
+		postOrderBiTree(T->lchild);
+		postOrderBiTree(T->rchild);
 		printf("%d ", T->data);
     }
 }
@@ -343,29 +371,29 @@ void BTree_char2E(BTree_char * T) {
 // 二叉树的层序遍历 使用队列若该节点的左右孩子不为空，则入队
 void LeverOrder(BTree * root)
 {
-	int front = -1;
-	int rear = -1;
-	BTree * Q[1000];
+    int front = -1;
+    int rear = -1;
+    BTree * Q[1000];
     int last = 0;
     Q[++rear] = root;
     last = rear;
     int l=1;
-	BTree * q = (BTree*)malloc(sizeof(BTree));
-	while (front != rear)
-	{
-		q = Q[++front];
-		cout <<l<<"----> "<< q->data<<" ";
-		// 左右孩子入队
-		if (q->lchild != NULL)
-			Q[++rear] = q->lchild;
-		if (q->rchild != NULL)
-			Q[++rear] = q->rchild;
+    BTree * q = (BTree*)malloc(sizeof(BTree));
+    while (front != rear)
+    {
+        q = Q[++front];
+        printf("%d:%d\t",l,q->data);
+        // 左右孩子入队
+        if (q->lchild != NULL)
+            Q[++rear] = q->lchild;
+        if (q->rchild != NULL)
+            Q[++rear] = q->rchild;
         if(front == last){
             last = rear;
             l++;
-            cout<<endl;
+            printf("\n");
         }
-	}
+    }
 
 }
 // 非递归前序遍历 OK
@@ -559,7 +587,6 @@ void testBtree_char() {
 }
 
 // 查找树的创建/插入
-
 int BST_Insert(BTree **T,int key){
     if(*T == NULL){
         *T = (BTree*)malloc(sizeof(BTree));
@@ -591,7 +618,7 @@ BTree * BST_search(int data,BTree * T){
         return BST_search(data,T->rchild);
     }
 }
-// 在给定 排序树中 输出比 可以 大的结点 从大到小
+// 在给定 排序树中 输出比 key 大的结点 从大到小
 void OutPut(BTree * bst_tree,int key){
     if(bst_tree == NULL){
         return;
@@ -613,29 +640,72 @@ BTree * search_small(BTree * t,int k){
     return  NULL;
 }
 
-
+// 测试查找树
 void testBST(){
     BTree* T=NULL ;
    // int q[] = {10,4,5,2,3,6,11};
     int q[] = {5,3,10,1,4,8,13};
+    T = createTree(T,_data1);
     int i=0;
-    for(i=0;i<7;i++){
-        BST_Insert(&T,q[i]);
-    }
-    InOrderBiTree(T);
+    //for(i=0;i<7;i++){
+      //  BST_Insert(&T,q[i]);
+    //}
+    //InOrderBiTree(T);
     cout<<"---------------------\n";
-    PreOrderBiTree(T);
+    //PreOrderBiTree(T);
     cout<<"---------------------\n";
     LeverOrder(T);
     cout<<"----------------------\n";
-    OutPut(T,4);
+    //OutPut(T,4);
+}
+
+typedef struct 
+{
+	BTree * t;
+	int tag;
+}tagstack;
+
+void search(BTree * tree,int x){
+	tagstack s[100];
+	int top = 0;
+	int i = 0;
+	while(tree!=NULL || top>0){
+		while(tree!=NULL && tree==NULL?0:tree->data != x){
+			printf("push : %d\n",tree->data );
+			s[++top].t = tree;
+			s[top].tag = 0;
+			tree = tree->lchild;
+		}
+		if(tree->data == x){
+			printf("所有的祖先节点为:\n");
+			for(i=1;i<=top;i++){
+				printf("%d\t",s[i].t->data);
+			}
+			exit(1);
+		}
+		while(top!=0 && s[top].tag==1){
+			top--;
+		}
+		if(top!=0){
+			s[top].tag = 1;
+			tree = s[top].t->rchild;
+		}
+	}
 }
 
 
 int main()
 {
-    testPath();
-//    testBtree();
+	BTree * tree ;
+	tree = createTree(tree,_data1);
+	//PreOrderBiTree(tree);
+	LeverOrder(tree);
+	postOrderBiTree(tree);
+	int num;
+	scanf("%d",&num);
+	search(tree,num);
+    //testPath();
+//testBtree();
 //
 //testBST();
     //    testAncestor();

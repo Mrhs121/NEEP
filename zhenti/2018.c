@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include “../datastruct/myStruct.h”
+#include "../datastruct/myStrcut.h"
 #define YES 1
 #define NO 0
 #define MAX 100
 #define eps 0.000000000001
+#define FALSE 0
+#define TRUE 1
 typedef struct  Score{
     int num;
     char name[20];
@@ -183,7 +185,7 @@ int getBits(int x,int start,int len){
 
 
 int _test(void *arr[],int type,int n,int compare){
-
+    return 1;
 }
 
 // 2018 839 判断表b是否包含在a中 时间O(n)
@@ -191,6 +193,7 @@ int  isAIncludeB(LNode *a,LNode*b)
 {
     LNode * _a = a->next;
     LNode * _b = b->next;
+    LNode * save = _a;
     // 如果匹配链 首元素的值比目标链的首元素都小
     // 那么肯定不包含
     if(_b->data < _a->data){
@@ -204,7 +207,8 @@ int  isAIncludeB(LNode *a,LNode*b)
         } else {
             // 不匹配的情况下 子表复原到表头
             _b = b->next;
-            _a = _a->next;
+            _a = save->next;
+            save  = _a;
         }
         // 如果走完了，那么说明吧全部匹配好了
         if(_b==NULL){
@@ -218,16 +222,47 @@ int  isAIncludeB(LNode *a,LNode*b)
     }
     //return FALSE;
 }
+// 最后一题
+int ancestor(BTree *b,int x)
+{
+    if (b==NULL){
+        return 0;
+    }
+    else if ( (b->lchild!=NULL && b->lchild->data==x) 
+            || (b->rchild!=NULL && b->rchild->data==x))
+    {
+        printf("%d ",b->data);
+        return 1;
+    }
+    else if ( (ancestor(b->lchild,x)) 
+            || (ancestor(b->rchild,x)))
+    {
+        printf("%d ",b->data);
+        return 1;
+    }
+    else
+        return 0;
+}
 
+void  testAnc(){
+    int data[] = {1,2,3,-1,-1,4,-1,-1,5,6,-1,-1,7,-1,-1};
+    BTree * tree;
+    tree = createTree(tree,data);
+    LeverOrder(tree);
+    int where;
+    scanf("%d",&where);
+    ancestor(tree,where);
+}
 int main(int argc,char *argv[])
 {
+    testAnc();
     // 
     // char data = {'a','b','c'};
     // int data2 = {1,2,3};
     // test(data,1);
 
     //printf("%f\n",CubeSqrtByNewton(10));
-    Five_18();
+    //Five_18();
     // int select = 0;
     // if (argc>1 && strcmp(argv[1],"-a")==0)
     // {

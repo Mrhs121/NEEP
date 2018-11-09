@@ -111,7 +111,6 @@ int readSudo(int sudo[MAX][MAX]){
 
 
 // 2015 第十大题，生成二叉树的扩充标准形式的存储结构,即为多出一个指针指向双亲节点
-//  完美解决方案
 ExtendBTree * TEN_extendTree2(BTree * tree,ExtendBTree * pre){
     if(tree == NULL){
         return NULL;
@@ -148,7 +147,8 @@ void TEN(){
     tree = createTree(tree,data);
     printf("标准存储结构\n");
     PreOrderBiTree(tree);
-  
+    printf("\n");
+    LeverOrder(tree);
     //TEN_extendTree(tree,NULL);
     ExtendBTree * ExTree = (ExtendBTree*)malloc(sizeof(ExtendBTree));
     ExTree = TEN_extendTree2(tree,NULL);
@@ -217,11 +217,11 @@ void mergeWithoutBuffer2(int *a,int n,int *b,int m){
 // Dij算法即可解答
 int main()
 {
-    int a[100] = {4,5,99};
-    int b[6] = {1,2,6,7,7,8};
-    mergeWithoutBuffer2(a,3,b,6);
-    print(a,9);
- //   TEN();
+    // int a[100] = {4,5,99};
+    // int b[6] = {1,2,6,7,7,8};
+    // mergeWithoutBuffer2(a,3,b,6);
+    // print(a,9);
+    TEN();
    //	int sudo[MAX][MAX];
    //	int n = readSudo(sudo);
    //	printf("issudo:%d\n",isSudo(sudo,n));

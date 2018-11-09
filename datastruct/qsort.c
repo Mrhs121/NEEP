@@ -26,8 +26,10 @@ void Qsort(void* base, int left, int right, int size, int (*cmp)(const void* a, 
 {
     assert(base != NULL && size >= 1 && cmp != NULL);    /* left may be < 0 because of the last - 1 */
     if (left >= right) return;
-    char* pleft = (char*)base + left * size;
+    // 左右指针
+    char* pleft = (char*)base + left * size; 
     char* pkey = (char*)base + (left + (right - left) / 2) * size;
+    
     swap(pleft, pkey, size);
     int last = left;
     char* plast = (char*)base + last * size;
