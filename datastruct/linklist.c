@@ -26,8 +26,6 @@ typedef struct LNode{
 // create linklist with headnode
 LNode * create(int data[],int n)
 {
-
-
     LNode * head = (linklist)malloc(sizeof(LNode)); 
     head->data = -1;
     LNode * m = head;
@@ -62,9 +60,11 @@ LNode * createWithSort(int data[],int n)
         newnode->next = NULL;
         // 处理第一个节点
         if(head->next==NULL){
+            // 感觉这段有没有都没有什么关系
             m->next = newnode;
             m = newnode;
         } else {
+
             // 寻找插入点
             while(insert!=NULL && insert->data<data[i]){
                 insertsPre = insertsPre->next;
@@ -196,12 +196,41 @@ int  isAIncludeB(LNode *a,LNode*b)
     }
     //return FALSE;
 }
+
+
+LNode * insert(LNode * head,LNode * p){
+    if(head==NULL){
+        return p;
+    }
+    printf("hello\n");
+    LNode * cur = head;
+    while(cur->next!=NULL && cur->next->data<p->data)
+        cur = cur->next;
+
+    p->next = cur->next;
+    cur->next = p;
+    return head;
+
+}
 int main()
 {
 
     int a[] = {888,2,5,214,5,41,4};
-    LNode * ss = createWithSort(a,7);
-    print(ss);
+   // LNode * ss = createWithSort(a,7);
+    LNode * datas[7];
+    int i=0;
+    for(i=0;i<7;i++){
+        datas[i] = (LNode*)malloc(sizeof(LNode));
+        datas[i]->data = a[i];
+        datas[i]->next = NULL;
+    }
+    LNode * head = (LNode*)malloc(sizeof(LNode));
+    head->next = NULL;
+    for(i=0;i<7;i++){
+        head = insert(head,datas[i]);
+    }
+    //Node * ss = createWithSort(a,7);
+    print(head);
     // int a[] = {1,2,3,4,5,6,7,8};
     // int b[] = {1,2,3};
     // LNode * A = create(a,8);

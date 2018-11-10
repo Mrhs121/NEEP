@@ -6,7 +6,7 @@ typedef int I_ten[10];
 #define V_Type %d
 #define VISITED 1
 #define NOT_VISITED 0
-#define MAXX 999
+#define MAXX 99999
 
 /*
  *  
@@ -89,6 +89,18 @@ void printArrary(int arr[],int n){
     int i=0;
     for(i=0;i<n;i++){
         printf("%d ",arr[i] );
+    }
+    printf("\n");
+}
+
+void printDouArrary(int arr[100][100],int n,int m){
+    int i=0;
+    int j = 0;
+    for(i=0;i<n;i++){
+        for(j=0;j<m;j++){
+            printf("%7d",arr[i][j] );
+        }
+        printf("\n");
     }
     printf("\n");
 }
@@ -214,6 +226,7 @@ ALGraph * createDAG(){
 
 
 // 按照边创建邻接表
+// 无向图
 ALGraph * createAlgByArc(){
     ALGraph * algraph = (ALGraph*)malloc(sizeof(ALGraph));
     int i=0;
@@ -700,17 +713,9 @@ void prim(MGraph * mgraph,int start){
                 k = j; //save the current close
             }
         }
-//bin        printf("select min :%d,k=%d\n",min,k);
         printf("{%d<-->%d\tinfo:%d}\n",close_set[k],k,cost[close_set[k]][k]);
         low[k] = 0;
-//        printf("low :");
-//        for(j=0;j<vexnum;j++){
-//            printf("%d  ",low[j]);
-//        }
-//        printf("\nclose_set:");
-//        for(j=0;j<vexnum;j++){
-//            printf("%d  ",close_set[j]);
-//        }
+
         printf("\n");
         for(j=0;j<vexnum;j++){
             if(cost[k][i]!=0 && cost[k][j]<low[j]){
@@ -718,17 +723,7 @@ void prim(MGraph * mgraph,int start){
                 close_set[j] = k; //
             }
         }
-        //low[k] = 0;
-/*        printf("调整新的权值\nlow :");
-        for(j=0;j<vexnum;j++){
-            printf("%d  ",low[j]);
-        }
-        printf("\nclose_set:");
-        for(j=0;j<vexnum;j++){
-            printf("%d  ",close_set[j]);
-        }
-        printf("\n");
-*/
+
     }
 }
 
@@ -785,11 +780,49 @@ void Dijkstra(int n,int v,int dist[],int pre[],MGraph * m){
 }
 
 void Kruskal(){
+
 }
 
+
+int floydPath[100][100];
+int floyddist[100][100];
+//计算每对顶点之间的最短距离
+// 每次增加一个中间点，判断通过这个中间点到达目标点的距离是否与直接到达更小
+// 如果更小则修改距离与路径
 void floyd(MGraph * mg,int n){
- // nt cost[MAXNUM][MAXNUM] = mg->Edge;
-    printf("最短路径算法");
+    //printf("最短路径算法");
+    int i=0,j=0,k=0,m=0;
+    for(i=0;i<mg->vexnum;i++){
+        for(j=0;j<mg->vexnum;j++){
+            floyddist[i][j] = mg->Edge[i][j];
+            floydPath[i][j] = 0;
+        }
+    }
+    for(k=0;k<n;k++){
+    // k 为经过的中间点    
+        for(i=0;i<n;i++){
+            for(j=0;j<n;j++){
+                if(floyddist[i][k]+floyddist[k][j] < floyddist[i][j]){
+                    floyddist[i][j] = floyddist[i][k]+floyddist[k][j];
+                    floydPath[i][j] = k+1; //编号从1开始
+                }
+            
+            }
+        }
+    }
+}
+
+
+void print_floydPath(i,j){
+
+    int k;
+    k = floydPath[i-1][j-1];
+   
+    if(k==0)
+        return;
+    print_floydPath(i,k);
+    printf("%5d",k);
+    print_floydPath(k,j); // 是不是多余的了啊？？
 }
 void push(DFS_Stack * s,int data){
     s->data[++(s->top)] = data;
@@ -835,6 +868,24 @@ void a(int b[]){
     b[1] = 2;
 }
 
+void testFloyd(){
+    MGraph * m = (MGraph*)malloc(sizeof(MGraph));
+    m = create();
+    printM(m);
+    floyd(m,m->vexnum);
+    int i=0,j=0;
+    // for(i=0;i<m->vexnum;i++){
+    //     for(j=0;j<m->vexnum;j++){
+    //         printf("%7d",floyddist[i][j] );
+    //     }
+    //     printf("\n");
+    // }
+    printDouArrary(floyddist,m->vexnum,m->vexnum);
+    printDouArrary(floydPath,m->vexnum,m->vexnum);
+    print_floydPath(1,2);
+    printf("\n");
+}
+
 void testDijkstra(){
     MGraph * m = (MGraph*)malloc(sizeof(MGraph));
     m = create();
@@ -861,7 +912,8 @@ void testDijkstra(){
 
 int main( )
 {
-    testFindPath();
+    testFloyd();
+    //testFindPath();
     //testDijkstra();
  //    fin = fopen("arc_input.txt","r");
  // //   int path[MAXNUM] = {-1};
