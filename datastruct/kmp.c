@@ -34,6 +34,7 @@ void calnext(char *str, int *next, int length)
 
 // str 正文串
 // prt 模式串（短串）
+// 核心：长串不发生回溯
 int KMP(char *str, int slen, char *ptr, int plen)
 {
     int *next = (int *)malloc(sizeof(int)*plen);
@@ -41,8 +42,12 @@ int KMP(char *str, int slen, char *ptr, int plen)
     int k = -1;
     for (int i = 0; i < slen; i++)
     {
-        while (k >-1&& ptr[k + 1] != str[i])//ptr和str不匹配，且k>-1（表示ptr和str有部分匹配）
+        while (k >-1&& ptr[k + 1] != str[i]){//ptr和str不匹配，且k>-1（表示ptr和str有部分匹配）
+         
             k = next[k];//往前回溯
+    //        printf("回溯  k = %d\n",k);
+        }
+        // 处理匹配的情况
         if (ptr[k + 1] == str[i])
             k = k + 1;
         if (k == plen-1)//说明k移动到ptr的最末端
@@ -56,14 +61,49 @@ int KMP(char *str, int slen, char *ptr, int plen)
     return -1;  
 }
 
-int main(){
+void testKMP(){
+     printf("kmp 算法\n核心思想：如何不让text的指针不回溯\n");
     _next = (int *)malloc(sizeof(int)*100);
     char * patten = "abababac";
     char * text = "abacababababacababc";
+    printf("text  :%s\npatten:%s\n",text,patten);
     calnext(patten,_next,8);
     printArr(_next,8);
     int index = KMP(text,19,patten,8);
     printf("finded index is :%d\n",index);
+    
+}
+
+int getLength(char * str)
+{
+    int length = 0;
+    int i = 0;
+    while(str[i++]!='\0'){
+        length++;
+    }
+    return length;
+}
+// 使用kmp实现的grep程序
+void grep(char * from,char * msg){
+
+    FILE * in = fopen(from,"r");
+    char message[100];
+    int msg_len = getLength(msg);
+    while(fscanf(in,"%s",message)!=EOF){
+        //printf("%s\n",message);
+        if(KMP(message,getLength(message),msg,msg_len)!=-1 ){
+            printf("%s\n",message);
+        }
+    }
+    printf("---------over!----------\n");
+}
+int main(int argc,char *argv[]){
+    if(argc==3){
+        grep(argv[1],argv[2]);
+    } else {
+        printf("usage: grep [filename] [patten]\n");
+    }
+    
     return 0;
 }
 
