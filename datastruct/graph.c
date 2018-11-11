@@ -813,6 +813,7 @@ void floyd(MGraph * mg,int n){
 }
 
 
+// i j分别为顶点的编号，从1开始
 void print_floydPath(i,j){
 
     int k;
@@ -822,7 +823,22 @@ void print_floydPath(i,j){
         return;
     print_floydPath(i,k);
     printf("%5d",k);
-    print_floydPath(k,j); // 是不是多余的了啊？？
+//    print_floydPath(k,j); // 是不是多余的了啊？？
+}
+void print_allFloyd(int n){
+    int i,j;
+    for(i=0;i<n;i++){
+        for(j=0;j<n;j++){
+            if(i!=j){
+                printf("%d -->",i+1);
+                print_floydPath(i+1,j+1);
+                printf("-->%d",j+1);
+                if(floyddist[i][j] == MAXX)
+                    printf("NO path");
+                printf("\n");
+            }
+        }
+    }
 }
 void push(DFS_Stack * s,int data){
     s->data[++(s->top)] = data;
@@ -882,7 +898,8 @@ void testFloyd(){
     // }
     printDouArrary(floyddist,m->vexnum,m->vexnum);
     printDouArrary(floydPath,m->vexnum,m->vexnum);
-    print_floydPath(1,2);
+    print_allFloyd(m->vexnum);
+    //print_floydPath(1,2);
     printf("\n");
 }
 
