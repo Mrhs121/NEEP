@@ -23,6 +23,14 @@ void printCharArr(char arr[],int n)
     }
     printf("\n");
 }
+void printCharArr2(char arr[])
+{
+    char c;
+    int i =0;
+    while( (c=arr[i++])!='\0' )
+        printf("%c",c);
+    printf("\n");
+}
 
 void printFloatArr(float arr[],int n)
 {

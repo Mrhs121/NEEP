@@ -11,7 +11,7 @@ void printArr(int * arr,int n){
     printf("\n");
 }
 
-int *_next;
+int *_next; 
 //这里的str是被包含的较短字符串，length是这个字符串的长度。
 void calnext(char *str, int *next, int length)
 {

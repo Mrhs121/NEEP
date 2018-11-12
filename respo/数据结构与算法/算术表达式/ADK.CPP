@@ -148,6 +148,6 @@ int main(void)
  gets(s);
  puts("该表达式的值为:"); 
  printf("%s\b=%g\n",s,EvaluateExpression(s));
- system("pause");
+ //system("pause");
  return 0;
 }

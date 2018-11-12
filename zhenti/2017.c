@@ -197,22 +197,24 @@ int main()
 {
 
 
-    // int a = 175;
-    // int b=8,c=16;
-    // //printf("%d\n",invert(a,4,3));
-    // scanf("%d",&a);
-    // DtoH(a);
+    int a = 175;
+    int b=8,c=16;
+    //printf("%d\n",invert(a,4,3));
+    scanf("%d",&a);
+    DtoH(a);
+
+    printf("\n--> %X\n",a);
     // printf("\n");
     // B2I(a);
     // printf("\n");
     // myprintf("str = %s int :%d char:%c float:%f %d->八进制:%o %d->十六进制:%x finish\n","huangsheng",1,'c',2.0f,b,b,c,c);
     // //printf("%c\n",'a'+1+'0');
-    BTree * T = (BTree*)malloc(sizeof(BTree));
-    int data[] = {10,7,6,-1,-1,8,-1,-1,8,-1,-1};
-    T = createTree(T, data);
-    PreOrderBiTree(T);
-    printf("\n");
-    printf("isSatisfyHeap = %s\n",isSatisfyHeap(T)==satisfy?"satisfy":"notsatisfy");
-    printf("%d\n",123<<33  );
+    // BTree * T = (BTree*)malloc(sizeof(BTree));
+    // int data[] = {10,7,6,-1,-1,8,-1,-1,8,-1,-1};
+    // T = createTree(T, data);
+    // PreOrderBiTree(T);
+    // printf("\n");
+    // printf("isSatisfyHeap = %s\n",isSatisfyHeap(T)==satisfy?"satisfy":"notsatisfy");
+    // printf("%d\n",123<<33  );
     return 1;
 }
