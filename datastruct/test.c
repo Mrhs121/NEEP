@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include <stdlib.h>
 
 void test()
 {
@@ -42,7 +42,12 @@ char ** split(char * str,char key){
 int main()
 {
 
+    FILE * in = fopen("testdata.txt","r");
+    char s[100];
+    fscanf(in,"%s",s);
+    printf("%s\n",s);
 
+    /*
     char *a[] = {"nihaoma","heiasdfdsafdafllo","world"};
     
     printf("%s,size:%ld\n",a[0],sizeof(a));
@@ -54,6 +59,7 @@ int main()
     printf("\n%ld:\n",sizeof(b));
     char **c = split("huangsheng,dashen,sixsix",',');
     printf("%s\n%s\n%s\n",c[0],c[1],c[2]);
+    */
     /*
     FILE * fin = fopen("aa.txt","r");
     char a ;

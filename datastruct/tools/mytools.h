@@ -3,6 +3,13 @@
 #include <stdio.h>
 #define MAXNUM 99999999
 
+int getStrlen(char * str){
+    int len = 0;
+    int i = 0;
+    while(str[i]!='\0')
+        len++;
+    return len;
+}
 
 void printIntArr(int arr[],int n)
 {

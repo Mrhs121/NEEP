@@ -83,17 +83,33 @@ int getLength(char * str)
     }
     return length;
 }
+
+
+int getLine(char str[100],FILE * in)
+{
+    char c;
+    int i = 0;
+    int result = 1;
+    while( (result=fscanf(in,"%c",&c))!=EOF && c!='\n'){
+        str[i++] = c;
+    }
+    str[i] = '\0';
+    return result;
+
+}
 // 使用kmp实现的grep程序
 void grep(char * from,char * msg){
 
     FILE * in = fopen(from,"r");
     char message[100];
     int msg_len = getLength(msg);
-    while(fscanf(in,"%s",message)!=EOF){
+    int lines = 1;
+    while(getLine(message,in)!=EOF){
         //printf("%s\n",message);
         if(KMP(message,getLength(message),msg,msg_len)!=-1 ){
-            printf("%s\n",message);
+            printf("%d:%s\n",lines,message);
         }
+        lines++;
     }
     printf("---------over!----------\n");
 }

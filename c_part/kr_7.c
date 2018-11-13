@@ -19,19 +19,40 @@ void myscanf(char * format,...)
 		}
 		localformat[i++] = '%';
 		// 判断是否是字母
-		while( *(p+1) && !isalpha(*(p+1)) )
+		while( *(p+1) && !isalpha(*(p+1)) ){
 			localformat[i++] = *++p;
+			printf("----\n");
+		}
 		localformat[i++] = *(p+1);
 		localformat[i] = '\0';
+		switch(*++p){
+			case 'd':
+				ival = va_arg(ap,int*);
+				scanf(localformat,ival);
+				break;
+			case 'f':
+				dval = va_arg(ap,double*);
+				scanf(localformat,dval);
+				break;
+			case 'c':
+				sval = va_arg(ap,char*);
+				scanf(localformat,sval);
+				break;
+		}
 		printCharArr2(localformat);
-
+		i = 0;
 	}
+	va_end(ap);
 }
 
 int main()
 {
 
-	int a,b;
-	myscanf("a=%dd,b=%d",&a,&b);
+	int a;
+	char b;
+	int *p = &a; // 原理所在
+	scanf("%d",p);
+	//myscanf("%d %c",&a,&b);
+	printf("%d \n",a);
 	return 0;
 }
