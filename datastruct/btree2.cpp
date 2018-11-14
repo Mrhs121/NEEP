@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include <iostream>
 using namespace std;
 #define YES 1 // 是堆
@@ -52,7 +53,9 @@ typedef struct Qu {
 
 
 //先序自动创建二叉树
+
 int _data1[] = {1,2,3,-1,-1,4,8,-1,-1,9,10,-1,-1,-1,5,6,-1,-1,7,-1,-1};
+int _data3[] = {1,2,3,4,-1,-1,-1,5,-1,-1,6,7,-1,-1,-1};
 int _data[] = {1,2,3,4,-1,-1,5,-1,-1,6,-1,-1,7,-1,-1};
 int _data2[] = { 1,2,3,-1,-1,-1,5,-1,-1 };
 int _data_sortTree[] = {6,2,1,-1,-1,4,3,-1,-1,-1,8,-1,-1};
@@ -180,7 +183,8 @@ BTree* createTree(BTree* T,int _data[]) {
 }
 
 
-//中序线索化链表，左孩子 根节点 右孩子
+// 中序线索化链表，左孩子 根节点 右孩子
+// ThrNode ** pre 传的是二级指针，直接对外部实体进行修改
 void createThread(ThrNode * node,ThrNode ** pre)
 {
     if(node == NULL){
@@ -377,7 +381,7 @@ void LeverOrder(BTree * root)
     int last = 0;
     Q[++rear] = root;
     last = rear;
-    int l=1;
+    int l=1; // 不仅可以得到层数，还可以计算每层的节点数
     BTree * q = (BTree*)malloc(sizeof(BTree));
     while (front != rear)
     {
@@ -417,6 +421,33 @@ void PreOrder(BTree * T)
 			T = T->rchild;
 		}
 	}
+}
+
+// 判断一棵树是否平衡
+void Judge_AVL(BTree * tree,int * balance,int *h){
+	int bl=0,br=0,hl=0,hr=0; // 左右孩子平衡标志以及高度
+	if(tree==NULL)
+	{
+		*h = 0;
+		*balance = 1;
+	}
+	else if(tree->lchild==NULL && tree->rchild==NULL){
+		//printf("\n 叶子结点 : %d\n",tree->data);
+		*h = 1;
+		*balance = 1;
+	}
+	else{
+		Judge_AVL(tree->lchild,&bl,&hl);
+		Judge_AVL(tree->rchild,&br,&hr);
+		*h = (hl>hr?hl:hr)+1; // 当前节点的高度为自节点的最大高度在上自身
+		if(abs(hl-hr)<2){
+			//printf("\n----> ccurrent node is :%d 左高度:%d 右高度:%d\n",tree->data,hl,hr);
+			*balance = bl&&br;
+		} else {
+			*balance = 0;
+		}
+	}
+
 }
 
 //寻找最近的公共祖先
@@ -508,7 +539,7 @@ void swap(BTree * b) {
 		b->rchild = temp;
 	}
 }
-//将前序变成后序序列
+//将前序变成后序序列 表达式
 void preToPost(char pre[], int l1, int h1, char post[], int l2, int h2) {
 
 	if (l1 <= h1) {
@@ -665,6 +696,8 @@ typedef struct
 	int tag;
 }tagstack;
 
+// 查找制定节点的所有祖先节点
+// 采用后续非递归的思想
 void search(BTree * tree,int x){
 	tagstack s[100];
 	int top = 0;
@@ -697,13 +730,17 @@ void search(BTree * tree,int x){
 int main()
 {
 	BTree * tree ;
-	tree = createTree(tree,_data1);
+	tree = createTree(tree,_data3);
 	//PreOrderBiTree(tree);
 	LeverOrder(tree);
-	postOrderBiTree(tree);
-	int num;
-	scanf("%d",&num);
-	search(tree,num);
+	int balance=0;
+	int h=0;
+	Judge_AVL(tree,&balance,&h);
+	printf("%d %d\n",balance,h);
+	// postOrderBiTree(tree);
+	// int num;
+	// scanf("%d",&num);
+	// search(tree,num);
     //testPath();
 //testBtree();
 //
