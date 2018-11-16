@@ -1,2 +1,2 @@
-just test
+ojust test
 svnserve -d -r yanjiu

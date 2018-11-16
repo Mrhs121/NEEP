@@ -2,7 +2,16 @@
 
 #include <stdio.h>
 #define MAXNUM 99999999
+#define TURE 1
+#define FLASE 0
+#define YES 1
+#define NO 0
 
+void swap(int * a,int *b){
+    int  temp = *a;
+    *a = *b;
+    *b = temp;
+}
 int getStrlen(char * str){
     int len = 0;
     int i = 0;
@@ -30,7 +39,8 @@ void printCharArr(char arr[],int n)
     }
     printf("\n");
 }
-void printCharArr2(char arr[])
+
+void printString(char arr[])
 {
     char c;
     int i =0;
@@ -48,3 +58,5 @@ void printFloatArr(float arr[],int n)
     }
     printf("\n");
 }
+
+

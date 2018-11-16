@@ -33,7 +33,7 @@ typedef struct BTree_char {
 
 
 typedef struct TStack {
-	BTree * data[50];
+    BTree * data[50];
 	int top;
 }TStack;
 
@@ -670,4 +670,3 @@ int main()
 	cout << endl;
 	return 0;
 }
-
