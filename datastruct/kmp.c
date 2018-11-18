@@ -101,7 +101,8 @@ int getLine(char str[100],FILE * in)
 void grep(char * from,char * msg){
 
     FILE * in = fopen(from,"r");
-    char message[100];
+    char message[1000];
+    // 尽量开大一点，否则可能会出现越界的情况
     int msg_len = getLength(msg);
     int lines = 1;
     while(getLine(message,in)!=EOF){
@@ -114,6 +115,7 @@ void grep(char * from,char * msg){
     printf("---------over!----------\n");
 }
 int main(int argc,char *argv[]){
+    printf("作者：黄晟\n");
     if(argc==3){
         grep(argv[1],argv[2]);
     } else {

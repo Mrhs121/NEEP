@@ -73,7 +73,7 @@ void read(char * file){
 
 
 
-void chansform(){
+void Transform(){
      int i,N,bias=0;
      unsigned char msg[16];
      FILE *fp=fopen("aa.txt","r");
@@ -110,7 +110,14 @@ void chansform(){
 
 int main(int argc,char*argv[])
 {
-    chansform();
+    int x = 10;
+    {
+        int x = 20;
+        printf("%d ",x);
+    }
+    printf("%d\n",x);
+    //Transform();
+
     /*
     char *a[] = {"nihaoma","heiasdfdsafdafllo","world"};
     

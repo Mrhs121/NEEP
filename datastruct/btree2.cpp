@@ -104,7 +104,7 @@ int BTWidth(BTree * t) {
 		if (max<LeverCount[i])
 			max = LeverCount[i];
 	}
-	cout << "the tree's Lever is:" << Lever << endl;
+	cout << "the tree's Lever is:\nthe tree's maxWidth is:" << Lever << max << endl;
 	return max;
 }
 

@@ -6,6 +6,12 @@
 #define FLASE 0
 #define YES 1
 #define NO 0
+#define DATATPYE int
+#define FORMAT "%c\n"
+
+void testDatatype(DATATPYE a){
+    printf(FORMAT,a);
+}
 
 void swap(int * a,int *b){
     int  temp = *a;
@@ -57,6 +63,16 @@ void printFloatArr(float arr[],int n)
         printf("%f ",arr[i]);
     }
     printf("\n");
+}
+
+// 十进制转为二进制输出
+void B2I(int x){
+    if(x==0)
+        return;
+    int Divisor = x/2;
+    int mod = x%2;
+    B2I(Divisor);
+    printf("%d",mod);
 }
 
 

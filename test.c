@@ -28,6 +28,8 @@ void change(int **p){
 int main()
 {
 
+    printf("%d\n",1^0);
+    /*
     printf("test mac\n");
     char * b;
     printf("%ld\n",sizeof(b));
@@ -35,7 +37,8 @@ int main()
     printf("%ld,%ld\n",sizeof(c),sizeof(int));
     char *a[] = {"hello", "world","dsajfhjkdahfkhdsjlaljka"};
     printf("%ld,%ld\n",sizeof(a)/sizeof(a[0]),sizeof(a[0]));
-/*  
+    */
+    /*  
     int a = 1;
     printf("a address:%p, b address:%p\n",&a,&b);
     int *p = &a;
