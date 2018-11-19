@@ -197,13 +197,15 @@ int main()
 {
 
 
+    
     int a = 175;
     int b=8,c=16;
-    //printf("%d\n",invert(a,4,3));
-    scanf("%d",&a);
-    DtoH(a);
+    myprintf("%d\n",a);
+    // //printf("%d\n",invert(a,4,3));
+    // scanf("%d",&a);
+    // DtoH(a);
 
-    printf("\n--> %X\n",a);
+    // printf("\n--> %X\n",a);
     // printf("\n");
     // B2I(a);
     // printf("\n");

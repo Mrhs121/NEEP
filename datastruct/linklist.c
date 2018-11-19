@@ -210,27 +210,49 @@ LNode * insert(LNode * head,LNode * p){
     p->next = cur->next;
     cur->next = p;
     return head;
-
+}
+LNode * insert2(LNode * head,LNode * p){
+    if(head==NULL){
+        return p;
+    }
+    
+    LNode * pre = head;
+    LNode * cur = pre->next;
+    while(cur!=NULL && cur->next->data<p->data){
+        pre = pre->next;
+        cur = pre->next;
+    }
+    p = cur;
+    pre->next = p;
+    return head;
 }
 int main()
 {
 
     int a[] = {888,2,5,214,5,41,4};
-   // LNode * ss = createWithSort(a,7);
-    LNode * datas[7];
-    int i=0;
-    for(i=0;i<7;i++){
-        datas[i] = (LNode*)malloc(sizeof(LNode));
-        datas[i]->data = a[i];
-        datas[i]->next = NULL;
-    }
-    LNode * head = (LNode*)malloc(sizeof(LNode));
-    head->next = NULL;
-    for(i=0;i<7;i++){
-        head = insert(head,datas[i]);
-    }
+    LNode * ss = createWithSort(a,7);
+    LNode * p = (LNode*)malloc(sizeof(LNode));
+    int in;
+    scanf("%d",&in);
+    p->data = in;
+    p->next = NULL;
+    print(ss);
+    insert(ss,p);
+    print(ss);
+    // LNode * datas[7];
+    // int i=0;
+    // for(i=0;i<7;i++){
+    //     datas[i] = (LNode*)malloc(sizeof(LNode));
+    //     datas[i]->data = a[i];
+    //     datas[i]->next = NULL;
+    // }
+    // LNode * head = (LNode*)malloc(sizeof(LNode));
+    // head->next = NULL;
+    // for(i=0;i<7;i++){
+    //     head = insert(head,datas[i]);
+    // }
     //Node * ss = createWithSort(a,7);
-    print(head);
+    //print(head);
     // int a[] = {1,2,3,4,5,6,7,8};
     // int b[] = {1,2,3};
     // LNode * A = create(a,8);

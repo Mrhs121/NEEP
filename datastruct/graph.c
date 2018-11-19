@@ -7,7 +7,7 @@ typedef int I_ten[10];
 #define VISITED 1
 #define NOT_VISITED 0
 #define MAXX 99999
-
+const char * g_input = "g_input.txt";
 /*
  *  
  *  数据结构 图的存储结构以及相关的操作
@@ -133,7 +133,7 @@ void printM(MGraph * mgraph){
     }
 }
 
-
+// 旧的写法，尽量不要使用了
 ALGraph * create_graph(){
     //int vexnum;
     ALGraph * algraph = (ALGraph*)malloc(sizeof(ALGraph));
@@ -463,13 +463,13 @@ void bfstraverse(ALGraph * algraph){
 void dfs(ALGraph * algraph,int v){
     visit(algraph,v);
     visited[v] = VISITED;
+    // 取下邻接表
     ArcNode * f = algraph->vertices[v].first;
     while(f!=NULL){
-        // 此处加上 arc++ 用于判断是否是棵树
+        // 此处加上 arc++ 用于判断是否是棵树，即为n个顶点又n-1条边
         // void dfs(ALGraph * alg,int v ,int * arc)
         if(visited[f->adjvex]!=VISITED){
             dfs(algraph,f->adjvex);
-          //  f = f->next;
         }
         f = f->next;
     }
@@ -674,7 +674,7 @@ ALGraph * testCreateByArc(){
     algraph = createDAG();
     printAlg(algraph);
     dfs_traverse(algraph);
-    int degree[10] = {0,0,0,0,0,0,0,0,0,0};
+    int degree[10] = {0};
     
     getDegree(algraph,degree);
     int i;
@@ -702,7 +702,7 @@ void prim(MGraph * mgraph,int start){
     // 初始化顶点的邻近的 边的代价 以及将其是顶点 并入 集合
     for(i=0;i<vexnum;i++){
         low[i] = cost[start][i];
-        close_set[i] = start;
+        close_set[i] = start; //存储的与当前顶点边最小的前驱顶点
     }
     // 需要循环 vexnum-1 
     for(i=0;i<vexnum-1;i++){
@@ -713,13 +713,17 @@ void prim(MGraph * mgraph,int start){
                 k = j; //save the current close
             }
         }
+        // 如第一个循环的时候，close_set[k]即为0，k即为0与其他顶点中，边最小的一个
         printf("{%d<-->%d\tinfo:%d}\n",close_set[k],k,cost[close_set[k]][k]);
+        // 将这个顶点并入顶点集
         low[k] = 0;
 
         printf("\n");
         for(j=0;j<vexnum;j++){
             if(cost[k][i]!=0 && cost[k][j]<low[j]){
                 low[j] = cost[k][j];
+                // 如果通过当前顶点到达其他顶点的距离小于之前i直接到达j的距离，那么则修改，
+                // 并且将j的最短距离的前驱设为k
                 close_set[j] = k; //
             }
         }
@@ -927,9 +931,31 @@ void testDijkstra(){
     printf("\n");
 }
 
+// 判断一个图是否是连通图
+int judgeConnected(ALGraph * algraph,int startV){
+    dfs(algraph,startV);
+    int i= 0;
+    for(i=0;i<algraph->vexnum;i++){
+        // 如果存在没有访问到顶点，则一定是非连通图
+        if(visited[i]==0)
+            return 0;
+    }
+    return 1;
+}
+void justTest(){
+    ALGraph * algraph = (ALGraph*)malloc(sizeof(ALGraph));
+    fin = fopen(g_input,"r");
+    algraph = createAlgByArc();
+    printAlg(algraph);
+    printf("%s\n",judgeConnected(algraph,0)==1?"yes":"no");
+    //dfs(algraph,0);
+    
+}
+
 int main( )
 {
-    testFloyd();
+    justTest();
+    //testFloyd();
     //testFindPath();
     //testDijkstra();
  //    fin = fopen("arc_input.txt","r");

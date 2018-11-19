@@ -12,7 +12,7 @@ typedef struct  Score{
     int num;
     char name[20];
     int score;
-}Stu[200];
+}Student;
 
 
 void printStu(struct Score s[],int count){
@@ -80,6 +80,16 @@ void write(FILE * out,struct Score s[],int count){
         fprintf(out,"%d %s %d\n",s[i].num,s[i].name,s[i].score);
     }
 }
+
+// 839可以使用标准库
+int compareStudent(const void * stua,const void * stub){
+    Student * a = (Student*)stua;
+    Student * b = (Student*)stub;
+    if(b->score == a->score){
+        return b->num - a->num; 
+    }
+    return b->score - a->score;
+}
 // 18年数据结构 第五大题
 //五、（本题共 20 分）两个班的成绩分别存放在两个文件当中。 
 //每个文件有多行，每行都是由空格分隔的学号、姓名和成绩。
@@ -116,8 +126,10 @@ void Five_18(){
         i++;
         count++;
     }
+
     printStu(stu,count);
-    QuickSort(stu,0,count-1);
+    //QuickSort(stu,0,count-1);
+    qsort(stu,count,sizeof(Student),compareStudent);
     printf("\n-----after------\n");
     printStu(stu,count);
     write(out,stu,count);
@@ -222,7 +234,7 @@ int  isAIncludeB(LNode *a,LNode*b)
     }
     //return FALSE;
 }
-// 最后一题
+// 最后一题 打印x的所有的祖先节点
 int ancestor(BTree *b,int x)
 {
     if (b==NULL){
@@ -234,8 +246,7 @@ int ancestor(BTree *b,int x)
         printf("%d ",b->data);
         return 1;
     }
-    else if ( (ancestor(b->lchild,x)) 
-            || (ancestor(b->rchild,x)))
+    else if ( (ancestor(b->lchild,x)) || (ancestor(b->rchild,x)))
     {
         printf("%d ",b->data);
         return 1;
@@ -255,14 +266,15 @@ void  testAnc(){
 }
 int main(int argc,char *argv[])
 {
-    testAnc();
+
+    //testAnc();
     // 
     // char data = {'a','b','c'};
     // int data2 = {1,2,3};
     // test(data,1);
 
     //printf("%f\n",CubeSqrtByNewton(10));
-    //Five_18();
+    Five_18();
     // int select = 0;
     // if (argc>1 && strcmp(argv[1],"-a")==0)
     // {
