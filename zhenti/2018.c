@@ -53,7 +53,7 @@ void QuickSort(struct Score s[],int left,int right){
         }
         while( s[left].score >= s[base].score  && left<right ){
             if(s[left].score == s[base].score && s[left].num < s[base].num){
-                printf("l :%d,%d ",s[left].score,s[left].score);
+                printf("l :%d,%d6 ",s[left].score,s[left].score);
                 break;
             }
             left++;
@@ -164,6 +164,7 @@ int Des(int a,int b){
 // c 第三大题  根据不同的参数，排序规则不同，升或者降
 // 快速排序
 // compare 排序标准
+// 错误
 void SAN_QuickSort(int (*compare)(int ,int ),int arr[],int left,int right){
     if(left>=right)
         return;
@@ -201,6 +202,7 @@ int _test(void *arr[],int type,int n,int compare){
 }
 
 // 2018 839 判断表b是否包含在a中 时间O(n)
+// 理解错误，错误
 int  isAIncludeB(LNode *a,LNode*b)
 {
     LNode * _a = a->next;

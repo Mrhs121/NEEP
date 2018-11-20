@@ -112,26 +112,23 @@ void print(LNode * head){
 }
 
 
-// void del(linklist &L,int a){
-//     LNode * p;
-//     printf("del %p,%p\n",L,&L);
+// 删除重复节点
+void del(LNode ** L,int a){
+    LNode * p;
     
-//     if(L == NULL)
-//         return;
-//     if(L->data == a){
-//         p = L;
-//         printf("%p,%d,",&L,L->data);
-//         L = L->next;
-//         printf("%p\n",&L);
-//         free(p);
-//         del(L,a);
-//        // printf("aa");
-//     } else {
-//         del(L->next,a);
-//        // printf("bb");
-//     }
+    if(*L == NULL)
+        return;
+    if((*L)->data == a){
+        p = (*L);
+        (*L) = (*L)->next;
+        free(p);
+        del(L,a);
+    } else {
+        del(&((*L)->next),a);
+       // printf("bb");
+    }
     
-// }
+}
 
 void change(LNode * head){
     head->data = 33333;
@@ -226,18 +223,31 @@ LNode * insert2(LNode * head,LNode * p){
     pre->next = p;
     return head;
 }
+
+double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Size) {
+    int s1=0,d1=nums1Size-1,m1;
+    int s2=0,d2=nums2Size-1,m2;
+    while(s1!=d1 || s2!=d2){
+        m1 = (s1+d1)/2;
+        m2 = (s2+d2)/2;
+        if(nums1[m1] == nums2[m2])
+            return num1[m1];
+    }
+}
 int main()
 {
 
-    int a[] = {888,2,5,214,5,41,4};
-    LNode * ss = createWithSort(a,7);
-    LNode * p = (LNode*)malloc(sizeof(LNode));
-    int in;
-    scanf("%d",&in);
-    p->data = in;
-    p->next = NULL;
+    int a[] = {888,2,5,214,5,41,4,2,214};
+    LNode * ss = createWithSort(a,9);
+    // LNode * p = (LNode*)malloc(sizeof(LNode));
+    // int in;
+    // scanf("%d",&in);
+    // p->data = in;
+    // p->next = NULL;
+    // print(ss);
+    // insert(ss,p);
     print(ss);
-    insert(ss,p);
+    del(&ss,214);
     print(ss);
     // LNode * datas[7];
     // int i=0;

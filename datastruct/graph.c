@@ -362,7 +362,7 @@ typedef struct{
 }Queue1;
 
 
-// 广度优先
+// 广度优先 采用队列
 void BFSTraverse(ALGraph * algraph,int v)
 {
     if(algraph == NULL || v>algraph->vexnum-1){
