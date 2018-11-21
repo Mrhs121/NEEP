@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-
-int _hash(char *str){
+int _hash(const char *str){
     int sum=0;
     int i = 0;
     char c;
@@ -12,6 +12,29 @@ int _hash(char *str){
         sum+=c;
     }
     return sum%10007;
+}
+
+
+int compare(const void * strA,const void * strB){
+    char * a = *(char**)strA;
+    char * b = *(char**)strB;
+   // printf("compare %s %s\n",a,b);
+    int hashA = _hash(a), hashB = _hash(b);
+    if(hashB!=hashA){
+        //printf("hash\n");
+        return hashA - hashB;
+    }
+    else {
+        if(strlen(a)!=strlen(b)){
+            //printf("len\n");
+            return strlen(b)-strlen(a);
+        }
+        else{
+            //printf("cmp\n");
+            return strcmp(b,a);
+        }
+    }
+    return 1;
 }
 
 void quicksort(char *data[],int left,int right){
@@ -60,18 +83,51 @@ void quicksort(char *data[],int left,int right){
     quicksort(data, l, left-1);
     quicksort(data, left+1, r);
 } // 没有bug了
-
-int main()
-{
-    char *str[] = {"abc","bac","acb","cab"};
+void testQuickSort(){
+    char *str[1000] = {"abfffc","acgb","agcb","cabgh"};
     int i =0;
     for(i=0;i<4;i++){
-        printf("%d\n",_hash(str[i]));
+        printf("%s:%d\n",str[i],_hash(str[i]));
     }
 //    printf("%d\n",strcmp("abc", "bbc"));
-    quicksort(str,0,3);
+    //quicksort(str,0,3);
+    qsort(str,4,sizeof(str[0]),compare);
     for(i=0;i<4;i++){
         printf("%s\n",str[i]);
+    } 
+}
+//直接传递二位数组就完事了
+int split(char key,char * str,char result[][1000]){
+    char c;
+    int i = 0;
+    int line= 0;
+    int column = 0;
+    while( (c=str[i++])!='\0' )
+    {
+        if(c!=key){
+            *(((char*)result)+line*1000+column) = c;
+            column++;
+            *(((char*)result)+line*1000+column) = '\0';
+        } else {
+            column = 0;
+            line++;
+        }
     }
+    printf("line = %d\n",line+1);
+    return line+1;
+}
+void testsplit(char _key){
+    char key = _key;
+    char result[100][1000];
+    int lines = split(key,"hu=ang da shen,li.ai.li,bao-b a o , zhu=zhu",result);
+    int i = 0;
+    for(i=0;i<lines;i++){
+        printf("%s\n", result[i]);
+    }
+}
+int main(int argc,char * argv[])
+{
+    testQuickSort();
+    //compare("huangsheng","dashen");
 	return 1;
 }

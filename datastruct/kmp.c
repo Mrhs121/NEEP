@@ -21,6 +21,7 @@ void calnext(char *str, int *next, int length)
     {
         while (k > -1 && str[k + 1] != str[q])
         {
+            //当遇到不匹配的字段的时候，根据前面0到k字段的最长公共前后缀来改变指针k
             k = next[k];//往前回溯
         }
         if (str[k + 1] == str[q])//如果相同，k++
@@ -50,7 +51,7 @@ int KMP(char *str, int slen, char *ptr, int plen)
         // 处理匹配的情况
         if (ptr[k + 1] == str[i])
             k = k + 1;
-        if (k == plen-1)//说明k移动到ptr的最末端
+        if (k == plen-1)//说明k移动到模式串的的最末端
         {
             //cout << "在位置" << i-plen+1<< endl;
             //k = -1;//重新初始化，寻找下一个
