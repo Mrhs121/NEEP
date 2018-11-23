@@ -191,6 +191,27 @@ void FindPath(ALGraph * algraph,int u,int v,int path[],int d,int k){
 }
 
 
+// 17年839真题  合并两个有序的数组，不使用缓冲区，A的长度够长
+// 两种思路
+// 1.暴力解法
+// 2.从后面忘前面添加新的大端
+// 明显这种做法更高效
+void mergeWithoutBuffer2(int *a,int n,int *b,int m){
+    int i,j;
+    int end = m+n-1;
+    // i记录a j记录b
+    for(i=n-1,j=m-1;j>=0&&i>=0;){
+        if(a[i]>=b[j]){
+            a[end--] = a[i--];
+        } else  {
+            a[end--] = b[j--];
+        }
+    }
+    if(j!=-1){
+        for(i=0;i<=j;i++)
+            a[i] = b[i];
+    }
+}
 
 
 int main()

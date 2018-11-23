@@ -907,6 +907,7 @@ void testFloyd(){
     printf("\n");
 }
 
+// 狄杰斯特拉
 void testDijkstra(){
     MGraph * m = (MGraph*)malloc(sizeof(MGraph));
     m = create();

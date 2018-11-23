@@ -265,34 +265,37 @@ void ss(){
     int i = 0;
     srand(time(NULL));
     for(i=0;i<10;i++){
-         data[i] = rand()%(rand()%100);
+         data[i] = rand()%(rand()%100)+1;
     }
     LNode * list = createWithoutHead(data,10);
     printList(list);
-    LNode  *h=list,*p,*q,*r,*s;
+    LNode  *h=list,*p,*pre,*max_pre,*max;
     list = NULL;
     while(h!=NULL){
-        p=s=h;
-        q=r=NULL;
+        p=max=h;
+        pre=max_pre=NULL;
         while(p!=NULL){
-            if(p->data>s->data){
-                s = p;
-                r = q;
+            // 移动p
+            if(p->data>max->data){
+                max = p;
+                max_pre = pre;
             }
-            q = p;
+            pre = p;
             p = p->next;
         }
-        if(s==h){
+        // 摘链，关键如何处理好pre
+        if(max==h){
             h = h->next;
         } else {
             // 摘下当前最大的结点
             // h逐渐减少
-            r->next = s->next;
+            max_pre->next = max->next;
         }
+
         //printList(list);
-        //头插，随后的序列为剩序
-        s->next = list;
-        list = s;
+        //没有haed的链表的头插法，随后的序列为剩序
+        max->next = list;
+        list = max;
         if(h!=NULL)
             printList(h);
         // 当 h 上的结点全部取下来之后，结束循环
@@ -301,15 +304,15 @@ void ss(){
 }
 int main()
 {   
-    //ss();
+    ss();
     //testListSelectSort();
 //    testHeadFile();
    // testHeap();
     //printf("\n-----------------\n");
   //  int b[10] = {1,2,3,4,5,6,7,8,9,10};
-    int b[10] = {412,1234,124,6,1234,1,412,4231,4 ,3};
-    QuickSort(b,0,9);
-    print(b,10);
+    // int b[10] = {412,1234,124,6,1234,1,412,4231,4 ,3};
+    // QuickSort(b,0,9);
+    // print(b,10);
     
 //    int k_min = find_k_min(b,0,9,3);
     //printf("k_min = %d\n",k_min);

@@ -1,7 +1,7 @@
 #pragma once
-
 #include <stdio.h>
-#define MAXNUM 99999999
+#include "../myStrcut.h"
+//#define MAXNUM 99999999
 #define TURE 1
 #define FLASE 0
 #define YES 1
@@ -9,6 +9,17 @@
 #define DATATPYE int
 #define FORMAT "%c\n"
 
+void printList(LNode * list){
+    LNode * p = list;
+    if(list->data==-1){
+        p = p->next;
+    }
+    while(p!=NULL){
+        printf("%5d->",p->data);
+        p = p->next;
+    }
+    printf("\n");
+}
 void testDatatype(DATATPYE a){
     printf(FORMAT,a);
 }
