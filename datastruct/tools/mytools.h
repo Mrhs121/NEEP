@@ -1,4 +1,6 @@
 #pragma once
+
+
 #include <stdio.h>
 #include "../myStrcut.h"
 //#define MAXNUM 99999999
@@ -85,5 +87,4 @@ void B2I(int x){
     B2I(Divisor);
     printf("%d",mod);
 }
-
 

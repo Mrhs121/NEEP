@@ -129,7 +129,7 @@ void PreOrderBiTree(BTree *T)
 {
 	if (T == NULL)
 	{
-        printf("null ");
+        //printf("null ");
 		return;
 	}
 	else
@@ -189,4 +189,5 @@ void LeverOrder(BTree * root)
     }
 
 }
+
 
