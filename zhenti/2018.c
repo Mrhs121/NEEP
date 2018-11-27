@@ -24,7 +24,7 @@ void printStu(struct Score s[],int count){
     }
 }
 
-void print(int b[],int n){
+static void print(int b[],int n){
     int i;
     printf("\n");
     for(i=0;i<n;i++){

@@ -114,7 +114,7 @@ void  testMaxBlock()
     int max = maxBlock((int **)data,5,10);
 }
 
-float print(int arr[],int n){
+static float print(int arr[],int n){
     int i=0;
     float sum = 0;
     for(i=0;i<n;i++){

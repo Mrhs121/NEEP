@@ -3,7 +3,7 @@
 #include <string.h>
 
 #include "./myhead.h"
-void print(char data[],int n){
+static void print(char data[],int n){
 	int i=0;
 	for(i=0;i<n;i++){
 		printf("%c ",data[i]);
@@ -13,12 +13,12 @@ void print(char data[],int n){
 
 // 类比2017第三大题 将十进制转为十六进制输出
 // 采取递归的方法
-void DtoH(int x){
+static void HtoD(int x){
     if(x==0)
         return;
     int Divisor = x/16;
     int mod = x%16;
-    DtoH(Divisor);    
+    HtoD(Divisor);    
     if(mod>=10)// 如果余数大于10则转换为A-F输出
         printf("%c",'A'+(mod-10));
     else 

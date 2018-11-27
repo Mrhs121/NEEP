@@ -21,7 +21,7 @@ typedef struct{
 }SqList;
 
 
-void print(int b[],int n){
+static  void print(int b[],int n){
     int i;
     printf("\n");
     for(i=0;i<n;i++){

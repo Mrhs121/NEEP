@@ -106,7 +106,7 @@ void DtoH(int x){
 
 
 // 十进制转为二进制输出
-void B2I(int x){
+static void B2I(int x){
     if(x==0)
         return;
     int Divisor = x/2;
