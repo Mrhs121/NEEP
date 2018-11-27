@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../datastruct/tools/mytools.h"
+#include "./myhead.h"
+
 void main_092()
 {
 	int a = 0, b = 0, c = 0;
@@ -49,7 +51,7 @@ void main_092()
 	B2I(answer); 
 	printf("\n");
 }
-int main()
+int test2009()
 {
 	main_092();
 	return 1;

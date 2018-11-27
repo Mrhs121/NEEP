@@ -4,6 +4,7 @@
 #define UP 2
 
 static int count = 0;
+// 寻找给定上下边界的下标
 int binsearch(int data[],int key,int l,int r,int lowOrUp){
 	
 	if(key>data[r] && lowOrUp == LOW)

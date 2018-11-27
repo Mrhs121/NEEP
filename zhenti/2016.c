@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "./myhead.h"
 #include <string.h>
 #include "../datastruct/tools/mytools.h"
 //#include "../datastruct/myStrcut.h"
@@ -174,7 +175,7 @@ void testlinkLeafNode(){
     printf("\n");
    
 }
-int main()
+int test2016()
 {
 	testlinkLeafNode();
 	//readProduct();

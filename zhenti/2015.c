@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../datastruct/myStrcut.h"
-
+#include "./myhead.h"
 #include <string.h>
 #include <math.h>
 #define YES 1
@@ -165,57 +165,11 @@ void move(SqList * A,int current){
         A->data[i] = A->data[i-1]; 
     }
 }
-// 17年839真题  合并两个有序的数组，不使用缓冲区，A的长度够长
-// 两种思路
-// 1.在A中插入新的元素之后，后面的元素往后面移动即可，应为A 的长度够长
-// 2.从后面忘前面添加新的大端
-void mergeWithoutBuffer(SqList *A,SqList *B)
-{
-    void print(int arr[],int n);
-    int i=0,j=0;
-    while(i<A->length&&j<B->length)
-    {
-        if(A->data[i]<=B->data[j])
-            i++;
-        else{ 
-            A->length++;
-            move(A,i);
-            A->data[i] = B->data[j];
-            print(A->data,A->length);
-            i++;
-            j++;
-        }
-    }
-    printf("i=%d,j=%d\n",i,j);
-    while(j<B->length ){
-        printf("add B\n");
-        A->data[i++] = B->data[j++];   
-        A->length++;
-    }
-//  return ture;
-}
-// 明显这种做法更高效
-void mergeWithoutBuffer2(int *a,int n,int *b,int m){
-    int i,j;
-    int end = m+n-1;
-    // i记录a j记录b
-    for(i=n-1,j=m-1;j>=0&&i>=0;){
-        if(a[i]>=b[j]){
-            a[end--] = a[i--];
-        } else  {
-            a[end--] = b[j--];
-        }
-    }
-    if(j!=-1){
-        for(i=0;i<=j;i++)
-            a[i] = b[i];
-    }
-}
 
 //十二题
 // 指定顶点之间的最短路径
 // Dij算法即可解答
-int main()
+int test2015()
 {
     // int a[100] = {4,5,99};
     // int b[6] = {1,2,6,7,7,8};

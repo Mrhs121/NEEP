@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../datastruct/myStrcut.h"
+#include "./myhead.h"
 #define YES 1
 #define NO 0
 #define MAX 100
@@ -202,7 +203,7 @@ int _test(void *arr[],int type,int n,int compare){
 }
 
 // 2018 839 判断表b是否包含在a中 时间O(n)
-// 理解错误，错误
+// 理解错误，这个只能测试连续串
 int  isAIncludeB(LNode *a,LNode*b)
 {
     LNode * _a = a->next;
@@ -257,6 +258,20 @@ int ancestor(BTree *b,int x)
         return 0;
 }
 
+int printAnc(BTree * tree,int key){
+    if(tree == NULL){
+        return 0;
+    }
+    if(tree->data == key){
+        return 1;
+    }
+    
+    int result =  (printAnc(tree->lchild,key) || printAnc(tree->rchild,key) );
+    if(result == 1)
+        printf("anc : %d \n",tree->data);
+    return result;
+    //return 0;
+}
 void  testAnc(){
     int data[] = {1,2,3,-1,-1,4,-1,-1,5,6,-1,-1,7,-1,-1};
     BTree * tree;
@@ -266,9 +281,35 @@ void  testAnc(){
     scanf("%d",&where);
     ancestor(tree,where);
 }
-int main(int argc,char *argv[])
+
+
+int inclusion(LNode * a,LNode * b){
+    LNode * aa = a->next;
+    LNode * bb = b->next;
+    while(aa!=NULL && bb!=NULL){
+        if(aa->data == bb->data){
+            aa = aa->next;
+            bb = bb->next;
+        } else {
+            aa = aa->next;
+        }
+    }
+    if(bb==NULL){
+        return 1;
+    }
+    return 0;
+}
+int test2018()
 {
 
+    int data1[] = {1,2,4,5,6,7,8,9};
+    int data2[] = {2,4,9};
+    int data3[] = {-1,3,5};
+    LNode * a = create(data1,8);
+    LNode * b = create(data2,3);
+    LNode * c = create(data3,3);
+    printf("a - b : %d\n",inclusion(a,b));
+    printf("a - c : %d\n",inclusion(a,c));
     //testAnc();
     // 
     // char data = {'a','b','c'};
@@ -276,7 +317,7 @@ int main(int argc,char *argv[])
     // test(data,1);
 
     //printf("%f\n",CubeSqrtByNewton(10));
-    Five_18();
+    //Five_18();
     // int select = 0;
     // if (argc>1 && strcmp(argv[1],"-a")==0)
     // {

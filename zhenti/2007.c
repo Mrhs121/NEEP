@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-int main()
+#include "./myhead.h"
+int test2007()
 {
-return 1;
+	return 1;
 }

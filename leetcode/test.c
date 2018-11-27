@@ -41,8 +41,12 @@ int lengthOfLongestSubstring(char* s) {
     printf("end = %d\n",end);
     return max;
 }
-
+// 返回最便宜的方案
+int shoppingOffers(int* price, int priceSize, int** special, int specialRowSize, int *specialColSizes, int* needs, int needsSize) {
+    
+}
 int main(){
-    printf("%d\n",lengthOfLongestSubstring("aiuiothgfksanv"));
+
+    //printf("%d\n",lengthOfLongestSubstring("aiuiothgfksanv"));
     return 0;
 }

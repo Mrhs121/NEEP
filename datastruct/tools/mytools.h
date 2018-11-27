@@ -1,5 +1,6 @@
 #pragma once
-
+#ifndef H_MYTOOLS
+#define H_MYTOOLS
 
 #include <stdio.h>
 #include "../myStrcut.h"
@@ -87,4 +88,5 @@ void B2I(int x){
     B2I(Divisor);
     printf("%d",mod);
 }
+#endif
 

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "./myhead.h"
 
 // 可行
 int MCNuggets(int n){
@@ -11,7 +11,7 @@ int MCNuggets(int n){
 	return MCNuggets(n-9)||MCNuggets(n-15)||MCNuggets(n-20);
 
 }
-int main()
+int test2013()
 {
 
 	int a;

@@ -4,10 +4,10 @@
 *
 */
 
-
+#include "./myhead.h"
 #include <stdio.h>
 #include <stdlib.h>
-int main()
+int test2012()
 {
 	return 1;
 }

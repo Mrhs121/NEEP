@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include "./myhead.h"
 int _hash(const char *str){
     int sum=0;
     int i = 0;
@@ -125,7 +125,7 @@ void testsplit(char _key){
         printf("%s\n", result[i]);
     }
 }
-int main(int argc,char * argv[])
+int test2014()
 {
     testQuickSort();
     //compare("huangsheng","dashen");

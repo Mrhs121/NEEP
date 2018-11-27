@@ -1,10 +1,11 @@
 /*
     839-17年真题答案
 */
-
+#include "./myhead.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <string.h>
 #include "../datastruct/myStrcut.h"
 #define satisfy 1
 #define notsatisfy 0
@@ -54,10 +55,10 @@ void myprintf(const char * format , ...)
                 i++;
                 printf("%f",va_arg(argList, double));
                 break;
-            case 'c':
-                i++;
-                printf("%c",va_arg(argList, char));
-                break;
+            // case 'c':
+            //     i++;
+            //     printf("%c",va_arg(argList, char));
+            //     break;
             case 'o':
                 // 处理八进制
                 i++;
@@ -81,8 +82,12 @@ void myprintf(const char * format , ...)
 // 然后再取反，将最后面的n位变成1  000000000111
 // 然后再将后面的n位移动（左移）到与目标数字相应的位数上 00000001110000
 // 最后用x与屏蔽码异或 （如果不同结果是1，相同为0）（0^0=0,1^0=1,即其他位没有变化）
-unsigned invert(unsigned x,int p,int n){
-    return x^ (~(~0<<n) << (p+1-n));
+char * invert(unsigned x,int p,int n){
+    unsigned result =  (x^ (~(~0<<n) << (p+1-n)));
+    printf("result = %d\n",result );
+    char  * str = (char*)malloc(sizeof(char)*32);
+    sprintf(str,"%d",result);
+    return str;
 }// kr原题 p40
 
 //第三大题 将十进制转为十六进制输出
@@ -176,7 +181,9 @@ void FindPath(ALGraph * algraph,int u,int v,int path[],int d,int k){
         if(d==k){
             printPath(path,d);
         }
-        visited[v] = NOT_VISITED;
+        visited[v] = NOT_VISITED;// 注意这里，如果在这里return的话，就需要手动将此顶点置为NOT_VISITED
+                                 // 因为可能有多条不同的路径都会经过这个顶点
+                                 // 及时的return可以有效减少时间   
         return;
     }
     p = algraph->vertices[u].first;
@@ -213,15 +220,21 @@ void mergeWithoutBuffer2(int *a,int n,int *b,int m){
     }
 }
 
-
-int main()
+int test2017()
 {
 
 
-    
-    int a = 175;
-    int b=8,c=16;
-    myprintf("%d\n",a);
+    // int data[] = {1,2,4,-1,-1,5,8,-1,-1,-1,3,6,-1,-1,7,-1,-1};
+    // BTree * tree = (BTree*)malloc(sizeof(BTree));
+    // tree = createTree(tree,data);
+    // LeverOrder(tree);
+    // int key;
+    // scanf("%d",&key);
+    // printAnc(tree,key);
+    //printf("%s\n",invert(123,5,2));    
+    // int a = 175;
+    // int b=8,c=16;
+    // myprintf("%d\n",a);
     // //printf("%d\n",invert(a,4,3));
     // scanf("%d",&a);
     // DtoH(a);

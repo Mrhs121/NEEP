@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "./myhead.h"
 #include "../datastruct/tools/mytools.h"
 unsigned char* i2ba(int n, unsigned char *s)
 {
@@ -140,7 +141,7 @@ double equation(char express[]){
         next = -1;
         c = express[++i];
     }
-    、
+    
     while (c!='\0') {
         if( (c<='9' && c>='0') || (c<='z' && c>='a')){
             //将用于计算的变量或者纯数字缓存起来
@@ -277,7 +278,7 @@ void main_112()
 }
 
 
-int main()
+int test2011()
 {
 
     main_112();

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-
+#include "./myhead.h"
 void print(char data[],int n){
 	int i=0;
 	for(i=0;i<n;i++){
@@ -145,7 +145,7 @@ void main_102()
  }
  	printf("c = %d \n", c);
 }//缺点 ： 时间复杂度较高
-int main()
+int test2010()
 {
 	// char a[] = { 'a', 'b' ,'c','d','e','f','g','h','i','j' };
 	// char com[20];

@@ -1,3 +1,6 @@
+#pragma once
+#ifndef H_MYSTRCUT
+#define H_MYSTRCUT
 
 #include<stdio.h>
 #include <stdlib.h>
@@ -190,4 +193,5 @@ void LeverOrder(BTree * root)
 
 }
 
+#endif
 
