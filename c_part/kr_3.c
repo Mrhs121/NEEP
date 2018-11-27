@@ -63,6 +63,8 @@ void itoa(int n,char s[]){
     s[i++] = (n)%10+'a';
     s[i] = '\0';
 }
+
+
 int main()
 {
     char s[100];
