@@ -302,8 +302,69 @@ void ss(){
     }
    printList(list);
 }
+
+
+
+void mergeAndDistinct(){
+    int a[] = {5 ,1, 4, 1, 2, 9};
+    int b[] = {7 ,2 ,3 ,1 ,5 ,7 ,6 ,5};
+    selectSort(a,6);
+    selectSort(b,8);
+    print(a,6);
+    print(b,8);
+    int reslut[40];
+    int i=0,j=0;
+    int k = 0;
+    int dub = -1;
+    while(i<6 && j<8){
+        if(a[i]<=b[j]){
+            if(a[i] == b[j] || a[i]==dub){
+                dub = a[i];
+                //i++;
+                if(a[i] == b[j])
+                    j++;
+                i++;
+            } else if(a[i] != reslut[k-1]) {
+                dub = -1;
+                reslut[k++] = a[i];
+            }
+            i++;
+        } else if(a[i] > b[j] ) {
+            if(b[j]!=reslut[k-1])
+                reslut[k++] = b[j];
+            j++;
+        } 
+        
+    }
+    print(reslut,k);
+    // 3 4 5 6 7 9
+    if(i==6 && j!=8){
+        for(i=j;i<8;i++)
+        {    
+            if(reslut[k-1] == b[i])
+                continue;
+            reslut[k++] = b[i];
+        }   
+    } else if(j==8 && i!=6) {
+        for(j=i;j<6;j++)
+        {   
+            if(a[j]==reslut[k-1])
+                continue;
+            reslut[k++] = a[j];
+        }    
+    }
+    print(reslut,k);
+    // for(i=1;i<k;i++){
+    //     if(reslut[i] == reslut[i-1] || reslut[i]==reslut[(i+1)%k])
+    //         continue;
+    //     printf("%d ",reslut[i]);
+    // }
+    printf("\n");
+
+}
 int main()
 {   
+    mergeAndDistinct();
     //ss();
     //testListSelectSort();
 //    testHeadFile();
@@ -315,12 +376,12 @@ int main()
     // print(b,10);
     
     
-    int k;
-    scanf("%d",&k);
-    int k_min = find_k_min(b,0,9,k);
-    printf("%d min = %d\n",k,k_min);
-    selectSort(b,9);
-    print(b,9);
+//    int k;
+ //   scanf("%d",&k);
+  //  int k_min = find_k_min(b,0,9,k);
+   // printf("%d min = %d\n",k,k_min);
+   // selectSort(b,9);
+   // print(b,9);
     //printf("k_min = %d\n",k_min);
     //print(b,10);
     //selectSort(b,10);
