@@ -4,67 +4,19 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-BST_Insert	btree2.cpp	/^int BST_Insert(BTree **T,int key){$/;"	f
-BST_search	btree2.cpp	/^BTree * BST_search(int data,BTree * T){$/;"	f
-BTWidth	btree2.cpp	/^int BTWidth(BTree * t) {$/;"	f
-BTree	btree2.cpp	/^typedef struct BTree {$/;"	s	file:
-BTree	btree2.cpp	/^}BTree;$/;"	t	typeref:struct:BTree	file:
-BTree_char	btree2.cpp	/^typedef struct BTree_char {$/;"	s	file:
-BTree_char	btree2.cpp	/^}BTree_char;$/;"	t	typeref:struct:BTree_char	file:
-BTree_char2E	btree2.cpp	/^void BTree_char2E(BTree_char * T) {$/;"	f
-BTree_char2Exp	btree2.cpp	/^void BTree_char2Exp(BTree_char * T, int deep) {$/;"	f
-InOrderBiTree	btree2.cpp	/^void InOrderBiTree(BTree *T)$/;"	f
-InOrderBiTree_char	btree2.cpp	/^void InOrderBiTree_char(BTree_char *T)$/;"	f
-LeverOrder	btree2.cpp	/^void LeverOrder(BTree * root)$/;"	f
-NO	btree2.cpp	/^#define NO /;"	d	file:
-OutPut	btree2.cpp	/^void OutPut(BTree * bst_tree,int key){$/;"	f
-PreOrder	btree2.cpp	/^void PreOrder(BTree * T)$/;"	f
-PreOrderBiTree	btree2.cpp	/^void PreOrderBiTree(BTree *T)$/;"	f
-PreOrderBiTreeWithLever	btree2.cpp	/^void PreOrderBiTreeWithLever(BTree *T,int lever)$/;"	f
-PreOrderBiTreeWithOutLeaf	btree2.cpp	/^void PreOrderBiTreeWithOutLeaf(BTree *T)$/;"	f
-PreOrderBiTree_char	btree2.cpp	/^void PreOrderBiTree_char(BTree_char *T)$/;"	f
-Qu	btree2.cpp	/^typedef struct Qu {$/;"	s	file:
-Qu	btree2.cpp	/^}Qu;$/;"	t	typeref:struct:Qu	file:
-TStack	btree2.cpp	/^typedef struct TStack {$/;"	s	file:
-TStack	btree2.cpp	/^}TStack;$/;"	t	typeref:struct:TStack	file:
-YES	btree2.cpp	/^#define YES /;"	d	file:
-_Lever	btree2.cpp	/^int _Lever = 0;$/;"	v
-_count	btree2.cpp	/^static int _count = 0;$/;"	v	file:
-_data	btree2.cpp	/^int _data[] = {1,2,3,4,-1,-1,5,-1,-1,6,-1,-1,7,-1,-1};$/;"	v
-_data1	btree2.cpp	/^int _data1[] = {1,2,3,-1,-1,4,-1,-1,5,6,-1,-1,7,-1,-1};$/;"	v
-_data2	btree2.cpp	/^int _data2[] = { 1,2,3,-1,-1,-1,5,-1,-1 };$/;"	v
-_data_char	btree2.cpp	/^char _data_char[] = { '*','+','a','#','#','b','#','#','*','c','#','#','-','#','d','#','#' };$/;"	v
-_data_char2	btree2.cpp	/^char _data_char2[] = { '+','+','a','#','#','b','#','#','+','c','#','#','+','d','#','#','e','#','#' };$/;"	v
-_data_sortTree	btree2.cpp	/^int _data_sortTree[] = {6,2,1,-1,-1,4,3,-1,-1,-1,8,-1,-1};$/;"	v
-ancestor	btree2.cpp	/^BTree * ancestor(BTree* root, int node1, int node2)$/;"	f
-ancestor_wd	btree2.cpp	/^BTree * ancestor_wd(BTree * root,BTree * p,BTree * q)$/;"	f
-createTree	btree2.cpp	/^BTree* createTree(BTree* T,int _data[]) {$/;"	f
-createTree_char	btree2.cpp	/^BTree_char* createTree_char(BTree_char* T) {$/;"	f
-data	btree2.cpp	/^	BTree * data[50];$/;"	m	struct:Qu	file:
-data	btree2.cpp	/^	BTree * data[50];$/;"	m	struct:TStack	file:
-data	btree2.cpp	/^	char data;$/;"	m	struct:BTree_char	file:
-data	btree2.cpp	/^	int data;$/;"	m	struct:BTree	file:
-front	btree2.cpp	/^	int front, rear;$/;"	m	struct:Qu	file:
-getPathByKey	btree2.cpp	/^void getPathByKey(BTree * T,int key){$/;"	f
-getTop	btree2.cpp	/^BTree * getTop(TStack s)$/;"	f
-isEmpty	btree2.cpp	/^bool isEmpty(TStack s) {$/;"	f
-isSatisfyHeap	btree2.cpp	/^int isSatisfyHeap(BTree * tree) {$/;"	f
-lchild	btree2.cpp	/^	struct BTree* lchild;$/;"	m	struct:BTree	typeref:struct:BTree::BTree	file:
-lchild	btree2.cpp	/^	struct BTree_char * lchild;$/;"	m	struct:BTree_char	typeref:struct:BTree_char::BTree_char	file:
-main	btree2.cpp	/^int main()$/;"	f
-maxsize	btree2.cpp	/^#define maxsize /;"	d	file:
-pop	btree2.cpp	/^BTree * pop(TStack * s)$/;"	f
-postOrder	btree2.cpp	/^void postOrder(BTree * tree)$/;"	f
-postOrderBiTree	btree2.cpp	/^void postOrderBiTree(BTree *T)$/;"	f
-preToPost	btree2.cpp	/^void preToPost(char pre[], int l1, int h1, char post[], int l2, int h2) {$/;"	f
-push	btree2.cpp	/^void push(TStack * s, BTree * node) {$/;"	f
-rchild	btree2.cpp	/^	struct BTree* rchild;$/;"	m	struct:BTree	typeref:struct:BTree::BTree	file:
-rchild	btree2.cpp	/^	struct BTree_char * rchild;$/;"	m	struct:BTree_char	typeref:struct:BTree_char::BTree_char	file:
-rear	btree2.cpp	/^	int front, rear;$/;"	m	struct:Qu	file:
-search_small	btree2.cpp	/^BTree * search_small(BTree * t,int k){$/;"	f
-swap	btree2.cpp	/^void swap(BTree * b) {$/;"	f
-testBST	btree2.cpp	/^void testBST(){$/;"	f
-testBtree	btree2.cpp	/^void testBtree() {$/;"	f
-testBtree_char	btree2.cpp	/^void testBtree_char() {$/;"	f
-testPath	btree2.cpp	/^void testPath(){$/;"	f
-top	btree2.cpp	/^	int top;$/;"	m	struct:TStack	file:
+AdjustDown	sort.c	/^void AdjustDown(int arr[],int k,int length){$/;"	f
+HalfInsertSort	sort.c	/^void HalfInsertSort(int arr[],int n){$/;"	f
+InsertSort	sort.c	/^void InsertSort(int arr[],int length){$/;"	f
+QuickSort	sort.c	/^void QuickSort(int arr[],int left,int right){$/;"	f
+buildHeap	sort.c	/^void buildHeap(int arr[],int length){$/;"	f
+dobule_pop	sort.c	/^void dobule_pop(int arr[],int n){$/;"	f
+find_k_min	sort.c	/^int find_k_min(int arr[],int low,int high,int k){$/;"	f
+main	sort.c	/^int main()$/;"	f
+print	sort.c	/^void print(int b[],int n){$/;"	f
+printList	sort.c	/^void printList(LNode * list){$/;"	f
+selectSort	sort.c	/^void selectSort(int arr[],int length){$/;"	f
+ss	sort.c	/^void ss(){$/;"	f
+swap	sort.c	/^void swap(int * a,int * b){$/;"	f
+testHeadFile	sort.c	/^void testHeadFile(){$/;"	f
+testHeap	sort.c	/^void testHeap(){$/;"	f
+testListSelectSort	sort.c	/^void testListSelectSort(){$/;"	f

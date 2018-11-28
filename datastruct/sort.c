@@ -304,17 +304,23 @@ void ss(){
 }
 int main()
 {   
-    ss();
+    //ss();
     //testListSelectSort();
 //    testHeadFile();
    // testHeap();
     //printf("\n-----------------\n");
   //  int b[10] = {1,2,3,4,5,6,7,8,9,10};
-    // int b[10] = {412,1234,124,6,1234,1,412,4231,4 ,3};
+    int b[10] = {412,123334,124,6,11234,1,4512,4231,4 ,3};
     // QuickSort(b,0,9);
     // print(b,10);
     
-//    int k_min = find_k_min(b,0,9,3);
+    
+    int k;
+    scanf("%d",&k);
+    int k_min = find_k_min(b,0,9,k);
+    printf("%d min = %d\n",k,k_min);
+    selectSort(b,9);
+    print(b,9);
     //printf("k_min = %d\n",k_min);
     //print(b,10);
     //selectSort(b,10);

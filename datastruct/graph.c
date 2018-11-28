@@ -745,9 +745,10 @@ void Dijkstra(int n,int v,int dist[],int pre[],MGraph * m){
         else
             pre[i] = 0;
     }
-    printArrary(dist,n);
+    //printArrary(dist,n);
     s[v] = 1;
     pre[v] = 0;
+    // 依次选取顶点，并入顶点集
     for(i=0;i<n;i++){
         min = MAXNUM;
         k = 0;
@@ -759,7 +760,7 @@ void Dijkstra(int n,int v,int dist[],int pre[],MGraph * m){
                 }
             }
         }
-        printArrary(dist,n);
+        //printArrary(dist,n);
         if (k==0)
         {
             continue;
@@ -772,6 +773,7 @@ void Dijkstra(int n,int v,int dist[],int pre[],MGraph * m){
                 if(dist[k]+m->Edge[k][j] < dist[j]){
                     printf("修改 %d \n",j+1);
                     dist[j] = dist[k]+m->Edge[k][j];
+                    // 同时修改j的前驱节点为当前的这个中间节点
                     pre[j] = k;
                 }
             }
