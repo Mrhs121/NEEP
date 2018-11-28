@@ -177,6 +177,7 @@ void testlinkLeafNode(){
 }
 int test2016()
 {
+    printf("---> test 2016\n");
 	testlinkLeafNode();
 	//readProduct();
 	//printf("%d\n",htoi("abc"));
