@@ -23,7 +23,80 @@
 //     char f;
 
 // }
+// 第五大题 对矩阵进行排序（现根据面积，）
+typedef struct Matrix
+{
+    double left_bottom_x,left_bottom_y;
+    double right_top_x,right_top_y;
+    double s;
+}matrix;
 
+// double calS(matrix m){
+//     return (m.right_top_x-m.left_bottom_x) * (m.right_top_y-m.left_bottom_y);
+// }
+double calS(double a,double b,double c,double d){
+    return (c-a) * (d-b);
+}
+
+double calDistant(double x,double y){
+    return x*x + y*y;
+}
+
+int compareMatrix(const void * a,const void * b){
+    matrix * m1 = (matrix*)a;
+    matrix * m2 = (matrix*)b;
+    printf("comparing %0.4lf <-> %0.4lf\n",m1->s,m2->s);
+    if(m1->s == m2->s){
+        if(calDistant(m1->left_bottom_x,m1->left_bottom_y) == calDistant(m2->left_bottom_x,m2->left_bottom_y)){
+            if(m1->left_bottom_x == m2->left_bottom_x){
+                return (m1->left_bottom_y - m2->left_bottom_y)>0?1:-1;
+            } else {
+                printf("same %lf %lf\n",m1->left_bottom_x ,m2->left_bottom_x );
+                return (m1->left_bottom_x - m2->left_bottom_x)>0?1:-1;
+            }
+        } else {
+            return (calDistant(m1->left_bottom_x,m1->left_bottom_y) - calDistant(m2->left_bottom_x,m2->left_bottom_y))>0?1:-1;
+        }
+    } else {
+        return (m1->s - m2->s)>0?1:-1;
+    }
+}
+void SortMatrix(char * filename){
+    if(filename == NULL){
+        printf("usge : [filename]\n");
+        return;
+    }
+    int N = 10;
+    FILE * in = fopen(filename,"r");
+    FILE * out = fopen("./matrix.out","w");
+    matrix matrixs[40];
+    double left_bottom_x,left_bottom_y;
+    double right_top_x,right_top_y;
+    int i=0,j=0;
+    while(i<N && fscanf(in,"%lf %lf %lf %lf\n",&left_bottom_x,&left_bottom_y,&right_top_x,&right_top_y)!=EOF){
+         matrixs[i].left_bottom_x = left_bottom_x;
+         matrixs[i].left_bottom_y = left_bottom_y;
+         matrixs[i].right_top_x = right_top_x;
+         matrixs[i].right_top_y = right_top_y;
+         matrixs[i].s = calS(left_bottom_x,left_bottom_y,right_top_x,right_top_y);
+        // printf("(%0.2lf,%0.2lf) (%0.2lf,%0.2lf) S = %0.4lf\n",left_bottom_x,left_bottom_y
+        //                           ,right_top_x,right_top_y,calS(left_bottom_x,left_bottom_y
+        //                           ,right_top_x,right_top_y));
+        i++;
+    }
+
+    qsort(matrixs,i,sizeof(matrix),compareMatrix);
+    for(j=0;j<i;j++){
+        fprintf(out, "%0.4lf %lf %lf %lf %lf\n",
+                                        matrixs[j].s,
+                                        matrixs[j].left_bottom_x,
+                                        matrixs[j].left_bottom_y,
+                                        matrixs[j].right_top_x,
+                                        matrixs[j].right_top_y );
+    }
+    printf("\n");
+
+}
 
 // 第四大题，自定义myprintf
 void myprintf(const char * format , ...)
@@ -220,10 +293,10 @@ void mergeWithoutBuffer2(int *a,int n,int *b,int m){
     }
 }
 
-int test2017()
+int test2017(char * filenames[])
 {
 
-
+    SortMatrix(filenames[2]);
     // int data[] = {1,2,4,-1,-1,5,8,-1,-1,-1,3,6,-1,-1,7,-1,-1};
     // BTree * tree = (BTree*)malloc(sizeof(BTree));
     // tree = createTree(tree,data);

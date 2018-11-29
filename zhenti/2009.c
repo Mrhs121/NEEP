@@ -51,8 +51,48 @@ void main_092()
 	B2I(answer); 
 	printf("\n");
 }
+
+ 
+ int file2H()
+ {
+     int i,N,bias=0;
+     unsigned char msg[16];
+     FILE *fp=fopen("./xald.mp3","r");
+     while(1)
+     {
+         for(i=0;i<16;i++)
+         {
+         	 //printf("reading------\n");
+             if(fscanf(fp,"%c",&msg[i])==EOF)
+                 break;
+         }
+         N=i;
+ 
+         printf("%08x ",bias);
+         bias+=0x10;
+         for(i=0;i<N;i++)
+             printf("%02x ",msg[i]);
+         if(N<16)
+             for(i=0;i<6-N;i++)
+                 printf("   ");
+         for(i=0;i<N;i++)
+         {
+             if(0x20<=msg[i] && msg[i]<=126)
+                 printf("%c",msg[i]);
+             else
+                 printf(".");
+         }
+         printf("\n");
+         if(N<16)
+ 
+             break;
+ 
+     }
+     return 0;
+ }
 int test2009()
 {
-	main_092();
+	file2H();
+	//main_092();
 	return 1;
 }

@@ -327,8 +327,9 @@ void mergeAndDistinct(){
             } else if(a[i] != reslut[k-1]) {
                 dub = -1;
                 reslut[k++] = a[i];
+                i++;
             }
-            i++;
+            
         } else if(a[i] > b[j] ) {
             if(b[j]!=reslut[k-1])
                 reslut[k++] = b[j];

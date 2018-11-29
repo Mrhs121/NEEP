@@ -15,7 +15,7 @@ int main(int argc,char *argv[])
             test2018();
             break;
         case 2017:
-            test2017();
+            test2017(argv);
             break;
         case 2016:
             test2016();
