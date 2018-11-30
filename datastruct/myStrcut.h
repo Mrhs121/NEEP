@@ -73,6 +73,7 @@ LNode * create(int data[],int n);
 LNode * createWithoutHead(int data[],int n);
 
 BTree* createTree(BTree* T,int _data[]);
+void PreOrderBiTree(BTree * T);
 void PreOrderExBiTree(ExtendBTree *T);
 
 // 二叉树的层序遍历 使用队列若该节点的左右孩子不为空，则入队
