@@ -664,6 +664,7 @@ void testFindPath(){
     FindPath2(algraph,0,4,path,-1,2);
     printf("count : %d \n",count);
 }
+
 // 创建   代 权 的 图
 ALGraph * testCreateByArc(){
 
@@ -685,7 +686,7 @@ ALGraph * testCreateByArc(){
     return algraph;
 }
 
-// param : MGraph
+// prim最小生成树算法
 void prim(MGraph * mgraph,int start){
     printf("最小生成树算法\n");
     int cost[MAXNUM][MAXNUM];
@@ -785,14 +786,16 @@ void Dijkstra(int n,int v,int dist[],int pre[],MGraph * m){
     }
 }
 
+// 最小生成树算法
 void Kruskal(){
 
 }
 
 
+
 int floydPath[100][100];
 int floyddist[100][100];
-//计算每对顶点之间的最短距离
+// 计算每对顶点之间的最短距离
 // 每次增加一个中间点，判断通过这个中间点到达目标点的距离是否与直接到达更小
 // 如果更小则修改距离与路径
 void floyd(MGraph * mg,int n){
