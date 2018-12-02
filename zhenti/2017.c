@@ -191,6 +191,7 @@ static void B2I(int x){
 
 // 9 判断一颗二叉树是否满足大顶堆的条件
 // 层序遍历队列或者用堆也行
+// 此方法存在缺陷，不能够判读是否是颗完全树
 int isSatisfyHeap(BTree * tree) {
     if(tree==NULL)
         return notsatisfy;

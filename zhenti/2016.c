@@ -116,7 +116,10 @@ void readProduct(){
 	fprintf(out, "%s %0.2lf\n",currentProduct,sum);	
 }
 
-// 十字链表表示稀疏矩阵
+// 十字链表表示稀疏矩阵 中节点的个数：n+m+1+真实数据个数
+
+
+
 // 采用非递归前序遍历
 BTree * linkLeafNode(BTree *T)
 {  
@@ -155,19 +158,42 @@ BTree * linkLeafNode(BTree *T)
     }
     return list;
 }
+
+BTree * LeafNodehead , *LeafPre = NULL;
+BTree * linkedByInOrder(BTree * tree){
+    if(tree){
+       linkedByInOrder(tree->lchild);
+       if(tree->lchild==NULL && tree->rchild==NULL){
+            printf("linking %d\n",tree->data);
+            if(LeafPre == NULL){
+                LeafNodehead = tree;
+                LeafPre = tree;
+            } else {
+                LeafPre->rchild = tree;
+                LeafPre = tree;
+            }
+       } 
+       linkedByInOrder(tree->rchild);
+       LeafPre->rchild = NULL;
+    }
+    return LeafNodehead;
+}
 void testlinkLeafNode(){
     BTree * tree  = (BTree*)malloc(sizeof(BTree));
     tree = createTree(tree,_data1);
     PreOrderBiTree(tree);
     printf("\n");
+    LeverOrder(tree);
+    printf("\n");
     BTree * head = (BTree*)malloc(sizeof(BTree));
     //head->lchild = (BTree*)malloc(sizeof(BTree))
-    head =  linkLeafNode(tree);
-    BTree * p = head->lchild;
+    LeafNodehead = linkedByInOrder(tree);
+    //head =  linkLeafNode(tree);
+    BTree * p = LeafNodehead;
     printf("after linked leaf node\n");
     while(p!=NULL){
         printf("%d ",p->data);
-        p = p->lchild;
+        p = p->rchild;
     }
     printf("\n 注意观察经这个结果 \n");
     
@@ -177,6 +203,7 @@ void testlinkLeafNode(){
 }
 int test2016()
 {
+    LeafNodehead = (BTree*)malloc(sizeof(BTree));
     printf("---> test 2016\n");
 	testlinkLeafNode();
 	//readProduct();
