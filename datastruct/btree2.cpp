@@ -559,6 +559,7 @@ void postOrder2(BTree * tree){
 
 		}
 		while(top!=0 && s[top].tag==1){
+			printf("%d ",s[top].bt->data);
 			top--;
 		}
 		if(top!=0){
