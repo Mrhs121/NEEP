@@ -539,8 +539,36 @@ void postOrder(BTree * tree)
 	printf("\n");
 }
 
+typedef struct
+{
+	BTree * bt;
+	int tag;
+}_stack;
 
-//非递归后序遍历
+_stack s[100];
+// 非递归后续遍历的第二种写法
+void postOrder2(BTree * tree){
+	printf("post 2\n");
+	int top = 0;
+	BTree * bt = tree;
+	while(bt!=NULL || top>0){
+		while(bt!=NULL){
+			s[++top].bt = bt;
+			s[top].tag = 0;
+			bt = bt->lchild;
+
+		}
+		while(top!=0 && s[top].tag==1){
+			top--;
+		}
+		if(top!=0){
+			s[top].tag = 1;
+			bt = s[top].bt->rchild;
+		}
+	}
+}
+
+// 查找key的祖先节点
 void SearchByPostOrder(BTree * tree,int key)
 {
 
@@ -795,8 +823,14 @@ int main()
 	BTree * tree ;
 	tree = createTree(tree,_data3);
 	PreOrderBiTree(tree);
+    printf("层序遍历\n");
     LeverOrder(tree);
-    SearchByPostOrder(tree,5);
+    printf("后序遍历\n");
+    postOrderBiTree(tree);
+	printf("\n非递归后序遍历\n");
+	//postOrder(tree);
+	postOrder2(tree);
+    //SearchByPostOrder(tree,5);
 
     /*
     //PreOrderBiTree(tree);
