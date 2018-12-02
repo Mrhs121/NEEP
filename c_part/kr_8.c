@@ -13,6 +13,8 @@ void * _calloc(unsigned n,unsigned size){
 	return p;
 }
 
+
+
 int main(){
 	int * data = (int *)malloc(sizeof(int)*5);
 	printf("%d\n",data[0]);

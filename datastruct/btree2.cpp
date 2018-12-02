@@ -16,7 +16,6 @@ using namespace std;
 #define maxsize 100 // 规定二叉树的节点总数不超过100
 /*
 * *  二叉树 前中后序遍历，非递归遍历（利用堆）（注：图的非递归遍历用的是队列）
-* *  时间：2017-09-17
 * *  作者：黄晟
 * */
 
@@ -39,10 +38,20 @@ struct ThrNode
     int ltag,rtag;
 };
 
+
+
 typedef struct TStack {
 	BTree * data[50];
 	int top;
 }TStack;
+
+void printTstack(TStack S){
+    int i = -1;
+    while( (i = S.top--)!=-1 ){
+        printf("%d ",S.data[i]->data);
+    }
+    printf("\n");
+}
 
 typedef struct Qu {
 	BTree * data[50];
@@ -503,23 +512,27 @@ void postOrder(BTree * tree)
 		//cout<<"if "<<s.top<<"----------"<<s.data[s.top]->data<<endl;
 		if (p != NULL) {
 			push(&s, p);
+			// 	直到左孩子为空
 			p = p->lchild;
 		}
 		else
 		{
 			p = getTop(s);
+			// 如果是从左边孩子返回的，那么就以为接下来要遍历root的又右孩子
+			// 否则说明root的左右孩子均遍历完成，那么就直接else输出当前root节点即可
 			if (p->rchild&&p->rchild != r)
 			{
-				p = p->rchild; //上一个结点向右边走
+				p = p->rchild; //接着遍历root的右孩子
 				push(&s, p);
-				p = p->lchild;
+				p = p->lchild; // 右孩子同样也是往左边开始寻找
 			}
 			else
 			{
+				// 当前节点的左右孩子均为空，则输出
 				p = pop(&s);
 				printf("%5d", p->data);
-				r = p;
-				p = NULL;
+				r = p;//记录root的直接邻接孩子
+				p = NULL;//回到上一层
 			}
 		}
 	}
@@ -527,6 +540,56 @@ void postOrder(BTree * tree)
 }
 
 
+//非递归后序遍历
+void SearchByPostOrder(BTree * tree,int key)
+{
+
+	int i = 0;
+	TStack s,s2;
+	
+    s.top = -1;
+    s2.top = -1;
+	
+    BTree * p = tree;
+	BTree * r = NULL;
+	while (p != NULL || !isEmpty(s))
+	{
+		//cout<<"if "<<s.top<<"----------"<<s.data[s.top]->data<<endl;
+		if (p != NULL) {
+			push(&s, p);
+			// 	直到左孩子为空
+			p = p->lchild;
+		}
+		else
+		{
+			p = getTop(s);
+			if(p->data == key){
+                //  此方法还可以计算连个节点最近的公共祖先
+                //  copy各自的祖先，然后最后比较即可
+                printf("top = %d\n",s.top);
+                printTstack(s);
+                exit(1);
+			}
+			// 如果是从左边孩子返回的，那么就以为接下来要遍历root的又右孩子
+			// 否则说明root的左右孩子均遍历完成，那么就直接else输出当前root节点即可
+			if (p->rchild&&p->rchild != r)
+			{
+				p = p->rchild; //接着遍历root的右孩子
+				push(&s, p);
+				p = p->lchild; // 右孩子同样也是往左边开始寻找
+			}
+			else
+			{
+				// 当前节点的左右孩子均为空，则输出
+				p = pop(&s);
+				//printf("%5d", p->data);
+				r = p;//记录root的直接邻接孩子
+				p = NULL;//回到上一层
+			}
+		}
+	}
+	printf("\n");
+}
 
 void swap(BTree * b) {
 	if (b) {
@@ -731,13 +794,19 @@ int main()
 {
 	BTree * tree ;
 	tree = createTree(tree,_data3);
-	//PreOrderBiTree(tree);
+	PreOrderBiTree(tree);
+    LeverOrder(tree);
+    SearchByPostOrder(tree,5);
+
+    /*
+    //PreOrderBiTree(tree);
 	LeverOrder(tree);
 	int balance=0;
 	int h=0;
 	Judge_AVL(tree,&balance,&h);
 	printf("%d %d\n",balance,h);
-	// postOrderBiTree(tree);
+	*/
+    // postOrderBiTree(tree);
 	// int num;
 	// scanf("%d",&num);
 	// search(tree,num);

@@ -34,6 +34,14 @@ typedef struct TStack {
 	int top;
 }TStack;
 
+
+void printStack(TStack s){
+    while(s.top--){
+        printf("%d ",s.data[i].data);
+    }
+}
+
+
 typedef struct Qu {
 	BTree * data[50];
 	// int LeverCount[50];
