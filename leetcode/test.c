@@ -47,7 +47,7 @@ int shoppingOffers(int* price, int priceSize, int** special, int specialRowSize,
 }
 
 
-char * dest;
+//char * dest;
 // 最长回文子串
 char *  longestPalindrome(char* s) {
     int length = strlen(s);
@@ -104,12 +104,84 @@ char *  longestPalindrome(char* s) {
     strncpy(dest,s+start,finallength);
     return dest;
 }
-
+// 寻找最长公共前缀
+char* longestCommonPrefix(char** strs, int strsSize) {
+    char c = strs[0][0];
+    int i = 0, j = 0;
+    int count = 0;
+    int length = 0;
+    while(c!='\0'){
+        c = strs[0][i];
+        for(j=0;j<strsSize&&c!='\0';j++){
+            if(c==strs[j][i]){
+                count++;
+            }
+        }
+        printf("count = %d\n",count );
+        if(count==strsSize){
+            count = 0;
+            length++;
+        }
+        else
+            break;
+        i++;
+    }
+    printf("length = %d\n",length );
+    char * dest = (char*)malloc(sizeof(char)*length+1);
+    dest[length] = '\0';
+    for(i=0;i<length;i++){
+        dest[i] = strs[0][i];
+    }
+    printf("%s\n",dest );
+    return dest;
+}
+int compare(const void * a,const void * b){
+    int num1 = *(int *)a;
+    int num2 = *(int *)b;
+    //printf("%d %d\n",num1,num2);
+    return num1 - num2;
+}
+void print(int arr[],int size){
+    int i = 0;
+    for(i=0;i<size;i++){
+        printf("%d ",arr[i] );
+    }
+    printf("\n");
+}
+// 三数之和等于0
+int** threeSum(int* nums, int numsSize, int* returnSize) {
+    qsort(nums,numsSize,sizeof(nums[0]),compare);
+    //print(nums,numsSize);
+    int *result[3];
+    int lines = 0;
+    int i=0,j=0,k=0;
+    //int a,b,c;
+    for(i=0;i<numsSize;i++){
+        for(j=i+1;i<numsSize;j++){
+            for(k=j+1;k<numsSize;k++){
+                if(nums[i]+nums[j]+nums[k] == 0){
+                    result[lines][0] = nums[i];
+                    result[lines][1] = nums[j];
+                    result[lines][2] = nums[k];
+                    lines++;
+                }
+            }  
+        }
+    }
+    printf("%d\n",lines );
+    *returnSize = lines;
+    return result;
+}
 int main(){
     
+    int size;
+    int data[] = {-1, 0, 1, 2, -1, -4};
+    threeSum(data,6,&size);
+    char * strs[20] = {"huangsheng","huangdashen","huanle"}; 
+    //printf("%s\n",longestCommonPrefix(strs,3));
     //bbcdyxabaxyda
     
-    printf("%s\n",longestPalindrome("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"));
+    //printf("%s\n",longestPalindrome("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"));
     //printf("Max Length = %d\n",maxlength);
     //printf("%d\n",lengthOfLongestSubstring("aiuiothgfksanv"));
     return 0;
