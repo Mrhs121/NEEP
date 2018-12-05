@@ -28,6 +28,8 @@ int getStrlen(char * str){
     return len;
 }
 
+
+
 void printIntArr(int arr[],int n)
 {
     int i=0;

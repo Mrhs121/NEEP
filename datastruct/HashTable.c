@@ -21,6 +21,10 @@ void init(){
 }
 void cover(char * key,char * value){
         int hashcode = hash(key);
+        hashTable.postions[hashTable.index] = hashcode;
+        if(get(key)==NULL){
+            hashTable.index++;
+        }
         KeyValue kv;
         kv.key = (char *)malloc(sizeof(char)*strlen(key)+1);
         kv.value = (char *)malloc(sizeof(char)*strlen(value)+1);
@@ -30,6 +34,9 @@ void cover(char * key,char * value){
 }
 
 void put(char * key,char * value){
+    if(hashTable.isInit == 0){
+        init();
+    }
     if(get(key)==NULL){
         cover(key,value);
     } else if(0==strcmp(key,hashTable.kv[hash(key)].key)){
@@ -41,21 +48,30 @@ void put(char * key,char * value){
 }
 
 char * get(char * key){
+    if(hashTable.isInit == 0){
+        init();
+    }
     return hashTable.kv[hash(key)].value;
 }
 
+void foreach(){
+    int i = 0;
+    for(i=0;i<hashTable.index;i++){
+        printf("key:%s value:%s\n",hashTable.kv[hashTable.postions[i]].key,
+                                   hashTable.kv[hashTable.postions[i]].value);
+    }
+}
 int main()
 {
     init();
     printf("%d ,%d\n",hashTable.isInit,hash("huangsheng"));
     put("name","huangsheng");
-    printf("name = %s\n",get("name"));
-    put("name","liaili");
-    printf("name = %s\n",get("name"));
-    if(get("age")==NULL){
-        printf("null\n");
-        put("age","22");
-    } 
+    put("jhasdjkfhjlkdsahfjlkhdsakjfh","huangsheng");
+    put("age","12");
+    put("email","1367467330@qq.com");
+    foreach();
+    put("name","李爱莉");
+    foreach();
     return 0;
 }
 

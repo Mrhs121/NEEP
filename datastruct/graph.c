@@ -26,17 +26,19 @@ typedef struct{
 
 FILE * fin;
 // ----邻接表------ 
+// 边表
 typedef struct ArcNode{
     int adjvex; //vertices index
     int info; //  权值
     struct ArcNode * next;
 }ArcNode;
 
+// 顶点节点
 typedef struct VNode{
     VertexType data;
     ArcNode * first;
 }VNode,AdjList[MAXNUM];
-
+// 图
 typedef struct{
     AdjList vertices;
     int vexnum,arcnum;

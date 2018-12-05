@@ -17,6 +17,7 @@ void testDatatype(DATATPYE a);
 
 void swap(int * a,int *b);
 int getStrlen(char * str);
+int getArrlen(int * arr);
 
 void printIntArr(int arr[],int n);
 
