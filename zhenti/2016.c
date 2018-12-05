@@ -49,7 +49,7 @@ int htoi(char *s){
 }
 //  链表的选择排序，无头节点
 void ss(){
-  int data[10];
+    int data[10];
     int i = 0;
     srand(time(NULL));
     for(i=0;i<10;i++){
@@ -90,7 +90,39 @@ void ss(){
     }
    printList(list);
 }
+// 对链表进行排序，冒泡排序
+void SortLinkListByBub(){
+    int data[10];
+    int m = 0;
+    srand(time(NULL));
+    for(m=0;m<10;m++){
+         data[m] = rand()%(rand()%100)+1;
+    }
+    LNode * list = createWithoutHead(data,10);
+    printList(list);
+    LNode *i = list,*move = list;
+    LNode *j,*pre;
+    int temp;
+    while(move->next!=NULL){
+        pre = i;
+        j = i->next;
+        while(j!=NULL){
+            if(pre->data > j->data){
+                // swap
+                temp = pre->data;
+                pre->data = j->data;
+                j->data = temp;
+            }
+            pre = j;
+            j = j->next;
 
+        }
+        move = move->next;
+        printList(list);
+    }
+    printList(list);
+}
+// 
 void readProduct(){
 	FILE * in = fopen("data.in","r");
 	FILE * out = fopen("data.out","w");
@@ -205,7 +237,8 @@ int test2016()
 {
     LeafNodehead = (BTree*)malloc(sizeof(BTree));
     printf("---> test 2016\n");
-	testlinkLeafNode();
+	SortLinkListByBub();
+    //testlinkLeafNode();
 	//readProduct();
 	//printf("%d\n",htoi("abc"));
 	//ss();

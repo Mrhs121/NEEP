@@ -6,10 +6,12 @@
 void swap(const void* a, const void* b, int size)
 {
     assert(a != NULL && b != NULL);
-    char tmp = 0;
+    unsigned char tmp = 0;
     int i = 0;
+    // 应为不知道具体元素的类型，所以逐个字节的交换数据，以达到整体交换数据的目的
     while (size > 0) {
         tmp = *((char*)a + i);
+        printf("%d\n",tmp );
         *((char*)a + i) = *((char*)b + i);
         *((char*)b + i) = tmp;
         ++i;
@@ -22,12 +24,14 @@ enum TYPE{INT,FLOAT,CHAR,STR};
 typedef enum TYPE Datatype;
 
 // 适用于任何类型
+// left 开始位置 right 全部元素的个数
 void Qsort(void* base, int left, int right, int size, int (*cmp)(const void* a, const void* b))
 {
     assert(base != NULL && size >= 1 && cmp != NULL);    /* left may be < 0 because of the last - 1 */
     if (left >= right) return;
     // 左右指针
     char* pleft = (char*)base + left * size; 
+    // 有效的随机取base值，避免有序序列带来的糟糕情况
     char* pkey = (char*)base + (left + (right - left) / 2) * size;
     
     swap(pleft, pkey, size);
@@ -99,22 +103,26 @@ void Qsort1(void* base, int left, int right, int size, Datatype type){
 
 int main(int argc, char* argv[])
 {
-    int a[] = {-2, 0, 5, 1, 10, 8, 5, 4, 3, 9};
-    int len1 = sizeof(a) / sizeof(a[0]);
-    fprintf(stdout, "before sort:\n");
-    for (int i = 0; i < len1; ++i) {
-        fprintf(stdout, "%d ", a[i]);
-    }
-    fprintf(stdout, "\n");
+    unsigned int a = 65535;
+    unsigned int b = 8127;
+    swap(&a,&b,sizeof(int));
+    printf("%d %d\n",a,b);
+    // int a[] = {-2, 0, 5, 1, 10, 8, 5, 4, 3, 9};
+    // int len1 = sizeof(a) / sizeof(a[0]);
+    // fprintf(stdout, "before sort:\n");
+    // for (int i = 0; i < len1; ++i) {
+    //     fprintf(stdout, "%d ", a[i]);
+    // }
+    // fprintf(stdout, "\n");
 
-    // 长度 每个元素的长度   比较函数
-    Qsort1(a, 0, len1 - 1, sizeof(a[0]), INT);
+    // // 长度 每个元素的长度   比较函数
+    // Qsort1(a, 0, len1 - 1, sizeof(a[0]), INT);
 
-    fprintf(stdout, "after sort:\n");
-    for (int i = 0; i < len1; ++i) {
-        fprintf(stdout, "%d ", a[i]);
-    }
-    fprintf(stdout, "\n");
+    // fprintf(stdout, "after sort:\n");
+    // for (int i = 0; i < len1; ++i) {
+    //     fprintf(stdout, "%d ", a[i]);
+    // }
+    // fprintf(stdout, "\n");
 
     // double a1[] = {1.2f,1.1f,1.4f};
     // int len11 = (int)sizeof(a1) / sizeof(a1[0]);
