@@ -9,6 +9,8 @@
 #include <stdlib.h>
 #define MAXSIZE 100
 
+//队列的下标是从0开始
+//栈的top是从-1开始
 typedef struct{
     int data[MAXSIZE];
     int front,rear;

@@ -54,7 +54,7 @@ void printTstack(TStack S){
 }
 
 typedef struct Qu {
-	BTree * data[50];
+	BTree * data[100];
 	// int LeverCount[50];
 	int front, rear;
 }Qu;
@@ -64,6 +64,8 @@ typedef struct Qu {
 //先序自动创建二叉树
 
 int _data1[] = {1,2,3,-1,-1,4,8,-1,-1,9,10,-1,-1,-1,5,6,-1,-1,7,-1,-1};
+int _data_complete[] = {1,2,4,-1,-1,5,-1,-1,3,6,-1,-1,7,-1,-1};
+int _data_notcomplete[] = {1,2,4,-1,-1,5,10,-1,-1,-1,3,6,-1,-1,7,-1,-1};
 int _data3[] = {1,2,3,4,-1,-1,-1,5,-1,-1,6,7,-1,-1,-1};
 int _data[] = {1,2,3,4,-1,-1,5,-1,-1,6,-1,-1,7,-1,-1};
 int _data2[] = { 1,2,3,-1,-1,-1,5,-1,-1 };
@@ -818,11 +820,36 @@ void search(BTree * tree,int x){
 	}
 }
 
+// 判断一棵树是否是完全树
+// 思想：根据层序遍历，因为层序遍历是从上到下，从左到右，如果是一颗完全二叉树（每一层的节点都是从左边开始的）的话，
+// 		所有的空节点全在队列的最后面，若不是完全二叉树，那么空节点后面肯定还有非空的
+int isComplete(BTree * tree){
+	//int result = 0;
+	Qu _queue;
+	_queue.front = -1;
+	_queue.rear = -1;
+	_queue.data[++_queue.rear] = tree;
+	BTree * node;
+	while(_queue.front < _queue.rear){
+		node = _queue.data[++_queue.front];
+		if(node){
+			_queue.data[++_queue.rear] = node->lchild;
+			_queue.data[++_queue.rear] = node->rchild;
+		} else {
+			while(_queue.front < _queue.rear){
+				node = _queue.data[++_queue.front];
+				if(node)
+					return 0;
+			}
+		}
+	}
+	return 1;
+}
 
 int main()
 {
 	BTree * tree ;
-	tree = createTree(tree,_data3);
+	tree = createTree(tree,_data_notcomplete);
 	PreOrderBiTree(tree);
     printf("层序遍历\n");
     LeverOrder(tree);
@@ -831,6 +858,7 @@ int main()
 	printf("\n非递归后序遍历\n");
 	//postOrder(tree);
 	postOrder2(tree);
+	printf("\niscomplete %d\n",isComplete(tree));
     //SearchByPostOrder(tree,5);
 
     /*

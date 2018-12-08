@@ -5,6 +5,7 @@
 static HashTable hashTable;
 
 int hash(char * key,int base){
+    
     if(strcmp(key,"hs")==0){
         printf("特殊字符串 %s\n",key);
         return 10050;
@@ -22,18 +23,18 @@ int hash(char * key,int base){
 void init(){
     printf("初始化hashtable\n");
     hashTable.size = 100;
-    hashTable.kv = (KeyValue**)malloc(sizeof(KeyValue*)*hashTable.size);
+    hashTable.kv = (KeyValue**)calloc(hashTable.size,sizeof(KeyValue*));
     int i = 0;
-    for(i=0;i<hashTable.size;i++){
-        hashTable.kv[i] = NULL;
-    }
+    // for(i=0;i<hashTable.size;i++){
+    //     hashTable.kv[i] = NULL;
+    // }
     hashTable.isInit = 1;
     
 }
 // 扩容
 void extendCapcity(){
     printf("扩容\n");
-    KeyValue ** kv = (KeyValue**)malloc(sizeof(KeyValue*)*2*hashTable.size);
+    KeyValue ** kv = (KeyValue**)calloc(hashTable.size,sizeof(KeyValue*));
     int i = 0;
     for(i=0;i<hashTable.length;i++){
         kv[hashTable.postions[i]] = hashTable.kv[hashTable.postions[i]];
@@ -45,6 +46,7 @@ static void putVal(char * key,char * value,int hashcode){
     if(hashcode > hashTable.size){
         extendCapcity();
     }
+    // 记录下当前kv的存储位置
     hashTable.postions[hashTable.index] = hashcode;
     hashTable.index++;
     hashTable.length++;
@@ -95,7 +97,7 @@ void put(char * key,char * value){
         printf("覆盖旧数据\n");
         strcpy(hashTable.kv[hashcode]->value,value);
     } else if( (kv=findKey(key,hashcode))!=NULL ){
-        // 如果冲突的key存在
+        // 在冲突链中查找是否存在这个key
         printf("hash冲突\n");
         strcpy(kv->value,value);
     } else {
@@ -167,6 +169,7 @@ void foreach(){
     int i = 0;
     KeyValue * kv;
     for(i=0;i<hashTable.index;i++){
+        printf("%d->",hashTable.postions[i]);
         kv = hashTable.kv[hashTable.postions[i]];
         if(kv==NULL)
             continue;
@@ -179,7 +182,7 @@ void foreach(){
         }
     }
 }
-int  main()
+int  test()
 {
     
     init();
@@ -206,17 +209,34 @@ int  main()
     foreach();
     removeKV("acbD");
     foreach();
+    printf("get(abcD)%s\n",_get("abcD")==NULL?"NULL":"yes");
+    printf("get(name)%s\n",_get("name"));
     // printf("_get(Dabc)%s\n",_get("Dabc") );
     // if(_get("name")==NULL){
     //     printf("name is NULL\n");
     //     put("name","hs");
     // }
-    foreach();
+    //oreach();
     // put("name","hanbindashadiao");
     //foreach();
     return 0;
 }
 
+void putVal2(char * key,char * value,int hashcode){
+    if(hashcode > hashTable.size){
+        extendCapcity();
+    }
+    hashTable.postions[hashTable.index] = hashcode;
+    hashTable.index++;
+    hashTable.length++;
+    KeyValue * kv = (KeyValue*)malloc(sizeof(KeyValue));
+    kv->key = (char *)malloc(sizeof(char)*strlen(key)+1);
+    kv->value = (char *)malloc(sizeof(char)*strlen(value)+1);
+    kv->next = NULL;
+    strcpy(kv->key,key);
+    strcpy(kv->value,value);
+    hashTable.kv[hashcode] = kv;
+}
 
 
 

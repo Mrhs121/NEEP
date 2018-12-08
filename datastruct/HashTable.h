@@ -13,13 +13,14 @@ typedef struct HASHTABLE{
     int isInit;
     int length;
     int index;
+    
     int postions[1000];
 }HashTable;
 
 void removeKV(char * key);
 void put(char * key,char * value);
+void putVal2(char * key,char * value,int hashcode);
 char* _get(char * key);
-
 static int hash(char * key,int base);
 static void init();
 void foreach();
