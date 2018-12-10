@@ -7,7 +7,7 @@ void print(int b[],int n){
     int i;
     printf("\n");
     for(i=0;i<n;i++){
-        printf("%5d",b[i]);
+        printf("%d ",b[i]);
     }
     printf("\n");
 }
@@ -363,16 +363,53 @@ void mergeAndDistinct(){
     printf("\n");
 
 }
+// 计数排序，时间复杂度O(n)
+void conurtSort(int arr[],int size){
+    //printf("size = %d\n",size );
+    print(arr,size);
+    int min=arr[0],max=arr[0];
+    int i,j=0,k=0;
+    int * counter;
+    for(i=0;i<size;i++){
+        if(min>arr[i])
+            min = arr[i];
+        if(max<arr[i])
+            max = arr[i];
+    }   
+    //printf("min=%d,max=%d\n",min,max );
+    counter = (int *)calloc(max+1,sizeof(int));
+    for(i=0;i<size;i++){
+        //printf("%d,",arr[i]);
+        counter[arr[i]]++;
+    }   
+    //printf("--->%d\n",counter[412]);
+    //printf("\n");
+    for(i=0;i<=max;i++){
+        if(counter[i]==0)
+            continue;
+        //printf("data:%d count:%d\n",i,counter[i]);
+        for(j=0;j<counter[i];j++){
+            arr[k++] = i;
+        }
+    }
+    print(arr,size);
+}
+
+// 桶排 ??? 跟计数排序有很大的区别吗？？
+void BucketSort(int arr[],int size){
+
+}
 int main()
 {   
-    mergeAndDistinct();
+    //mergeAndDistinct();
     //ss();
     //testListSelectSort();
 //    testHeadFile();
    // testHeap();
     //printf("\n-----------------\n");
   //  int b[10] = {1,2,3,4,5,6,7,8,9,10};
-    int b[10] = {412,123334,124,6,11234,1,4512,4231,4 ,3};
+    int b[10] = {823475,78,124,6,99,1,89,46,4,3};
+    conurtSort(b,sizeof(b)/sizeof(b[0]));
     // QuickSort(b,0,9);
     // print(b,10);
     

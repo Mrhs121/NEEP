@@ -141,6 +141,10 @@ char * _get(char * key){
     }
     return get(key,hash(key,hashTable.size));
 }
+
+void delPostion(int hashcode){
+    
+}
 void removeKV(char * key){
     if(hashTable.isInit == 0){
         return;
@@ -155,7 +159,7 @@ void removeKV(char * key){
             hashTable.kv[hashcode] = kv->next;
             if(kv->next==NULL){
                 // 这里需要再添加一个对positio的修改的功能
-                hashTable.length--;
+                hashTable.length--;            
             }
             
             free(kv);

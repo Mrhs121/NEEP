@@ -1,6 +1,5 @@
 #pragma once
-#ifndef H_MYSTRCUT
-#define H_MYSTRCUT
+
 
 #include<stdio.h>
 #include <stdlib.h>
@@ -79,6 +78,4 @@ void PreOrderExBiTree(ExtendBTree *T);
 // 二叉树的层序遍历 使用队列若该节点的左右孩子不为空，则入队
 void LeverOrder(BTree * root);
 
-
-#endif
 
