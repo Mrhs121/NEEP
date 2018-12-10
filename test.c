@@ -28,6 +28,8 @@ void change(int **p){
 int main()
 {
 
+    int a = 1;
+    test(&a);
     printf("%d\n",1^0);
     /*
     printf("test mac\n");

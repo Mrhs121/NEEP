@@ -112,18 +112,19 @@ void print(LNode * head){
 }
 
 
-// 删除重复节点
+// 删除重复节点,直接对外部实体进行修改
 void del(LNode ** L,int a){
     LNode * p;
     
     if(*L == NULL)
         return;
-    if((*L)->data == a){
+    if( (*L)->data == a ){
         p = (*L);
         (*L) = (*L)->next;
         free(p);
         del(L,a);
     } else {
+        // 注意这里：直接对外部实体链表的next指针域进行修改
         del(&((*L)->next),a);
        // printf("bb");
     }
@@ -224,21 +225,31 @@ LNode * insert2(LNode * head,LNode * p){
     return head;
 }
 
-double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Size) {
-    int s1=0,d1=nums1Size-1,m1;
-    int s2=0,d2=nums2Size-1,m2;
-    while(s1!=d1 || s2!=d2){
-        m1 = (s1+d1)/2;
-        m2 = (s2+d2)/2;
-        if(nums1[m1] == nums2[m2])
-            return num1[m1];
-    }
-}
+// double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Size) {
+//     int s1=0,d1=nums1Size-1,m1;
+//     int s2=0,d2=nums2Size-1,m2;
+//     while(s1!=d1 || s2!=d2){
+//         m1 = (s1+d1)/2;
+//         m2 = (s2+d2)/2;
+//         if(nums1[m1] == nums2[m2])
+//             return num1[m1];
+//     }
+// }
+
 int main()
 {
 
     int a[] = {888,2,5,214,5,41,4,2,214};
     LNode * ss = createWithSort(a,9);
+    print(ss);
+    LNode ** temp = &(ss->next->next); // 直接对实体修改
+    (*temp)->next = (*temp)->next->next->next;
+    print(ss);
+    int b[] = {1,32,324,123,4,2134,23,1};
+    LNode * ss2 = createWithSort(b,sizeof(b)/sizeof(b[0]));
+    print(ss2);
+    (*temp)->next = ss2->next; // nice
+    print(ss);
     // LNode * p = (LNode*)malloc(sizeof(LNode));
     // int in;
     // scanf("%d",&in);
@@ -246,9 +257,9 @@ int main()
     // p->next = NULL;
     // print(ss);
     // insert(ss,p);
-    print(ss);
-    del(&ss,214);
-    print(ss);
+    // print(ss);
+    // del(&ss,214);
+    // print(ss);
     // LNode * datas[7];
     // int i=0;
     // for(i=0;i<7;i++){
