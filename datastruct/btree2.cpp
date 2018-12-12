@@ -193,6 +193,30 @@ BTree* createTree(BTree* T,int _data[]) {
 	return T;
 }
 
+ThrNode * createThrTree(ThrNode * T,int _data[]) {
+
+	//cout << "输入数据(-1表示空节点):";
+	int data;
+	//scanf("%d",&data);
+	//cout << _data[_count] << endl;;
+	data = _data[_count];
+	_count++;
+	if (data == -1)
+		return NULL;
+	else
+	{
+		T = (ThrNode*)malloc(sizeof(ThrNode));
+		T->data = data;
+		T->ltag = 0;
+		T->rtag = 0;
+		//cout << "input " << data << " 的左子树:" << endl;
+		T->lchild = createThrTree(T->lchild,_data);
+		//cout << "input " << data << " 的右子树:" << endl;
+		T->rchild = createThrTree(T->rchild,_data);
+	}
+	return T;
+}
+
 
 // 中序线索化链表，左孩子 根节点 右孩子
 // ThrNode ** pre 传的是二级指针，直接对外部实体进行修改
@@ -206,18 +230,41 @@ void createThread(ThrNode * node,ThrNode ** pre)
     if(node->lchild==NULL) {
         //printf("1 zhi qian");
         node->ltag = 1;
-        printf("设置%c的前驱\n",node->data);
+        //printf("设置%c的前驱\n",node->data);
         node->lchild = *pre; //设置前驱
     }
     
     //if(node->rchild == NULL) node->rtag = 1; // 如果孩子为空，则设置为后继
     if((*pre)!= NULL && (*pre)->rchild==NULL ) {
-        printf("设置%c的后继%c\n",(*pre)->data,node->data);
+        //printf("设置%c的后继%c\n",(*pre)->data,node->data);
         (*pre)->rchild=node; // 设置后记
         (*pre)->rtag = 1;
     }
     (*pre)=node;
+   
     createThread(node->rchild,pre);
+}
+
+ThrNode * FirstNode(ThrNode * p){
+	while(p!=NULL && p->ltag==0){
+		//printf("-->\n");
+		p = p->lchild;
+	}
+	return p;
+}
+
+ThrNode * NextNode(ThrNode * p){
+
+	if(p->rtag == 0)
+		return FirstNode(p->rchild); //如果右节点是孩子节点，那么可能有很多节点在下方
+	else
+		return p->rchild; // 如果右节点为后继节点，那么直接返回后继节点
+}
+void InOrderThrTree(ThrNode * tree){
+	ThrNode * p ;
+	for(p = FirstNode(tree);p!=NULL;p=NextNode(p))
+		printf("%d ",p->data );
+	printf("\n");
 }
 // 839真题 答案 一颗二叉树采用标准存储
 // 判断这棵树是否为堆的条件
@@ -358,6 +405,27 @@ void InOrderBiTree_char(BTree_char *T)
 		InOrderBiTree_char(T->rchild);
 	}
 }
+
+// 非递归中序遍历
+void InOrder(BTree * tree){
+	TStack s;
+	BTree * p = tree;
+	s.top = -1;
+	while(p!=NULL || !isEmpty(s)){
+		//printf("--<\n");
+		if(p!=NULL){
+			push(&s,p);
+			p = p->lchild;
+		} else {
+			//printf("-->\n");
+			p = pop(&s);
+			printf("%d ",p->data);
+			p = p->rchild;
+		}
+	}
+}
+
+
 // 将中序序列转换成数学表达式
 void BTree_char2Exp(BTree_char * T, int deep) {
 
@@ -850,15 +918,32 @@ int main()
 {
 	BTree * tree ;
 	tree = createTree(tree,_data_notcomplete);
-	PreOrderBiTree(tree);
-    printf("层序遍历\n");
-    LeverOrder(tree);
-    printf("后序遍历\n");
-    postOrderBiTree(tree);
-	printf("\n非递归后序遍历\n");
+	InOrderBiTree(tree);
+	printf("\n");
+	_count = 0;
+	ThrNode * pre = (ThrNode*)malloc(sizeof(ThrNode));
+	ThrNode * thrtree;
+	thrtree = createThrTree(thrtree,_data_notcomplete);
+	
+	createThread(thrtree,&pre);
+	printf("pre->data %d\n",pre->data);
+	//pre->rchild = NULL; //不能拉下这两句
+	//pre->rtag = 1;
+
+	InOrderThrTree(thrtree);
+	// PreOrderBiTree(tree);
+ //    printf("\n层序遍历\n");
+ //    LeverOrder(tree);
+ //    printf("后序遍历\n");
+ //    postOrderBiTree(tree);
+	// printf("\n非递归后序遍历\n");
 	//postOrder(tree);
-	postOrder2(tree);
-	printf("\niscomplete %d\n",isComplete(tree));
+	// postOrder2(tree);
+	// printf("\n中序遍历\n");
+	// InOrderBiTree(tree);
+	// printf("\n");
+	// InOrder(tree);
+	//printf("\niscomplete %d\n",isComplete(tree));
     //SearchByPostOrder(tree,5);
 
     /*
