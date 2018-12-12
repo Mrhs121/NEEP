@@ -61,6 +61,7 @@ int compareMatrix(const void * a,const void * b){
         return (m1->s - m2->s)>0?1:-1;
     }
 }
+// 按照矩阵的面积排序
 void SortMatrix(char * filename){
     if(filename == NULL){
         printf("usge : [filename]\n");
@@ -188,7 +189,34 @@ static void B2I(int x){
     printf("%d",mod);
 }
 
+typedef struct Qu {
+    BTree * data[100];
+    // int LeverCount[50];
+    int front, rear;
+}Qu;
 
+int isComplete(BTree * tree){
+    //int result = 0;
+    Qu _queue;
+    _queue.front = -1;
+    _queue.rear = -1;
+    _queue.data[++_queue.rear] = tree;
+    BTree * node;
+    while(_queue.front < _queue.rear){
+        node = _queue.data[++_queue.front];
+        if(node){
+            _queue.data[++_queue.rear] = node->lchild;
+            _queue.data[++_queue.rear] = node->rchild;
+        } else {
+            while(_queue.front < _queue.rear){
+                node = _queue.data[++_queue.front];
+                if(node)
+                    return 0;
+            }
+        }
+    }
+    return 1;
+}
 // 9 判断一颗二叉树是否满足大顶堆的条件
 // 层序遍历队列或者用堆也行
 // 此方法存在缺陷，不能够判读是否是颗完全树
@@ -203,11 +231,14 @@ int isSatisfyHeap(BTree * tree) {
     queue[rear] = tree;
     rear++;
 	BTree * p;
+    // 先判断是否满足完全树
+    // if(isComplete(tree)==0)
+    //     return notsatisfy;
 	while (front != rear)
 	{
 		//p = stack[top--];
         p = queue[front++];
-        printf("%d ",p->data);
+        //printf("%d ",p->data);
 		// 左右孩子均不能大于根结点
 		if (p->lchild != NULL)
 		{
@@ -297,7 +328,7 @@ void mergeWithoutBuffer2(int *a,int n,int *b,int m){
 int test2017(char * filenames[])
 {
 
-    SortMatrix(filenames[2]);
+    //SortMatrix(filenames[2]);
     // int data[] = {1,2,4,-1,-1,5,8,-1,-1,-1,3,6,-1,-1,7,-1,-1};
     // BTree * tree = (BTree*)malloc(sizeof(BTree));
     // tree = createTree(tree,data);
@@ -319,12 +350,13 @@ int test2017(char * filenames[])
     // printf("\n");
     // myprintf("str = %s int :%d char:%c float:%f %d->八进制:%o %d->十六进制:%x finish\n","huangsheng",1,'c',2.0f,b,b,c,c);
     // //printf("%c\n",'a'+1+'0');
-    // BTree * T = (BTree*)malloc(sizeof(BTree));
-    // int data[] = {10,7,6,-1,-1,8,-1,-1,8,-1,-1};
-    // T = createTree(T, data);
+    BTree * T = (BTree*)malloc(sizeof(BTree));
+    int data[] = {10,7,-1,6,-1,-1,8,-1,-1};
+    T = createTree(T, data);
+    LeverOrder(T);
     // PreOrderBiTree(T);
     // printf("\n");
-    // printf("isSatisfyHeap = %s\n",isSatisfyHeap(T)==satisfy?"satisfy":"notsatisfy");
+    printf("isSatisfyHeap = %s\n",isSatisfyHeap(T)==satisfy?"satisfy":"notsatisfy");
     // printf("%d\n",123<<33  );
     return 1;
 }

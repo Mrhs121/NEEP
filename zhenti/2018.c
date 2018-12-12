@@ -299,9 +299,9 @@ int inclusion(LNode * a,LNode * b){
     }
     return 0;
 }
-void swap(const void* a, const void* b, int size)
+void _swap(const void* a, const void* b, int size)
 {
-    assert(a != NULL && b != NULL);
+    //assert(a != NULL && b != NULL);
     unsigned char tmp = 0;
     int i = 0;
     // 应为不知道具体元素的类型，所以逐个字节的交换数据，以达到整体交换数据的目的
@@ -323,14 +323,14 @@ typedef enum TYPE Datatype;
 // left 开始位置 right 全部元素的个数
 void Qsort(void* base, int left, int right, int size, int (*cmp)(const void* a, const void* b))
 {
-    assert(base != NULL && size >= 1 && cmp != NULL);    /* left may be < 0 because of the last - 1 */
+    //assert(base != NULL && size >= 1 && cmp != NULL);    /* left may be < 0 because of the last - 1 */
     if (left >= right) return;
     // 左右指针
     char* pleft = (char*)base + left * size; 
     // 有效的随机取base值，避免有序序列带来的最糟糕情况
     char* pkey = (char*)base + (left + (right - left) / 2) * size;
     
-    swap(pleft, pkey, size);
+    _swap(pleft, pkey, size);
     int last = left;
     char* plast = (char*)base + last * size;
     for (int i = left + 1; i <= right; ++i) {
@@ -338,17 +338,17 @@ void Qsort(void* base, int left, int right, int size, int (*cmp)(const void* a, 
         if (cmp(pi, pleft) < 0) {
             ++last;
             plast = (char*)base + last * size;
-            swap(pi, plast, size);
+            _swap(pi, plast, size);
         }
     }
-    swap(pleft, plast, size);
+    _swap(pleft, plast, size);
     Qsort(base, left, last - 1, size, cmp);
     Qsort(base, last + 1, right, size, cmp);
 }
 
-int cmp_string(const void* a, const void* b)
+int _cmp_string(const void* a, const void* b)
 {
-    assert(a != NULL && b != NULL);
+    //assert(a != NULL && b != NULL);
     // 指向字符串的指针 *--->char * 
     const char** lhs = (const char**)a;
     const char** rhs = (const char**)b;
@@ -356,9 +356,9 @@ int cmp_string(const void* a, const void* b)
     return strcmp(*lhs, *rhs);
 }
 
-int cmp_int(const void* a, const void* b)
+int _cmp_int(const void* a, const void* b)
 {
-    assert(a != NULL && b != NULL);
+    //assert(a != NULL && b != NULL);
     const int* lhs = (const int*)a;
     const int* rhs = (const int*)b;
     if (*lhs < *rhs) {
@@ -370,9 +370,9 @@ int cmp_int(const void* a, const void* b)
     }
 }
 
-int cmp_float(const void* a, const void* b)
+int _cmp_float(const void* a, const void* b)
 {
-    assert(a != NULL && b != NULL);
+    //assert(a != NULL && b != NULL);
     const double* lhs = (const double*)a;
     const double* rhs = (const double*)b;
     if (*lhs < *rhs) {
@@ -389,7 +389,7 @@ void Qsort1(void* base, int left, int right, int size, Datatype type){
     if (type == INT)
     {
         printf("data type is int\n");
-        Qsort(base, left, right, size, cmp_int);
+        Qsort(base, left, right, size, _cmp_int);
     } else if(type == FLOAT){
         printf("float\n");
     } else if(type == CHAR){

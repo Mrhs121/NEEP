@@ -82,7 +82,6 @@ LNode * createWithSort(int data[],int n)
 // create linklist with headnode
 LNode * createWithoutHead(int data[],int n)
 {
-
     LNode * head = (linklist)malloc(sizeof(LNode)); 
     head->data = data[0];
     LNode * m = head;
@@ -124,7 +123,7 @@ void del(LNode ** L,int a){
         free(p);
         del(L,a);
     } else {
-        // 注意这里：直接对外部实体链表的next指针域进行修改
+        // 注意这里：直接对外部实体链表每个节点的next指针域进行修改
         del(&((*L)->next),a);
        // printf("bb");
     }
@@ -162,7 +161,7 @@ void change(LNode * head){
 
 
 
-// 2018 839 判断表b是否包含在a中 时间O(n)
+// 2018 839 b是否为a的连续子串 时间O(n)
 int  isAIncludeB(LNode *a,LNode*b)
 {
     LNode * _a = a->next;
@@ -195,7 +194,7 @@ int  isAIncludeB(LNode *a,LNode*b)
     //return FALSE;
 }
 
-
+// 单链表的插入
 LNode * insert(LNode * head,LNode * p){
     if(head==NULL){
         return p;
