@@ -232,19 +232,21 @@ int isSatisfyHeap(BTree * tree) {
     rear++;
 	BTree * p;
     // 先判断是否满足完全树
-    // if(isComplete(tree)==0)
-    //     return notsatisfy;
+    if(isComplete(tree)==0)
+        return notsatisfy;
 	while (front != rear)
 	{
 		//p = stack[top--];
         p = queue[front++];
-        //printf("%d ",p->data);
+        
 		// 左右孩子均不能大于根结点
+        printf("------\n");
 		if (p->lchild != NULL)
 		{
+            printf("l :%d\n",p->data);
 			if (p->data < p->lchild->data)
 			{
-                printf("notsatisfy :lchild:%d > root:%d\n",p->lchild->data,p->data);
+               // printf("notsatisfy :lchild:%d > root:%d\n",p->lchild->data,p->data);
 				return notsatisfy;
 			}
 			//stack[++top] = p->lchild;
@@ -252,13 +254,14 @@ int isSatisfyHeap(BTree * tree) {
         }
 		if (p->rchild != NULL)
 		{
+            printf("r :%d\n",p->data);
 			if (p->data < p->rchild->data)
 			{
-                printf("not satisfy rchild:%d > root:%d\n",p->rchild->data,p->data);
+               // printf("not satisfy rchild:%d > root:%d\n",p->rchild->data,p->data);
 				return notsatisfy;
 			}
 			//stack[++top] = p->lchild;
-            queue[rear++] = p->lchild;
+            queue[rear++] = p->rchild;
 		}
 	}
 	return satisfy;
