@@ -39,7 +39,7 @@ struct ThrNode
 };
 
 
-
+int BST_Insert(BTree **T,int key);
 typedef struct TStack {
 	BTree * data[50];
 	int top;
@@ -62,7 +62,9 @@ typedef struct Qu {
 
 
 //先序自动创建二叉树
-
+int _data_sort[] = {5,4,3,-1,-1,-1,10,6,-1,-1,11,-1,-1};
+int _data_non_sort[] = {5,4,6,-1,-1,-1,10,12,-1,-1,11,-1,-1};
+int _data_non_sort2[] = {5,4,3,10,12,11};
 int _data1[] = {1,2,3,-1,-1,4,8,-1,-1,9,10,-1,-1,-1,5,6,-1,-1,7,-1,-1};
 int _data_complete[] = {1,2,4,-1,-1,5,-1,-1,3,6,-1,-1,7,-1,-1};
 int _data_notcomplete[] = {1,2,4,-1,-1,5,10,-1,-1,-1,3,6,-1,-1,7,-1,-1};
@@ -528,7 +530,49 @@ void Judge_AVL(BTree * tree,int * balance,int *h){
 	}
 
 }
+int predata = -10000;
+// 判断一棵树是否是平衡树
+int JudgeBST(BTree * tree){
+    int b1,b2;
+    if(tree == NULL)
+        return 1;
+    else {
+		// 中序遍历的写法
+		b1  = JudgeBST(tree->lchild);
+		// 
+		if(b1==0 || predata >= tree->data)
+			return 0;
+		predata = tree->data;
+		printf("current node %d\n",tree->data);
+		b2 = JudgeBST(tree->rchild);
+		return b2;
+    }
+}
 
+void testJudgeBST(){
+	printf("---> test Judge BST\n");
+	BTree * tree = (BTree*)malloc(sizeof(BTree));
+	tree = createTree(tree,_data_sort);
+	LeverOrder(tree);
+	printf("is Ordered %s\n---------------------\n",JudgeBST(tree)==1?"yes":"no");
+
+	_count = 0;
+	predata = -1111;
+	BTree * tree2 = (BTree*)malloc(sizeof(BTree));
+	tree2 = createTree(tree2,_data_non_sort);
+	LeverOrder(tree2);
+	printf("is Ordered %s\n---------------------\n",JudgeBST(tree2)==1?"yes":"no");
+
+	BTree * bst = (BTree *)malloc(sizeof(BTree));
+	int i = 0;
+	_count = 0;
+	predata = -1111;
+	for(i=0;i<(sizeof(_data_non_sort2)/sizeof(_data_non_sort[0]));i++){
+		BST_Insert(&bst , _data_non_sort2[i]);
+	}
+	LeverOrder(bst);
+	printf("is Ordered %s\n---------------------\n",JudgeBST(bst)==1?"yes":"no");
+}
 //寻找最近的公共祖先
 // 从根节点开始遍历，如果node1和node2中的任一个和root匹配
 // ，那么root就是最低公共祖先。 
@@ -588,6 +632,8 @@ void postOrder(BTree * tree)
 		else
 		{
 			p = getTop(s);
+
+
 			// 如果是从左边孩子返回的，那么就以为接下来要遍历root的又右孩子
 			// 否则说明root的左右孩子均遍历完成，那么就直接else输出当前root节点即可
 			if (p->rchild&&p->rchild != r)
@@ -780,7 +826,7 @@ void testBtree_char() {
 }
 
 // 查找树的创建/插入
-int BST_Insert(BTree **T,int key){
+int BST_Insert(BTree ** T,int key){
     if(*T == NULL){
         *T = (BTree*)malloc(sizeof(BTree));
         (*T)->data = key;
@@ -904,6 +950,8 @@ int isComplete(BTree * tree){
 			_queue.data[++_queue.rear] = node->lchild;
 			_queue.data[++_queue.rear] = node->rchild;
 		} else {
+			// 如果再度列中碰到了空的节点，那么遍历队列中剩下的数据
+			// 如果剩余的数据中有非空的节点，那么就说明不是完全树
 			while(_queue.front < _queue.rear){
 				node = _queue.data[++_queue.front];
 				if(node)
@@ -913,9 +961,7 @@ int isComplete(BTree * tree){
 	}
 	return 1;
 }
-
-int main()
-{
+void testThreadTree(){
 	BTree * tree ;
 	tree = createTree(tree,_data_notcomplete);
 	InOrderBiTree(tree);
@@ -931,6 +977,10 @@ int main()
 	//pre->rtag = 1;
 
 	InOrderThrTree(thrtree);
+}
+int main()
+{
+	testJudgeBST();
 	// PreOrderBiTree(tree);
  //    printf("\n层序遍历\n");
  //    LeverOrder(tree);
