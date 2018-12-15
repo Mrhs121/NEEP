@@ -23,6 +23,7 @@ typedef struct BTree {
 	int data;
 	struct BTree* lchild;
 	struct BTree* rchild;
+	int count;
 }BTree;
 
 typedef struct BTree_char {
@@ -62,6 +63,7 @@ typedef struct Qu {
 
 
 //先序自动创建二叉树
+int _data_sort1[] = {10,9,5,4,3,-1,-1,-1,6,-1,7,-1,-1,-1,11,-1,12,-1,-1};
 int _data_sort[] = {5,4,3,-1,-1,-1,10,6,-1,-1,11,-1,-1};
 int _data_non_sort[] = {5,4,6,-1,-1,-1,10,12,-1,-1,11,-1,-1};
 int _data_non_sort2[] = {5,4,3,10,12,11};
@@ -171,7 +173,13 @@ BTree_char* createTree_char(BTree_char* T) {
 	}
 	return T;
 }
-
+int AddTreeCount(BTree * tree){
+	if(tree == NULL)
+		return 0;
+	int l=0,r=0;
+	tree->count = AddTreeCount(tree->lchild)+AddTreeCount(tree->rchild);
+	return tree->count+1;
+}
 
 BTree* createTree(BTree* T,int _data[]) {
 
@@ -572,6 +580,33 @@ void testJudgeBST(){
 	}
 	LeverOrder(bst);
 	printf("is Ordered %s\n---------------------\n",JudgeBST(bst)==1?"yes":"no");
+}
+
+// 在一棵查找树中，找第k小的数，时间复杂度O(long2n);
+// 思路：判断左树的节点个数与k的大小，如果左边的节点的个数+1（左子树的根节点）等于k-1，那么说明当前节点即为所求节点
+//		如果k小于，那么说明在左边，接着在左边找第k小的即可
+//		如果大于则说明节点在当前节点的右边，接着在右边找k_min-tree->lchild->count-2（当前节点加上当前节点的直接左孩子）小的节点
+BTree * Search_K_Min(BTree * tree,int k_min){
+	
+	if(k_min<1 || k_min>tree->count+1){
+		printf("无！\n");
+		return NULL;
+	}
+		
+	if(tree->lchild == NULL){
+		if(k_min==1)
+			return tree;
+		else
+			return Search_K_Min(tree->rchild,k_min-1);
+	}
+	else {
+		if((k_min-1) == tree->lchild->count+1)
+			return tree;
+		if(tree->lchild->count+1 > k_min-1)
+			return Search_K_Min(tree->lchild,k_min);
+		if(tree->lchild->count+1 < k_min-1)
+			return Search_K_Min(tree->rchild,k_min-tree->lchild->count-2);
+	}
 }
 //寻找最近的公共祖先
 // 从根节点开始遍历，如果node1和node2中的任一个和root匹配
@@ -978,9 +1013,22 @@ void testThreadTree(){
 
 	InOrderThrTree(thrtree);
 }
+
+void testAddTreeCount(){
+	BTree * tree = (BTree*)malloc(sizeof(BTree));
+	tree = createTree(tree,_data_sort1);
+	AddTreeCount(tree);
+	int k ;
+	scanf("%d",&k);
+	BTree * k_min = Search_K_Min(tree,k);
+	if(k_min != NULL)
+		printf("k_min : %d\n",k_min->data);
+	printf("%d %d %d\n",tree->count,tree->lchild->lchild->count,tree->rchild->count);
+}
 int main()
 {
-	testJudgeBST();
+	testAddTreeCount();
+	//testJudgeBST();
 	// PreOrderBiTree(tree);
  //    printf("\n层序遍历\n");
  //    LeverOrder(tree);
