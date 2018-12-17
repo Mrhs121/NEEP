@@ -165,17 +165,37 @@ void move(SqList * A,int current){
         A->data[i] = A->data[i-1]; 
     }
 }
-
+// 合并两个有序的数组，不是用缓冲区，a的长度够长
+void Merge(int *a,int m,int *b,int n){
+    int i=m-1,j=n-1,k=m+n-1;
+    while(i!=-1 && j!=-1){
+        if(a[i]>b[j]){
+            //printf("add %d\n",a[i]);
+            a[k--] = a[i--];
+        } else {
+            a[k--] = b[j--];
+        }
+    }
+    printf("j = %d\n",j );
+    if(j!=0){
+        for(i=j;i>=0;i--){
+            a[k--] = b[i];
+        }
+    }
+    print(a,m+n);
+}
 //十二题
 // 指定顶点之间的最短路径
 // Dij算法即可解答
 int test2015()
 {
-    // int a[100] = {4,5,99};
-    // int b[6] = {1,2,6,7,7,8};
-    // mergeWithoutBuffer2(a,3,b,6);
+    //int a[]
+    int a[100] = {4,5,99};
+    int b[6] = {1,2,6,7,7,8};
+    Merge(a,3,b,6);   
+    //mergeWithoutBuffer2(a,3,b,6);
     // print(a,9);
-    TEN();
+    //TEN();
    //	int sudo[MAX][MAX];
    //	int n = readSudo(sudo);
    //	printf("issudo:%d\n",isSudo(sudo,n));
