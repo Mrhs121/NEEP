@@ -42,6 +42,7 @@ int maxBlock(int **a,int h,int w){
 	int i=0,j=0;
 	for(i=0;i<h;i++){
 		for(j=0;j<w;j++){
+            // 注意这里
 			if(  *((int *)a+i*w+j)==1 && mark[i][j]==-1){
 				int current_max = find(a,h,w,i,j);
 				printf("current_max = %d\n",current_max );

@@ -192,12 +192,17 @@ BTree * linkLeafNode(BTree *T)
 }
 
 BTree * LeafNodehead , *LeafPre = NULL;
+
+// 中序遍历链接从左到右链接叶子结点
 BTree * linkedByInOrder(BTree * tree){
     if(tree){
        linkedByInOrder(tree->lchild);
+       // 叶子结点
        if(tree->lchild==NULL && tree->rchild==NULL){
+
             printf("linking %d\n",tree->data);
             if(LeafPre == NULL){
+                // 处理一个节点
                 LeafNodehead = tree;
                 LeafPre = tree;
             } else {
@@ -235,10 +240,12 @@ void testlinkLeafNode(){
 }
 int test2016()
 {
-    LeafNodehead = (BTree*)malloc(sizeof(BTree));
-    printf("---> test 2016\n");
-	SortLinkListByBub();
-    //testlinkLeafNode();
+    int 🌝😂 = 123;
+    printf("%d\n",🌝😂);
+ //    LeafNodehead = (BTree*)malloc(sizeof(BTree));
+ //    printf("---> test 2016\n");
+	// //SortLinkListByBub();
+ //    testlinkLeafNode();
 	//readProduct();
 	//printf("%d\n",htoi("abc"));
 	//ss();

@@ -14,8 +14,9 @@ int _hash(const char *str){
     return sum%10007;
 }
 
-
+// qsort 用于二维字符串数组的排序
 int compare(const void * strA,const void * strB){
+    // 注意这里的写法，先转换成二级指针，再解一层引用
     char * a = *(char**)strA;
     char * b = *(char**)strB;
    // printf("compare %s %s\n",a,b);
@@ -83,6 +84,7 @@ void quicksort(char *data[],int left,int right){
     quicksort(data, l, left-1);
     quicksort(data, left+1, r);
 } // 没有bug了
+
 void testQuickSort(){
     char *str[1000] = {"abfffc","acgb","agcb","cabgh"};
     int i =0;
