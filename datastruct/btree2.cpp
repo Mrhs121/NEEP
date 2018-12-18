@@ -43,6 +43,7 @@ struct ThrNode
 
 
 int BST_Insert(BTree **T,int key);
+
 typedef struct TStack {
     BTree * data[50];
     int top;
@@ -56,12 +57,40 @@ void printTstack(TStack S){
     printf("\n");
 }
 
+bool isEmpty(TStack s) {
+    if (s.top == -1) {
+        //cout<<"kong\n";
+        return true;
+    }
+    else {
+        //cout<<"not empty"<<endl;
+        return false;
+    }
+}
+
+void push(TStack * s, BTree * node) {
+    s->data[++(s->top)] = node;
+}
+
+BTree * pop(TStack * s)
+{
+    
+    return s->data[s->top--];
+}
+
+BTree * getTop(TStack s)
+{
+    return s.data[s.top];
+}
+
+
 typedef struct Qu {
     BTree * data[100];
     // int LeverCount[50];
     int front, rear;
 }Qu;
 
+void 
 
 
 //先序自动创建二叉树
@@ -125,35 +154,6 @@ int BTWidth(BTree * t) {
     return max;
 }
 
-
-
-bool isEmpty(TStack s) {
-    if (s.top == -1) {
-        //cout<<"kong\n";
-        return true;
-    }
-    else {
-        //cout<<"not empty"<<endl;
-        return false;
-    }
-}
-
-void push(TStack * s, BTree * node) {
-    s->data[++(s->top)] = node;
-}
-
-BTree * pop(TStack * s)
-{
-    
-    return s->data[s->top--];
-}
-
-BTree * getTop(TStack s)
-{
-    return s.data[s.top];
-}
-
-
 BTree_char* createTree_char(BTree_char* T) {
     
     cout << "输入数据(-1表示空节点):";
@@ -175,6 +175,8 @@ BTree_char* createTree_char(BTree_char* T) {
     }
     return T;
 }
+
+// 为每个节点添加左右子树节点的总个数
 int AddTreeCount(BTree * tree){
     if(tree == NULL)
         return 0;
@@ -205,6 +207,7 @@ BTree* createTree(BTree* T,int _data[]) {
     return T;
 }
 
+// 创建索引树
 ThrNode * createThrTree(ThrNode * T,int _data[]) {
     
     //cout << "输入数据(-1表示空节点):";
@@ -272,6 +275,7 @@ ThrNode * NextNode(ThrNode * p){
     else
         return p->rchild; // 如果右节点为后继节点，那么直接返回后继节点
 }
+// 中序遍历索引树
 void InOrderThrTree(ThrNode * tree){
     ThrNode * p ;
     for(p = FirstNode(tree);p!=NULL;p=NextNode(p))
@@ -315,6 +319,7 @@ int isSatisfyHeap(BTree * tree) {
     return 1;
 }
 
+// 遍历二叉树的非叶子结点
 void PreOrderBiTreeWithOutLeaf(BTree *T)
 {
     if (T == NULL)
@@ -344,6 +349,7 @@ void PreOrderBiTree(BTree *T)
         PreOrderBiTree(T->rchild);
     }
 }
+
 
 void PreOrderBiTreeWithLever(BTree *T,int lever)
 {
@@ -540,8 +546,9 @@ void Judge_AVL(BTree * tree,int * balance,int *h){
     }
     
 }
+
 int predata = -10000;
-// 判断一棵树是否是平衡树
+// 判断一棵树是否是排序树
 int JudgeBST(BTree * tree){
     int b1,b2;
     if(tree == NULL)
@@ -988,7 +995,7 @@ int isComplete(BTree * tree){
             _queue.data[++_queue.rear] = node->lchild;
             _queue.data[++_queue.rear] = node->rchild;
         } else {
-            // 如果再度列中碰到了空的节点，那么遍历队列中剩下的数据
+            // 如果在队列中碰到了空的节点，那么遍历队列中剩下的数据
             // 如果剩余的数据中有非空的节点，那么就说明不是完全树
             while(_queue.front < _queue.rear){
                 node = _queue.data[++_queue.front];
@@ -1062,9 +1069,9 @@ int JudgeArrBST(int a[],int length){
             }
         }
             k++;
-        }
-        return 1;
     }
+    return 1;
+}
 
     void testJudgeArrBST(){
         int arr[] = {20,30,90,80,70,50,60};

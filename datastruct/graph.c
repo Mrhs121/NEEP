@@ -40,16 +40,16 @@ typedef struct VNode{
 }VNode,AdjList[MAXNUM];
 // 图
 typedef struct{
-    AdjList vertices;
+    AdjList vertices; //顶点的集合
     int vexnum,arcnum;
 }ALGraph;
 // ----------------------------------------
 
-typedef struct Queue{
-    int data[MAXNUM];
-    int front;
-    int rear;
-}Q;
+    typedef struct Queue{
+        int data[MAXNUM];
+        int front;
+        int rear;
+    }Q;
     void init(Q **queue){
         (*queue)->front = 0;
         (*queue)->rear = 0;
@@ -358,10 +358,10 @@ void testMgraph(){
     prim(m,0);
 }
 
-typedef struct{
-    VNode  v;
-    int adjvex;
-}Queue1;
+    typedef struct{
+        VNode  v;
+        int adjvex;
+    }Queue1;
 
 
 // 广度优先 采用队列
@@ -477,15 +477,15 @@ void dfs(ALGraph * algraph,int v){
     }
 }
 
-typedef struct Stack_Node{
-    int adjnum;
-    ArcNode * next_arc;
-}DFS_non_node;
+    typedef struct Stack_Node{
+        int adjnum;
+        ArcNode * next_arc;
+    }DFS_non_node;
 
-typedef struct Stack{
-    int data[MAXNUM];
-    int top;
-}DFS_Stack;
+    typedef struct Stack{
+        int data[MAXNUM];
+        int top;
+    }DFS_Stack;
 
 // 深度优先非递归写法
 // 由于使用了栈 所以导致 由右边开始遍历，但是 任然是深度
@@ -514,6 +514,7 @@ void dfs_non(ALGraph * algraph,int v){
     }
 }
 
+// 获取顶点的入度
 void  getDegree(ALGraph * algraph,int degree[]){
     int i;
     ArcNode * p;

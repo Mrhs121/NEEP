@@ -12,21 +12,26 @@ void printArr(int * arr,int n){
 }
 
 int *_next; 
+
 //这里的str是被包含的较短字符串，length是这个字符串的长度。
 void calnext(char *str, int *next, int length)
 {
     next[0] = -1;
     int k = -1;
+    // q为不动串的下标
     for (int q = 1; q <= length-1; q++)
     {
+
         while (k > -1 && str[k + 1] != str[q])
         {
-            //当遇到不匹配的字段的时候，根据前面0到k字段的最长公共前后缀来改变指针k
+            // 当遇到不匹配的字段的时候，根据前面0到k字段的最长公共前后缀来改变指针k
+            // 如果k+1 与 q依然不想等，则继续向前回溯
             k = next[k];//往前回溯
         }
+        // k+1 前面k位是想用的最长公共前缀，所以从一位与当前不匹配的位置进行比较
         if (str[k + 1] == str[q])//如果相同，k++
         {
-            k = k + 1;
+            k = k + 1; // 相同的情况下，移动串的下标往后移动
         }
         next[q] = k;
     }
