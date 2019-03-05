@@ -57,10 +57,11 @@ void printd(int n){
 
 
 static int i=0;
+
 void itoa(int n,char s[]){
-    if(n/10)
-        itoa(n/10,s);
-    s[i++] = (n)%10+'a';
+    if(n/16) 
+        itoa(n/16,s);
+    s[i++] = (n)%16+'a';
     s[i] = '\0';
 }
 
@@ -70,6 +71,7 @@ int main()
     char s[100];
     itoa(123,s);
     printf("%s\n",s);
+
     printf("\n");
     printd(1234);
     printf("\n");

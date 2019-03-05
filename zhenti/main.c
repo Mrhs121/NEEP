@@ -8,7 +8,6 @@ int main(int argc,char *argv[])
         printf("Usage : [year]\n");
         return 0;
     }
-    
     int year = atoi(argv[1]);
     switch(year){
         case 2018:

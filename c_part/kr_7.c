@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <ctype.h>
-#include "../datastruct/tools/mytools.h"
+//#include "../datastruct/tools/mytools.h"
+
 void myscanf(char * format,...)
 {
 	va_list ap;
@@ -18,13 +19,16 @@ void myscanf(char * format,...)
 			continue;
 		}
 		localformat[i++] = '%';
+		printf("-->%s\n",localformat);
 		// 判断是否是字母
 		while( *(p+1) && !isalpha(*(p+1)) ){
 			localformat[i++] = *++p;
 			printf("----\n");
 		}
+		printf("%c\n",*(p+1));
 		localformat[i++] = *(p+1);
 		localformat[i] = '\0';
+
 		switch(*++p){
 			case 'd':
 				ival = va_arg(ap,int*);
@@ -39,7 +43,7 @@ void myscanf(char * format,...)
 				scanf(localformat,sval);
 				break;
 		}
-		printCharArr2(localformat);
+		//printCharArr2(localformat);
 		i = 0;
 	}
 	va_end(ap);
@@ -51,8 +55,8 @@ int main()
 	int a;
 	char b;
 	int *p = &a; // 原理所在
-	scanf("%d",p);
-	//myscanf("%d %c",&a,&b);
+	//scanf("%d",p);
+	myscanf("a=%23dabc	 b=%c",&a,&b);
 	printf("%d \n",a);
 	return 0;
 }

@@ -22,6 +22,7 @@ int calulate(char postfix[])
         if(islower(c))
         {
             printf("%c\n",c);
+            // 将操作数入栈
             stack[++top] = value[c-'a']; 
         }
         else

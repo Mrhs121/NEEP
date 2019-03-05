@@ -90,7 +90,7 @@ typedef struct Qu {
     int front, rear;
 }Qu;
 
-void 
+
 
 
 //先序自动创建二叉树
@@ -351,6 +351,7 @@ void PreOrderBiTree(BTree *T)
 }
 
 
+int widths[100] = {0};
 void PreOrderBiTreeWithLever(BTree *T,int lever)
 {
     if (T == NULL)
@@ -359,7 +360,8 @@ void PreOrderBiTreeWithLever(BTree *T,int lever)
     }
     else
     {
-        printf(" %d-----> %d ",lever ,T->data);
+        printf(" lever:%d-----> %d \n",lever ,T->data);
+        widths[lever] = widths[lever]+1;
         PreOrderBiTreeWithLever(T->lchild,lever+1);
         PreOrderBiTreeWithLever(T->rchild,lever+1);
     }
@@ -382,8 +384,8 @@ void postOrderBiTree(BTree *T)
 
 void PreOrderBiTree_char(BTree_char *T)
 {
-    if (T == NULL)
-    {
+    if (T == NULL)             
+    { 
         return;
     }
     else
@@ -1081,7 +1083,17 @@ int JudgeArrBST(int a[],int length){
     }
     int main()
     {
-        testJudgeArrBST();
+        BTree * tree = (BTree*)malloc(sizeof(BTree));
+        tree = createTree(tree,_data_complete);
+        PreOrderBiTreeWithLever(tree,1);
+        int i = 0;
+        for(i=0;i<100;i++)
+            widths[i] = 0;
+
+        for(i=0;i<sizeof(widths)/sizeof(widths[0]);i++){
+            printf("lever:%d width:%d\n",i,widths[i] );
+        }
+        //testJudgeArrBST();
         //testAddTreeCount();
         //testJudgeBST();
         // PreOrderBiTree(tree);

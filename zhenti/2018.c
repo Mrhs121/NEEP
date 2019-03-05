@@ -130,6 +130,7 @@ void Five_18(){
 
     printStu(stu,count);
     //QuickSort(stu,0,count-1);
+    
     qsort(stu,count,sizeof(Student),compareStudent);
     printf("\n-----after------\n");
     printStu(stu,count);
@@ -249,6 +250,7 @@ int ancestor(BTree *b,int x)
         printf("%d ",b->data);
         return 1;
     }
+    // 如果当前节点的左边或者右边出现过x的话，即表明当前节点为x的祖先节点
     else if ( (ancestor(b->lchild,x)) || (ancestor(b->rchild,x)))
     {
         printf("%d ",b->data);
@@ -330,7 +332,9 @@ void Qsort(void* base, int left, int right, int size, int (*cmp)(const void* a, 
     // 有效的随机取base值，避免有序序列带来的最糟糕情况
     char* pkey = (char*)base + (left + (right - left) / 2) * size;
     
+
     _swap(pleft, pkey, size);
+
     int last = left;
     char* plast = (char*)base + last * size;
     for (int i = left + 1; i <= right; ++i) {
@@ -342,6 +346,7 @@ void Qsort(void* base, int left, int right, int size, int (*cmp)(const void* a, 
         }
     }
     _swap(pleft, plast, size);
+
     Qsort(base, left, last - 1, size, cmp);
     Qsort(base, last + 1, right, size, cmp);
 }
@@ -397,17 +402,17 @@ void Qsort1(void* base, int left, int right, int size, Datatype type){
     }
 }
 
+
 int test2018()
 {
-
     int data1[] = {1,2,4,5,6,7,8,9};
     int data2[] = {2,4,9};
     int data3[] = {-1,3,5};
     LNode * a = create(data1,8);
     LNode * b = create(data2,3);
     LNode * c = create(data3,3);
-    printf("a - b : %d\n",inclusion(a,b));
-    printf("a - c : %d\n",inclusion(a,c));
+    printf("a - b : %s\n",inclusion(a,b)==1?"yes":"no");
+    printf("a - c : %s\n",inclusion(a,c)==1?"yes":"no");
     //testAnc();
     // 
     // char data = {'a','b','c'};

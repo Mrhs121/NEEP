@@ -181,7 +181,7 @@ ALGraph * create_graph(){
     return  algraph;
 }
 
-// 创建有向图
+// 创建有向图(带权) 
 ALGraph * createDAG(){
     ALGraph * algraph = (ALGraph*)malloc(sizeof(ALGraph));
     int i=0;
@@ -325,9 +325,6 @@ MGraph * create(){
 }
 
 
-
-
-
 void testAlgraph(){
     fin = fopen("g_input.txt","r");
     ALGraph * algraph = (ALGraph*)malloc(sizeof(ALGraph)); 
@@ -386,6 +383,7 @@ void BFSTraverse(ALGraph * algraph,int v)
     queue[rear].adjvex = v;
     ArcNode * temp = NULL;
    
+    // 队列非空
     while(front!=rear){
         ++front;
         VNode p = queue[front].v;
@@ -393,6 +391,7 @@ void BFSTraverse(ALGraph * algraph,int v)
         if(visited[queue[front].adjvex]==NOT_VISITED){
             printf("visit ---> %d\n",p.data);
             visited[queue[front].adjvex] = VISITED;
+            // 将当前顶点的所有的邻接顶点入队
             while(temp != NULL){
                 ++rear;
                 queue[rear].v = algraph->vertices[temp->adjvex];
@@ -503,7 +502,9 @@ void dfs_non(ALGraph * algraph,int v){
     while(stack->top!=-1){
         int k = stack->data[stack->top--];
         visit(algraph,k);
+
         ArcNode * p = algraph->vertices[k].first;
+
         while(p!=NULL){
             if(visited[p->adjvex]==NOT_VISITED){
                 stack->data[++(stack->top)] = p->adjvex;
@@ -609,6 +610,7 @@ void FindPath(ALGraph * algraph,int u,int v,int path[],int d,int k){
         visited[v] = NOT_VISITED;
         return;
     }
+    // 下面即为深度优先遍历的基本操作
     p = algraph->vertices[u].first;
     while(p!=NULL){
         w = p->adjvex;
@@ -963,6 +965,7 @@ void justTest(){
 
 int main( )
 {
+
     justTest();
     //testFloyd();
     //testFindPath();
