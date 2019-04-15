@@ -411,8 +411,8 @@ int test2018()
     LNode * a = create(data1,8);
     LNode * b = create(data2,3);
     LNode * c = create(data3,3);
-    printf("a - b : %s\n",inclusion(a,b)==1?"yes":"no");
-    printf("a - c : %s\n",inclusion(a,c)==1?"yes":"no");
+    printf("list a - b : %s\n",inclusion(a,b)==1?"yes":"no");
+    printf("list a - c : %s\n",inclusion(a,c)==1?"yes":"no");
     //testAnc();
     // 
     // char data = {'a','b','c'};

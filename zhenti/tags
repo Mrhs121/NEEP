@@ -3,7 +3,182 @@
 !_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
-!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-TEN	2015.c	/^void TEN(){$/;"	f
-TEN_extendTree	2015.c	/^void TEN_extendTree(BTree * tree,BTree * pre){$/;"	f
-main	2015.c	/^int main()$/;"	f
+!_TAG_PROGRAM_VERSION	5.8	//
+Asc	./2018.c	/^int Asc(int a,int b){$/;"	f
+B2I	./2017.c	/^static void B2I(int x){$/;"	f	file:
+B2I	./mytools.c	/^void B2I(int x){$/;"	f
+CHAR	./2018.c	/^enum TYPE{INT,FLOAT,CHAR,STR};$/;"	e	enum:TYPE	file:
+CubeSqrtByNewton	./2018.c	/^float CubeSqrtByNewton(float x)$/;"	f
+Datatype	./2018.c	/^typedef enum TYPE Datatype;$/;"	t	typeref:enum:TYPE	file:
+Des	./2018.c	/^int Des(int a,int b){$/;"	f
+DtoH	./2017.c	/^void DtoH(int x){$/;"	f
+FALSE	./2018.c	/^#define FALSE /;"	d	file:
+FLOAT	./2018.c	/^enum TYPE{INT,FLOAT,CHAR,STR};$/;"	e	enum:TYPE	file:
+FindPath	./2017.c	/^void FindPath(ALGraph * algraph,int u,int v,int path[],int d,int k){$/;"	f
+Five_18	./2018.c	/^void Five_18(){$/;"	f
+HtoD	./2010.c	/^static void HtoD(int x){$/;"	f	file:
+INT	./2018.c	/^enum TYPE{INT,FLOAT,CHAR,STR};$/;"	e	enum:TYPE	file:
+LeafNodehead	./2016.c	/^BTree * LeafNodehead , *LeafPre = NULL;$/;"	v
+LeafPre	./2016.c	/^BTree * LeafNodehead , *LeafPre = NULL;$/;"	v
+LeverOrder	./myStrcut.c	/^void LeverOrder(BTree * root)$/;"	f
+MAX	./2015.c	/^#define MAX /;"	d	file:
+MAX	./2018.c	/^#define MAX /;"	d	file:
+MCNuggets	./2013.c	/^int MCNuggets(int n){$/;"	f
+Matrix	./2017.c	/^typedef struct Matrix$/;"	s	file:
+Merge	./2015.c	/^void Merge(int *a,int m,int *b,int n){$/;"	f
+NO	./2015.c	/^#define NO /;"	d	file:
+NO	./2018.c	/^#define NO /;"	d	file:
+NOT_VISITED	./2017.c	/^#define NOT_VISITED /;"	d	file:
+PreOrderBiTree	./myStrcut.c	/^void PreOrderBiTree(BTree *T)$/;"	f
+PreOrderExBiTree	./myStrcut.c	/^void PreOrderExBiTree(ExtendBTree *T)$/;"	f
+Product	./2016.c	/^}Product;	$/;"	t	typeref:struct:product	file:
+Qsort	./2018.c	/^void Qsort(void* base, int left, int right, int size, int (*cmp)(const void* a, const void* b))$/;"	f
+Qsort1	./2018.c	/^void Qsort1(void* base, int left, int right, int size, Datatype type){$/;"	f
+Qu	./2017.c	/^typedef struct Qu {$/;"	s	file:
+Qu	./2017.c	/^}Qu;$/;"	t	typeref:struct:Qu	file:
+QuickSort	./2018.c	/^void QuickSort(struct Score s[],int left,int right){$/;"	f
+SAN_QuickSort	./2018.c	/^void SAN_QuickSort(int (*compare)(int ,int ),int arr[],int left,int right){$/;"	f
+STR	./2018.c	/^enum TYPE{INT,FLOAT,CHAR,STR};$/;"	e	enum:TYPE	file:
+Score	./2015.c	/^typedef struct  Score{$/;"	s	file:
+Score	./2018.c	/^typedef struct  Score{$/;"	s	file:
+SortLinkListByBub	./2016.c	/^void SortLinkListByBub(){$/;"	f
+SortMatrix	./2017.c	/^void SortMatrix(char * filename){$/;"	f
+SqList	./2015.c	/^}SqList;$/;"	t	typeref:struct:__anon1	file:
+Stu	./2015.c	/^}Stu[200];$/;"	t	typeref:struct:Score	file:
+Student	./2018.c	/^}Student;$/;"	t	typeref:struct:Score	file:
+TEN	./2015.c	/^void TEN(){$/;"	f
+TEN_extendTree2	./2015.c	/^ExtendBTree * TEN_extendTree2(BTree * tree,ExtendBTree * pre){$/;"	f
+TRUE	./2018.c	/^#define TRUE /;"	d	file:
+TYPE	./2018.c	/^enum TYPE{INT,FLOAT,CHAR,STR};$/;"	g	file:
+VISITED	./2017.c	/^#define VISITED /;"	d	file:
+YES	./2015.c	/^#define YES /;"	d	file:
+YES	./2018.c	/^#define YES /;"	d	file:
+_cmp_float	./2018.c	/^int _cmp_float(const void* a, const void* b)$/;"	f
+_cmp_int	./2018.c	/^int _cmp_int(const void* a, const void* b)$/;"	f
+_cmp_string	./2018.c	/^int _cmp_string(const void* a, const void* b)$/;"	f
+_count	./myStrcut.c	/^int _count;$/;"	v
+_data1	./2016.c	/^int _data1[] = {1,2,3,-1,-1,4,8,-1,-1,9,10,-1,-1,-1,5,6,-1,-1,7,-1,-1};$/;"	v
+_hash	./2014.c	/^int _hash(const char *str){$/;"	f
+_swap	./2018.c	/^void _swap(const void* a, const void* b, int size)$/;"	f
+_test	./2018.c	/^int _test(void *arr[],int type,int n,int compare){$/;"	f
+ancestor	./2018.c	/^int ancestor(BTree *b,int x)$/;"	f
+bitsSwapRequired	./2016.c	/^int bitsSwapRequired(int x,int y){$/;"	f
+calDistant	./2017.c	/^double calDistant(double x,double y){$/;"	f
+calS	./2017.c	/^double calS(double a,double b,double c,double d){$/;"	f
+cc	./makefile	/^cc = gcc$/;"	m
+checkBit	./2011.c	/^int checkBit(int x,int N)$/;"	f
+cmp_int	./2011.c	/^int cmp_int(const void* a, const void* b)$/;"	f
+combine	./2010.c	/^void combine(char data[],int left,int n,int m,char com[20]){$/;"	f
+combine2	./2010.c	/^void combine2(char data[],int n,int m){$/;"	f
+compare	./2014.c	/^int compare(const void * strA,const void * strB){$/;"	f
+compareMatrix	./2017.c	/^int compareMatrix(const void * a,const void * b){$/;"	f
+compareStudent	./2018.c	/^int compareStudent(const void * stua,const void * stub){$/;"	f
+create	./myStrcut.c	/^LNode * create(int data[],int n)$/;"	f
+createTree	./myStrcut.c	/^BTree* createTree(BTree* T,int _data[]) {$/;"	f
+createWithoutHead	./myStrcut.c	/^LNode * createWithoutHead(int data[],int n)$/;"	f
+data	./2015.c	/^    int data[MAXSIZE];$/;"	m	struct:__anon1	file:
+data	./2017.c	/^    BTree * data[100];$/;"	m	struct:Qu	file:
+del	./2011.c	/^void del(char str[],char ch,int n){$/;"	f
+deps	./makefile	/^deps = $(shell find .\/ -name "*.h")$/;"	m
+eps	./2015.c	/^#define eps /;"	d	file:
+eps	./2018.c	/^#define eps /;"	d	file:
+equation	./2011.c	/^double equation(char express[]){$/;"	f
+eval	./2011.c	/^void eval(char *numBuff, int isX)$/;"	f
+file2H	./2009.c	/^ int file2H()$/;"	f
+find	./2011.c	/^int find(int **a,int h,int w,int i,int j){$/;"	f
+front	./2017.c	/^    int front, rear;$/;"	m	struct:Qu	file:
+getBits	./2018.c	/^int getBits(int x,int start,int len){$/;"	f
+getStrlen	./mytools.c	/^int getStrlen(char * str){$/;"	f
+htoi	./2016.c	/^int htoi(char *s){$/;"	f
+i2ba	./2011.c	/^unsigned char* i2ba(int n, unsigned char *s)$/;"	f
+inclusion	./2018.c	/^int inclusion(LNode * a,LNode * b){$/;"	f
+invert	./2017.c	/^char * invert(unsigned x,int p,int n){$/;"	f
+isAIncludeB	./2018.c	/^int  isAIncludeB(LNode *a,LNode*b)$/;"	f
+isComplete	./2017.c	/^int isComplete(BTree * tree){$/;"	f
+isRight	./2011.c	/^int isRight = 0;$/;"	v
+isSatisfyHeap	./2017.c	/^int isSatisfyHeap(BTree * tree) {$/;"	f
+isSudo	./2015.c	/^int isSudo(int sudo[MAX][MAX],int n){$/;"	f
+left_bottom_x	./2017.c	/^    double left_bottom_x,left_bottom_y;$/;"	m	struct:Matrix	file:
+left_bottom_y	./2017.c	/^    double left_bottom_x,left_bottom_y;$/;"	m	struct:Matrix	file:
+length	./2015.c	/^    int length;$/;"	m	struct:__anon1	file:
+linkLeafNode	./2016.c	/^BTree * linkLeafNode(BTree *T)$/;"	f
+linkedByInOrder	./2016.c	/^BTree * linkedByInOrder(BTree * tree){$/;"	f
+main	./main.c	/^int main(int argc,char *argv[])$/;"	f
+main_092	./2009.c	/^void main_092()$/;"	f
+main_102	./2010.c	/^void main_102()$/;"	f
+main_112	./2011.c	/^void main_112()$/;"	f
+mark	./2011.c	/^int mark[100][100];$/;"	v
+matrix	./2017.c	/^}matrix;$/;"	t	typeref:struct:Matrix	file:
+matrixInvert	./2010.c	/^void matrixInvert(int ** a,int n){$/;"	f
+maxBlock	./2011.c	/^int maxBlock(int **a,int h,int w){$/;"	f
+mergeWithoutBuffer2	./2017.c	/^void mergeWithoutBuffer2(int *a,int n,int *b,int m){$/;"	f
+move	./2015.c	/^void move(SqList * A,int current){$/;"	f
+myprintf	./2017.c	/^void myprintf(const char * format , ...)$/;"	f
+name	./2015.c	/^    char name[20];$/;"	m	struct:Score	file:
+name	./2016.c	/^	char * name;$/;"	m	struct:product	file:
+name	./2018.c	/^    char name[20];$/;"	m	struct:Score	file:
+notsatisfy	./2017.c	/^#define notsatisfy /;"	d	file:
+num	./2015.c	/^    int num;$/;"	m	struct:Score	file:
+num	./2018.c	/^    int num;$/;"	m	struct:Score	file:
+numSum	./2011.c	/^int numSum = 0, xSum = 0;$/;"	v
+obj	./makefile	/^obj = $(src:%.c=%.o) $/;"	m
+price	./2016.c	/^	double price;	$/;"	m	struct:product	file:
+print	./2010.c	/^static void print(char data[],int n){$/;"	f	file:
+print	./2011.c	/^static float print(int arr[],int n){$/;"	f	file:
+print	./2015.c	/^static  void print(int b[],int n){$/;"	f	file:
+print	./2018.c	/^static void print(int b[],int n){$/;"	f	file:
+print101	./2011.c	/^void print101(int n){$/;"	f
+printAnc	./2018.c	/^int printAnc(BTree * tree,int key){$/;"	f
+printCharArr	./mytools.c	/^void printCharArr(char arr[],int n)$/;"	f
+printFloatArr	./mytools.c	/^void printFloatArr(float arr[],int n)$/;"	f
+printIntArr	./mytools.c	/^void printIntArr(int arr[],int n)$/;"	f
+printList	./mytools.c	/^void printList(LNode * list){$/;"	f
+printMatrix	./2010.c	/^void printMatrix(int ** p,int n){$/;"	f
+printPath	./2017.c	/^void printPath(int path[],int size){$/;"	f
+printString	./mytools.c	/^void printString(char arr[])$/;"	f
+printStu	./2018.c	/^void printStu(struct Score s[],int count){$/;"	f
+product	./2016.c	/^typedef struct product$/;"	s	file:
+prom	./makefile	/^prom = zhenti$/;"	m
+putAll	./2010.c	/^void putAll(int m,int n,char * data){$/;"	f
+quicksort	./2014.c	/^void quicksort(char *data[],int left,int right){$/;"	f
+readProduct	./2016.c	/^void readProduct(){$/;"	f
+readSudo	./2015.c	/^int readSudo(int sudo[MAX][MAX]){$/;"	f
+rear	./2017.c	/^    int front, rear;$/;"	m	struct:Qu	file:
+right_top_x	./2017.c	/^    double right_top_x,right_top_y;$/;"	m	struct:Matrix	file:
+right_top_y	./2017.c	/^    double right_top_x,right_top_y;$/;"	m	struct:Matrix	file:
+s	./2017.c	/^    double s;$/;"	m	struct:Matrix	file:
+satisfy	./2017.c	/^#define satisfy /;"	d	file:
+score	./2015.c	/^    int score;$/;"	m	struct:Score	file:
+score	./2018.c	/^    int score;$/;"	m	struct:Score	file:
+search	./2011.c	/^void *search(void* key,void* base,size_t num,size_t width,$/;"	f
+split	./2014.c	/^int split(char key,char * str,char result[][1000]){$/;"	f
+src	./makefile	/^src = $(shell find .\/ -name "*.c")$/;"	m
+ss	./2016.c	/^void ss(){$/;"	f
+strins	./2010.c	/^int strins(char  s1[],int i,char s2[]){$/;"	f
+swap	./mytools.c	/^void swap(int * a,int *b){$/;"	f
+test101	./2011.c	/^int test101()$/;"	f
+test2004	./2004.c	/^int test2004()$/;"	f
+test2005	./2005.c	/^int test2005()$/;"	f
+test2006	./2006.c	/^int test2006()$/;"	f
+test2007	./2007.c	/^int test2007()$/;"	f
+test2008	./2008.c	/^int test2008()$/;"	f
+test2009	./2009.c	/^int test2009()$/;"	f
+test2010	./2010.c	/^int test2010()$/;"	f
+test2011	./2011.c	/^int test2011()$/;"	f
+test2012	./2012.c	/^int test2012()$/;"	f
+test2013	./2013.c	/^int test2013()$/;"	f
+test2014	./2014.c	/^int test2014()$/;"	f
+test2015	./2015.c	/^int test2015()$/;"	f
+test2016	./2016.c	/^int test2016()$/;"	f
+test2017	./2017.c	/^int test2017(char * filenames[])$/;"	f
+test2018	./2018.c	/^int test2018()$/;"	f
+testAnc	./2018.c	/^void  testAnc(){$/;"	f
+testDatatype	./mytools.c	/^void testDatatype(DATATPYE a){$/;"	f
+testMaxBlock	./2011.c	/^void  testMaxBlock()$/;"	f
+testQuickSort	./2014.c	/^void testQuickSort(){$/;"	f
+testlinkLeafNode	./2016.c	/^void testlinkLeafNode(){$/;"	f
+testsplit	./2014.c	/^void testsplit(char _key){$/;"	f
+ui2hex	./2010.c	/^char * ui2hex(unsigned n,char *s){$/;"	f
+visited	./2017.c	/^int visited[1000];$/;"	v
+write	./2018.c	/^void write(FILE * out,struct Score s[],int count){$/;"	f
+xSum	./2011.c	/^int numSum = 0, xSum = 0;$/;"	v
